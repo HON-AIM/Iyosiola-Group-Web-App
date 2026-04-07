@@ -1,0 +1,200 @@
+import { NextResponse } from "next/server";
+import { writeFile, mkdir, unlink } from "fs/promises";
+import path from "path";
+import { auth } from "@/lib/auth";
+import { prisma } from "@/lib/db";
+import { type NextRequest } from "next/server";
+import crypto from "crypto";
+
+const ALLOWED_MIME_TYPES = new Set(["image/jpeg", "image/png", "image/webp", "image/gif"]);
+const MAX_FILE_SIZE_BYTES = 5 * 1024 * 1024;
+const MIN_FILE_SIZE_BYTES = 100;
+const MAX_UPLOADS_PER_HOUR = 20;
+const MAX_UPLOAD_BYTES_PER_HOUR = 100 * 1024 * 1024;
+const UPLOAD_WINDOW = 60 * 60 * 1000;
+const UPLOAD_DIR = path.join(process.cwd(), "public", "uploads");
+
+const uploadAttempts = new Map<string, { count: number; resetAt: number; totalBytes: number }>();
+
+function isValidImageBuffer(buffer: Buffer): boolean {
+  if (buffer.length < 12) return false;
+  
+  if (buffer[0] === 0xff && buffer[1] === 0xd8 && buffer[2] === 0xff) return true;
+  if (buffer[0] === 0x89 && buffer[1] === 0x50 && buffer[2] === 0x4e && buffer[3] === 0x47) return true;
+  if (buffer[0] === 0x52 && buffer[1] === 0x49 && buffer[2] === 0x46 && buffer[3] === 0x46 && buffer.length >= 12 && buffer[8] === 0x57 && buffer[9] === 0x45 && buffer[10] === 0x42 && buffer[11] === 0x50) return true;
+  if (buffer[0] === 0x47 && buffer[1] === 0x49 && buffer[2] === 0x46 && buffer[3] === 0x38 && (buffer[4] === 0x39 || buffer[4] === 0x37)) return true;
+
+  return false;
+}
+
+function getExtensionFromMimeType(mimeType: string): string {
+  const extMap: Record<string, string> = {
+    "image/jpeg": "jpg",
+    "image/png": "png",
+    "image/webp": "webp",
+    "image/gif": "gif",
+  };
+  return extMap[mimeType] || "jpg";
+}
+
+function generateSafeFilename(mimeType: string): string {
+  const uuid = crypto.randomUUID();
+  const randomSuffix = crypto.randomBytes(4).toString("hex");
+  const ext = getExtensionFromMimeType(mimeType);
+  return `${uuid}-${randomSuffix}.${ext}`;
+}
+
+export async function POST(request: NextRequest) {
+  const startTime = Date.now();
+
+  try {
+    const session = await auth();
+
+    if (!session?.user?.id || session.user.role !== "ADMIN") {
+      return NextResponse.json({ message: "Unauthorized: Admin access required" }, { status: 401 });
+    }
+
+    const clientIp = request.headers.get("x-forwarded-for") || "unknown";
+
+    const now = Date.now();
+    const attemptData = uploadAttempts.get(clientIp);
+
+    if (attemptData) {
+      if (now < attemptData.resetAt) {
+        if (attemptData.count >= MAX_UPLOADS_PER_HOUR) {
+          return NextResponse.json({ message: "Upload rate limit exceeded. Please try again later." }, { status: 429 });
+        }
+        attemptData.count++;
+      } else {
+        uploadAttempts.set(clientIp, { count: 1, resetAt: now + UPLOAD_WINDOW, totalBytes: 0 });
+      }
+    } else {
+      uploadAttempts.set(clientIp, { count: 1, resetAt: now + UPLOAD_WINDOW, totalBytes: 0 });
+    }
+
+    const contentType = request.headers.get("content-type") || "";
+    if (!contentType.includes("multipart/form-data")) {
+      return NextResponse.json({ message: "Bad Request: Expected multipart/form-data" }, { status: 400 });
+    }
+
+    let formData: FormData;
+    try {
+      formData = await request.formData();
+    } catch {
+      return NextResponse.json({ message: "Bad Request: Invalid form data" }, { status: 400 });
+    }
+
+    const file = formData.get("file");
+
+    if (!(file instanceof File)) {
+      return NextResponse.json({ message: "Bad Request: No file provided or invalid file" }, { status: 400 });
+    }
+
+    if (!ALLOWED_MIME_TYPES.has(file.type)) {
+      return NextResponse.json({ message: "Invalid file type. Only JPEG, PNG, WebP, and GIF images are allowed." }, { status: 400 });
+    }
+
+    if (file.size < MIN_FILE_SIZE_BYTES || file.size > MAX_FILE_SIZE_BYTES) {
+      return NextResponse.json({ message: "Bad Request: File size must be between 100 bytes and 5MB" }, { status: 400 });
+    }
+
+    const currentAttempt = uploadAttempts.get(clientIp);
+    if (currentAttempt && currentAttempt.totalBytes + file.size > MAX_UPLOAD_BYTES_PER_HOUR) {
+      return NextResponse.json({ message: "Total upload size exceeded. Please try again later." }, { status: 429 });
+    }
+
+    const bytes = await file.arrayBuffer();
+    const buffer = Buffer.from(bytes);
+
+    if (!isValidImageBuffer(buffer)) {
+      return NextResponse.json({ message: "File content does not match an allowed image format." }, { status: 400 });
+    }
+
+    const filename = generateSafeFilename(file.type);
+
+    try {
+      await mkdir(UPLOAD_DIR, { recursive: true });
+    } catch {
+      return NextResponse.json({ message: "Server error: Cannot write to upload directory" }, { status: 500 });
+    }
+
+    const filePath = path.join(UPLOAD_DIR, filename);
+    const resolvedPath = path.resolve(filePath);
+    const resolvedUploadDir = path.resolve(UPLOAD_DIR);
+
+    if (!resolvedPath.startsWith(resolvedUploadDir)) {
+      console.error("[ERROR] Path traversal attempt detected:", { filePath: resolvedPath, uploadDir: resolvedUploadDir, adminId: session.user.id });
+      return NextResponse.json({ message: "Server error: Invalid file path" }, { status: 500 });
+    }
+
+    try {
+      await writeFile(filePath, buffer);
+    } catch {
+      return NextResponse.json({ message: "Server error: Failed to save file" }, { status: 500 });
+    }
+
+    try {
+      await prisma.uploadedFile.create({
+        data: {
+          filename,
+          originalName: file.name.replace(/[\/\\]/g, "_").slice(0, 255),
+          mimeType: file.type,
+          size: buffer.length,
+          url: `/uploads/${filename}`,
+          uploadedBy: session.user.id,
+          ipAddress: clientIp,
+          checksum: crypto.createHash("sha256").update(buffer).digest("hex"),
+        },
+      });
+    } catch (dbError) {
+      try { await unlink(filePath); } catch {}
+      console.error("[ERROR] Failed to create upload record:", { error: dbError instanceof Error ? dbError.message : String(dbError) });
+      return NextResponse.json({ message: "Server error: Failed to save upload metadata" }, { status: 500 });
+    }
+
+    console.info("[AUDIT] File uploaded successfully:", {
+      adminId: session.user.id,
+      filename,
+      size: buffer.length,
+      ip: clientIp,
+      duration: Date.now() - startTime,
+    });
+
+    return NextResponse.json(
+      { message: "File uploaded successfully", url: `/uploads/${filename}`, fileName: filename },
+      { status: 201 }
+    );
+  } catch (error) {
+    console.error("[ERROR] Upload failed:", { error: error instanceof Error ? error.message : String(error) });
+    return NextResponse.json({ message: "An error occurred while uploading the file" }, { status: 500 });
+  }
+}
+
+export async function GET(request: NextRequest) {
+  try {
+    const session = await auth();
+
+    if (!session?.user?.id || session.user.role !== "ADMIN") {
+      return NextResponse.json({ message: "Unauthorized: Admin access required" }, { status: 401 });
+    }
+
+    const page = Math.max(1, parseInt(request.nextUrl.searchParams.get("page") || "1"));
+    const pageSize = Math.min(100, Math.max(1, parseInt(request.nextUrl.searchParams.get("pageSize") || "20")));
+    const skip = (page - 1) * pageSize;
+
+    const [uploads, total] = await Promise.all([
+      prisma.uploadedFile.findMany({
+        where: { uploadedBy: session.user.id },
+        orderBy: { createdAt: "desc" },
+        skip,
+        take: pageSize,
+      }),
+      prisma.uploadedFile.count({ where: { uploadedBy: session.user.id } }),
+    ]);
+
+    return NextResponse.json({ uploads, pagination: { page, pageSize, total, pages: Math.ceil(total / pageSize) } }, { status: 200 });
+  } catch (error) {
+    console.error("[ERROR] GET uploads failed:", { error: error instanceof Error ? error.message : String(error) });
+    return NextResponse.json({ message: "Failed to fetch uploads" }, { status: 500 });
+  }
+}
