@@ -1,6 +1,8 @@
 import { redirect } from "next/navigation";
 import { type Metadata } from "next";
 import { auth } from "@/lib/auth";
+
+export const dynamic = "force-dynamic";
 import AdminSidebar from "@/components/admin/AdminSidebar";
 import { AlertCircle } from "lucide-react";
 
