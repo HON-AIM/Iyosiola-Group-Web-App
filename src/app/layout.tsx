@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Providers } from "@/components/Providers";
 import Header from "@/components/Header";
+import NewsletterForm from "@/components/NewsletterForm";
 import "./globals.css";
 
 const BASE_URL = process.env.NEXT_PUBLIC_APP_URL || "https://iyosiolagroup.com";
@@ -113,16 +114,7 @@ export default function RootLayout({
                     <h3 className="text-xl font-bold text-white mb-1">Stay Updated</h3>
                     <p className="text-primary-100 text-sm">Subscribe to our newsletter for exclusive deals and updates</p>
                   </div>
-                  <form className="flex w-full md:w-auto gap-2" onSubmit={(e) => e.preventDefault()}>
-                    <input 
-                      type="email" 
-                      placeholder="Enter your email" 
-                      className="px-4 py-3 rounded-lg bg-white text-gray-900 w-full md:w-72 focus:outline-none focus:ring-2 focus:ring-accent-500"
-                    />
-                    <button type="submit" className="bg-accent-500 hover:bg-accent-600 text-white font-bold px-6 py-3 rounded-lg transition-colors whitespace-nowrap">
-                      Subscribe
-                    </button>
-                  </form>
+                  <NewsletterForm />
                 </div>
               </div>
             </div>
