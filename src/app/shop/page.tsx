@@ -1,143 +1,292 @@
 import type { Metadata } from "next";
 import { prisma } from "@/lib/db";
-import ProductCard from "@/components/shop/ProductCard";
 import Link from "next/link";
-import { ChevronRight, Tag, Flame, Percent } from "lucide-react";
+import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "Shop Premium Flour Online | Iyosiola Foods",
   description:
     "Shop premium quality flour, semolina, wheat products, and baking essentials from Iyosiola Foods. Fresh products delivered to your doorstep across Nigeria.",
-  keywords: [
-    "buy flour online Nigeria",
-    "premium flour",
-    "baking flour Nigeria",
-    "semolina online",
-    "wheat flour",
-    "buy flour online",
-    "baking essentials Nigeria",
-  ],
-  openGraph: {
-    title: "Shop Premium Flour Online | Iyosiola Foods",
-    description: "Shop premium quality flour, semolina, and baking essentials. Fresh products delivered across Nigeria.",
-    type: "website",
-    images: [{ url: "/og-shop.jpg", width: 1200, height: 630, alt: "Iyosiola Foods Shop" }],
-  },
 };
+
+const categories = [
+  { name: "All Products", icon: "🛍️", count: 156, link: "/shop" },
+  { name: "Baking Flour", icon: "🌾", count: 42, link: "/shop?category=BAKING" },
+  { name: "Wheat Flour", icon: "🌾", count: 28, link: "/shop?category=WHEAT" },
+  { name: "All-Purpose", icon: "🍞", count: 35, link: "/shop?category=ALL_PURPOSE" },
+  { name: "Semolina", icon: "🥣", count: 18, link: "/shop?category=SEMOLINA" },
+  { name: "Bundle Deals", icon: "📦", count: 12, link: "/shop?category=bundle" },
+];
+
+function StarRating({ rating }: { rating: number }) {
+  return (
+    <div className="flex items-center gap-0.5">
+      {[1, 2, 3, 4, 5].map((star) => (
+        <svg
+          key={star}
+          className={`w-3 h-3 ${star <= rating ? "text-yellow-400" : "text-gray-300"}`}
+          fill="currentColor"
+          viewBox="0 0 20 20"
+        >
+          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+        </svg>
+      ))}
+      <span className="text-xs text-gray-500 ml-1">({rating})</span>
+    </div>
+  );
+}
+
+function ProductCard({ product }: { product: any }) {
+  const formatMoney = (amount: number) => {
+    return new Intl.NumberFormat("en-NG", {
+      style: "currency",
+      currency: "NGN",
+      maximumFractionDigits: 0,
+    }).format(amount);
+  };
+
+  const originalPrice = product.price * 1.25;
+  const discount = Math.round((1 - product.price / originalPrice) * 100);
+
+  return (
+    <Link
+      href={`/shop/product/${product.id}`}
+      className="group bg-white rounded-lg border border-gray-100 hover:border-primary-200 hover:shadow-lg transition-all duration-200 flex flex-col h-full"
+    >
+      <div className="relative">
+        {discount > 0 && (
+          <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-bold px-2 py-0.5 rounded z-10">
+            -{discount}%
+          </div>
+        )}
+        {product.stock <= 5 && product.stock > 0 && (
+          <div className="absolute top-2 right-2 bg-orange-500 text-white text-xs font-bold px-2 py-0.5 rounded z-10">
+            Only {product.stock} left
+          </div>
+        )}
+        <div className="aspect-square bg-gray-50 flex items-center justify-center p-4 rounded-t-lg overflow-hidden">
+          {product.image ? (
+            <Image
+              src={product.image}
+              alt={product.name}
+              width={150}
+              height={150}
+              className="object-contain group-hover:scale-105 transition-transform duration-300"
+            />
+          ) : (
+            <div className="w-24 h-24 bg-gray-200 rounded-full flex items-center justify-center text-gray-400 text-xs">
+              No Image
+            </div>
+          )}
+        </div>
+      </div>
+
+      <div className="p-3 flex flex-col flex-1">
+        <div className="text-xs text-primary-600 font-semibold mb-1">Iyosiola Foods</div>
+        <h3 className="text-sm text-gray-800 line-clamp-2 mb-2 group-hover:text-primary-600 transition-colors min-h-[2.5rem]">
+          {product.name}
+        </h3>
+        
+        <div className="mb-2">
+          <StarRating rating={4} />
+        </div>
+
+        <div className="mt-auto">
+          <p className="font-bold text-lg text-gray-900">{formatMoney(product.price)}</p>
+          <p className="text-xs text-gray-400 line-through">{formatMoney(originalPrice)}</p>
+        </div>
+
+        <button className="mt-3 w-full bg-primary-600 hover:bg-primary-700 text-white font-semibold py-2 rounded text-sm transition-colors">
+          Add to Cart
+        </button>
+      </div>
+    </Link>
+  );
+}
 
 export default async function ShopHomePage() {
   const topProducts = await prisma.product.findMany({
     where: { stock: { gt: 0 }, isActive: true },
-    take: 6,
+    take: 8,
   });
 
   const recommendedProducts = await prisma.product.findMany({
     where: { stock: { gt: 0 }, isActive: true },
     orderBy: { createdAt: "desc" },
-    take: 12,
+    take: 20,
   });
 
-  const categories = [
-    { name: "Flour", icon: "🌾", link: "/shop?category=flour" },
-    { name: "Semolina", icon: "🥣", link: "/shop?category=semolina" },
-    { name: "Wheat", icon: "🍞", link: "/shop?category=wheat" },
-    { name: "Groceries", icon: "🛒", link: "/shop?category=groceries" },
-    { name: "Bulk Purchases", icon: "📦", link: "/shop?category=bulk" },
-  ];
+  const flashSaleProducts = await prisma.product.findMany({
+    where: { stock: { gt: 0 }, isActive: true },
+    take: 4,
+  });
 
   return (
-    <div className="space-y-6 container mx-auto px-4 py-6">
-      <div className="flex flex-col md:flex-row gap-4 h-auto md:h-96">
-        <div className="hidden md:flex flex-col w-64 bg-white rounded-md shadow-sm border border-gray-100 py-3 shrink-0">
-          {categories.map((cat, index) => (
-            <Link
-              key={index}
-              href={cat.link}
-              className="px-4 py-2 hover:bg-gray-50 flex items-center justify-between text-gray-700 hover:text-primary-600 transition-colors text-sm"
-            >
-              <div className="flex items-center gap-3">
-                <span className="text-xl">{cat.icon}</span>
-                <span>{cat.name}</span>
-              </div>
-              <ChevronRight className="h-4 w-4 text-gray-400" />
-            </Link>
-          ))}
-        </div>
-
-        <div className="flex-1 bg-yellow-50 rounded-md overflow-hidden relative group cursor-pointer shadow-sm">
-          <div className="absolute inset-0 bg-gradient-to-r from-primary-600 to-primary-900 flex items-center p-8 md:p-12">
-            <div className="text-white space-y-4 max-w-lg z-10">
-              <span className="bg-yellow-400 text-yellow-900 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
-                Flash Sale 24h Only
-              </span>
-              <h2 className="text-3xl md:text-5xl font-extrabold leading-tight">
-                Premium Baking Flour,<br />Now 15% Off
-              </h2>
-              <p className="text-white/80 font-medium text-lg">
-                Stock up your bakery with Iyosiola&apos;s finest grade.
-              </p>
-              <Link href="/shop" className="bg-white text-primary-900 px-6 py-3 rounded-md font-bold mt-4 hover:bg-gray-100 transition shadow-lg inline-block">
-                SHOP NOW
-              </Link>
-            </div>
-            <div className="absolute right-0 bottom-0 opacity-20 transform translate-x-1/4 translate-y-1/4">
-              <svg width="400" height="400" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                <path fill="#ffffff" d="M44.7,-76.4C58.8,-69.2,71.8,-59.1,79.6,-45.8C87.4,-32.6,90,-16.3,88.5,-0.9C87.1,14.6,81.6,29.1,72.4,40.7C63.2,52.4,50.3,61.1,36.5,68.3C22.7,75.4,8.1,81,-6.6,83.1C-21.3,85.1,-36.1,83.5,-49.6,76.5C-63.1,69.5,-75.3,57.1,-81.4,42.2C-87.5,27.2,-87.5,9.6,-83.4,-6.4C-79.3,-22.4,-71.1,-36.8,-60,-48.6C-48.9,-60.4,-34.9,-69.7,-20.5,-75.3C-6.1,-81,8.7,-83.1,23.3,-83C37.9,-82.9,52.2,-80.6,44.7,-76.4Z" transform="translate(100 100)" />
-              </svg>
-            </div>
-          </div>
-        </div>
-
-        <div className="hidden lg:flex flex-col w-56 gap-4 shrink-0">
-          <div className="flex-1 bg-white rounded-md shadow-sm border border-gray-100 p-4 flex flex-col justify-center items-center text-center">
-            <div className="bg-orange-100 p-3 rounded-full mb-3">
-              <Flame className="h-6 w-6 text-orange-500" />
-            </div>
-            <h4 className="font-bold text-gray-900">Hot Deals</h4>
-            <p className="text-xs text-gray-500 mt-1">Daily discounts on staples.</p>
-          </div>
-          <div className="flex-1 bg-white rounded-md shadow-sm border border-gray-100 p-4 flex flex-col justify-center items-center text-center">
-            <div className="bg-blue-100 p-3 rounded-full mb-3">
-              <Percent className="h-6 w-6 text-blue-500" />
-            </div>
-            <h4 className="font-bold text-gray-900">Bulk Offers</h4>
-            <p className="text-xs text-gray-500 mt-1">Buy more, save more.</p>
-          </div>
-        </div>
+    <div className="min-h-screen bg-gray-100">
+      {/* Top Promo Bar */}
+      <div className="bg-primary-900 text-white text-center py-2 px-4 text-sm">
+        <span className="font-semibold">FREE DELIVERY</span> on orders above ₦25,000 | Use code: <span className="font-bold text-accent-400">IYOSIOLA10</span> for 10% off
       </div>
 
-      {topProducts.length > 0 && (
-        <section className="bg-white rounded-md shadow-sm border border-gray-100 overflow-hidden mt-6">
-          <div className="bg-red-500 px-4 py-3 border-b border-red-500 flex justify-between items-center">
-            <h3 className="font-bold text-lg text-white flex items-center gap-2">
-              <Tag className="h-5 w-5 fill-white" /> Top Selling Items
-            </h3>
-            <Link href="/shop" className="text-white text-sm hover:underline font-medium">
-              SEE ALL &gt;
-            </Link>
-          </div>
-          <div className="p-4 bg-red-50/30">
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 md:gap-4">
-              {topProducts.map((product) => (
-                <ProductCard key={product.id} product={product} />
-              ))}
+      <div className="container mx-auto px-4 py-6">
+        <div className="flex flex-col lg:flex-row gap-6">
+          {/* Left Sidebar - Categories */}
+          <aside className="w-full lg:w-64 shrink-0">
+            <div className="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden sticky top-24">
+              <div className="bg-primary-900 text-white px-4 py-3 font-bold">
+                Shop by Category
+              </div>
+              <div className="py-2">
+                {categories.map((cat, index) => (
+                  <Link
+                    key={index}
+                    href={cat.link}
+                    className="px-4 py-2.5 hover:bg-gray-50 flex items-center justify-between text-gray-700 hover:text-primary-600 transition-colors text-sm border-b border-gray-50 last:border-0"
+                  >
+                    <div className="flex items-center gap-3">
+                      <span className="text-lg">{cat.icon}</span>
+                      <span className="font-medium">{cat.name}</span>
+                    </div>
+                    <span className="text-xs text-gray-400 bg-gray-100 px-2 py-0.5 rounded">{cat.count}</span>
+                  </Link>
+                ))}
+              </div>
             </div>
-          </div>
-        </section>
-      )}
 
-      <section className="bg-white rounded-md shadow-sm border border-gray-100 overflow-hidden">
-        <div className="px-4 py-4 border-b border-gray-100">
-          <h3 className="font-bold text-xl text-gray-900">Recommended for you</h3>
+            {/* Delivery Info Card */}
+            <div className="bg-white rounded-lg shadow-sm border border-gray-100 mt-4 p-4">
+              <div className="flex items-center gap-2 mb-3">
+                <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                  <svg className="w-4 h-4 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
+                  </svg>
+                </div>
+                <span className="font-semibold text-sm text-gray-900">Delivery</span>
+              </div>
+              <div className="text-xs text-gray-600 space-y-1">
+                <p>• Lagos: 1-2 Business Days</p>
+                <p>• Other States: 3-5 Business Days</p>
+                <p>• FREE on orders ₦25,000+</p>
+              </div>
+            </div>
+
+            {/* Return Policy */}
+            <div className="bg-white rounded-lg shadow-sm border border-gray-100 mt-4 p-4">
+              <div className="flex items-center gap-2 mb-3">
+                <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                  <svg className="w-4 h-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                  </svg>
+                </div>
+                <span className="font-semibold text-sm text-gray-900">Return Policy</span>
+              </div>
+              <p className="text-xs text-gray-600">
+                7 days return policy. Items must be unused and in original packaging.
+              </p>
+            </div>
+          </aside>
+
+          {/* Main Content */}
+          <main className="flex-1">
+            {/* Hero Banner */}
+            <div className="bg-gradient-to-r from-primary-600 to-primary-900 rounded-xl overflow-hidden mb-6">
+              <div className="flex flex-col md:flex-row items-center">
+                <div className="flex-1 p-8 md:p-12 text-white">
+                  <div className="inline-block bg-accent-500 text-white text-xs font-bold px-3 py-1 rounded-full mb-4">
+                    OFFICIAL STORE
+                  </div>
+                  <h2 className="text-3xl md:text-4xl font-extrabold mb-4">
+                    Premium Quality<br />Flour Delivered
+                  </h2>
+                  <p className="text-white/80 mb-6 max-w-md">
+                    Nigeria&apos;s trusted flour brand. From household baking to industrial use, we have you covered.
+                  </p>
+                  <Link href="/shop" className="inline-block bg-white text-primary-900 font-bold px-6 py-3 rounded-lg hover:bg-gray-100 transition-colors">
+                    Shop Now
+                  </Link>
+                </div>
+                <div className="hidden md:block w-1/3 p-8">
+                  <div className="bg-white/10 rounded-full p-8">
+                    <Image src="/logo.jpg" alt="Iyosiola Foods" width={200} height={200} className="object-contain" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Flash Sale Section */}
+            {flashSaleProducts.length > 0 && (
+              <section className="bg-white rounded-xl shadow-sm border border-gray-100 mb-6 overflow-hidden">
+                <div className="bg-red-500 px-6 py-4 flex items-center justify-between">
+                  <div className="flex items-center gap-4">
+                    <div className="flex items-center gap-2">
+                      <span className="text-xl">⚡</span>
+                      <h3 className="font-bold text-lg text-white">FLASH SALES</h3>
+                    </div>
+                    <div className="hidden sm:flex items-center gap-2 text-white text-sm">
+                      <span>Ends in:</span>
+                      <div className="flex gap-1">
+                        <span className="bg-white text-red-600 font-bold px-2 py-1 rounded">04</span>:
+                        <span className="bg-white text-red-600 font-bold px-2 py-1 rounded">32</span>:
+                        <span className="bg-white text-red-600 font-bold px-2 py-1 rounded">18</span>
+                      </div>
+                    </div>
+                  </div>
+                  <Link href="/shop?sale=flash" className="text-white text-sm font-semibold hover:underline">
+                    See All →
+                  </Link>
+                </div>
+                <div className="p-4">
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                    {flashSaleProducts.map((product) => (
+                      <ProductCard key={product.id} product={product} />
+                    ))}
+                  </div>
+                </div>
+              </section>
+            )}
+
+            {/* Top Selling Section */}
+            {topProducts.length > 0 && (
+              <section className="bg-white rounded-xl shadow-sm border border-gray-100 mb-6 overflow-hidden">
+                <div className="bg-primary-900 px-6 py-4 flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <span className="text-xl">🏆</span>
+                    <h3 className="font-bold text-lg text-white">Top Selling Items</h3>
+                  </div>
+                  <Link href="/shop?sort=popular" className="text-white text-sm font-semibold hover:underline">
+                    See All →
+                  </Link>
+                </div>
+                <div className="p-4">
+                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                    {topProducts.map((product) => (
+                      <ProductCard key={product.id} product={product} />
+                    ))}
+                  </div>
+                </div>
+              </section>
+            )}
+
+            {/* All Products / Recommended */}
+            <section className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+              <div className="px-6 py-4 border-b border-gray-100 flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <span className="text-xl">✨</span>
+                  <h3 className="font-bold text-lg text-gray-900">Just For You</h3>
+                </div>
+                <span className="text-sm text-gray-500">{recommendedProducts.length} products</span>
+              </div>
+              <div className="p-4">
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                  {recommendedProducts.map((product) => (
+                    <ProductCard key={product.id} product={product} />
+                  ))}
+                </div>
+              </div>
+            </section>
+          </main>
         </div>
-        <div className="p-4">
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2 md:gap-4">
-            {recommendedProducts.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
-        </div>
-      </section>
+      </div>
     </div>
   );
 }
