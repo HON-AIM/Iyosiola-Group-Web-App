@@ -1,23 +1,18 @@
 import { redirect } from "next/navigation";
 import { type Metadata } from "next";
 import { auth } from "@/lib/auth";
+import AdminSidebar from "@/components/admin/AdminSidebar";
 
 export const dynamic = "force-dynamic";
-import AdminSidebar from "@/components/admin/AdminSidebar";
-import { AlertCircle } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Admin Dashboard | IYOSIOLA GROUP",
-  description: "Manage products, orders, customers, and site content",
+  description: "Manage products, orders, customers, and store settings",
   robots: {
-    index: false, // Don't index admin pages
+    index: false,
     follow: false,
   },
 };
-
-interface AdminLayoutProps {
-  children: React.ReactNode;
-}
 
 interface SessionUser {
   id?: string;
@@ -33,51 +28,42 @@ interface AuthSession {
 
 export default async function AdminLayout({
   children,
-}: AdminLayoutProps) {
+}: {
+  children: React.ReactNode;
+}) {
   let session: AuthSession | null = null;
-  let authError = false;
 
   try {
     session = await auth();
   } catch (error) {
     console.error("Auth session error:", error);
-    authError = true;
+    redirect("/login");
   }
 
-  // Protect Admin Routes. Only users with role ADMIN can access.
-  if (authError || !session?.user?.role || session.user.role !== "ADMIN") {
+  if (!session?.user?.role || session.user.role !== "ADMIN") {
     redirect("/login");
   }
 
   return (
-    <div className="flex min-h-screen bg-gray-50">
-      {/* Skip to main content link for accessibility */}
-      <a
-        href="#main-content"
-        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:bg-green-600 focus:text-white focus:px-4 focus:py-2 focus:rounded-lg focus:font-medium"
-      >
-        Skip to main content
-      </a>
+    <div className="flex h-screen bg-gray-100 overflow-hidden">
+      <AdminSidebar />
+      
+      <div className="flex-1 flex flex-col overflow-hidden lg:pl-0 pl-0">
+        {/* Top Bar for Mobile */}
+        <header className="lg:hidden h-16 bg-white border-b border-gray-200 flex items-center px-4">
+          <div className="text-sm text-gray-500">Admin Dashboard</div>
+        </header>
 
-      {/* Sidebar - Hidden on mobile by default */}
-      <div className="hidden md:flex md:flex-col md:w-64 flex-shrink-0">
-        <AdminSidebar />
-      </div>
-
-      {/* Mobile Sidebar Overlay - Only visible on mobile */}
-      <div className="md:hidden fixed inset-0 z-40 bg-black/50 opacity-0 pointer-events-none transition-opacity duration-300" />
-
-      {/* Main Content */}
-      <main
-        id="main-content"
-        className="flex-1 overflow-y-auto overflow-x-hidden w-full"
-        role="main"
-        aria-label="Admin dashboard content"
-      >
-        <div className="p-4 md:p-8 max-w-full">
+        {/* Main Content */}
+        <main
+          id="main-content"
+          className="flex-1 overflow-y-auto p-4 lg:p-8"
+          role="main"
+          aria-label="Admin dashboard content"
+        >
           {children}
-        </div>
-      </main>
+        </main>
+      </div>
     </div>
   );
 }
