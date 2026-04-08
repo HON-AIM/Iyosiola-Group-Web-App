@@ -63,7 +63,7 @@ export default function AboutPage() {
           <div className="space-y-4 text-base md:text-lg leading-relaxed">
             <p>
               At <strong className="text-primary-900">Iyosiola Group</strong>, we are driven by a singular vision: 
-              to be the cornerstone of Africa's economic development through diversified and sustainable business practices. 
+              to be the cornerstone of Africa&apos;s economic development through diversified and sustainable business practices. 
               From our humble beginnings in agricultural trade, we have expanded into a formidable conglomerate.
             </p>
 

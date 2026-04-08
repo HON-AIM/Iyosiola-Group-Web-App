@@ -190,7 +190,7 @@ export default function AdminProductsPage() {
         <div>
           <h1 className="text-3xl font-bold text-gray-900">Products</h1>
           <p className="text-sm text-gray-500 mt-1">
-            Manage your store's inventory. Total: {pagination.total} products
+            Manage your store&apos;s inventory. Total: {pagination.total} products
           </p>
         </div>
         <Link
