@@ -141,10 +141,10 @@ export default function AdminSidebar() {
         {/* Logo */}
         <div className="h-16 flex items-center justify-between px-4 border-b border-gray-800">
           <Link href="/admin" className="flex items-center gap-3">
-            <Image src="/logo.jpg" alt="Iyosiola Logo" width={40} height={40} className="rounded" />
+            <Image src="/logo.jpg" alt="Iyosi Foods Logo" width={40} height={40} className="rounded" />
             <div>
-              <span className="font-bold text-lg block">Admin Panel</span>
-              <span className="text-xs text-gray-400">Iyosiola Foods</span>
+              <h2 className="text-white font-black text-lg leading-tight">Admin</h2>
+              <span className="text-xs text-gray-400">Iyosi Foods</span>
             </div>
           </Link>
           <button onClick={() => setMobileOpen(false)} className="lg:hidden p-2 hover:bg-gray-800 rounded">
@@ -216,7 +216,7 @@ export default function AdminSidebar() {
             </div>
             <div className="flex-1 min-w-0">
               <p className="text-sm font-semibold truncate">Admin</p>
-              <p className="text-xs text-gray-400 truncate">admin@iyosiola.com</p>
+              <p className="text-xs text-gray-400 truncate">admin@iyosifoods.com</p>
             </div>
             <button
               onClick={() => signOut({ callbackUrl: "/login" })}

@@ -26,32 +26,32 @@ const ContactFormSchema = z.object({
   email: z.string().email("Invalid email address").max(100).trim().toLowerCase(),
   phone: z.string().regex(/^\+?[1-9]\d{1,14}$/, "Invalid phone number").optional().or(z.literal("")),
   subject: z.string().min(5, "Subject must be at least 5 characters").max(100).trim(),
-  category: z.enum(["BUSINESS_INQUIRY", "INVESTMENT", "PRODUCT_SUPPORT", "COMPLAINT", "OTHER"]),
+  category: z.enum(["PRODUCT_INQUIRY", "WHOLESALE_INQUIRY", "ORDER_ISSUE", "COMPLAINT", "OTHER"]),
   message: z.string().min(10, "Message must be at least 10 characters").max(5000).trim(),
   honeypot: z.string().optional(),
 });
 
 const CONTACT_CATEGORIES = [
-  { value: "BUSINESS_INQUIRY", label: "Business Inquiry" },
-  { value: "INVESTMENT", label: "Investment Opportunity" },
-  { value: "PRODUCT_SUPPORT", label: "Product Support" },
-  { value: "COMPLAINT", label: "Complaint/Feedback" },
+  { value: "PRODUCT_INQUIRY", label: "Product Inquiry" },
+  { value: "WHOLESALE_INQUIRY", label: "Wholesale / Bulk Order" },
+  { value: "ORDER_ISSUE", label: "Order Issue" },
+  { value: "COMPLAINT", label: "Complaint / Feedback" },
   { value: "OTHER", label: "Other" },
 ];
 
 const CONTACT_INFO = {
   headquarters: {
-    title: "Corporate Headquarters",
-    lines: ["Iyosiola Group Towers", "Central Business District", "Lagos, Nigeria"],
+    title: "Our Office",
+    lines: ["Iyosi Foods Headquarters", "Lagos, Nigeria"],
   },
   phone: {
     title: "Phone",
-    primary: "+234 800 IYOSIOLA",
+    primary: "+234 800 IYOSI",
     secondary: "+234 801 234 5678",
   },
   email: {
     title: "Email",
-    address: "contact@iyosiolagroup.com",
+    address: "hello@iyosifoods.com",
   },
   hours: {
     title: "Business Hours",
@@ -66,7 +66,7 @@ export default function ContactForm() {
     email: "",
     phone: "",
     subject: "",
-    category: "BUSINESS_INQUIRY",
+    category: "PRODUCT_INQUIRY",
     message: "",
     honeypot: "",
   });
@@ -142,7 +142,7 @@ export default function ContactForm() {
         const data: SubmissionResponse = await response.json();
         setSubmissionResponse(data);
         setSubmitted(true);
-        setFormData({ firstName: "", lastName: "", email: "", phone: "", subject: "", category: "BUSINESS_INQUIRY", message: "", honeypot: "" });
+        setFormData({ firstName: "", lastName: "", email: "", phone: "", subject: "", category: "PRODUCT_INQUIRY", message: "", honeypot: "" });
 
         submitTimeoutRef.current = setTimeout(() => {
           setSubmitted(false);

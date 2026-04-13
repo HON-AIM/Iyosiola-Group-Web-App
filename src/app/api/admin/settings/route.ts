@@ -80,7 +80,7 @@ export async function GET(request: NextRequest) {
         {
           id: "global",
           announcementText: "",
-          storeName: "IYOSIOLA Foods",
+          storeName: "Iyosi Foods",
           storeDescription: "",
           storeEmail: "",
           storePhone: "",

@@ -101,7 +101,7 @@ export default async function ProductDetailPage({
                 {/* Official Badge */}
                 <div className="inline-flex items-center gap-2 bg-primary-900 text-white text-xs font-bold px-3 py-1 rounded mb-4">
                   <span className="w-2 h-2 bg-accent-400 rounded-full"></span>
-                  OFFICIAL IYOSIOLA FOODS STORE
+                  OFFICIAL IYOSI FOODS STORE
                 </div>
 
                 <h1 className="text-xl md:text-2xl font-bold text-gray-900 leading-tight mb-3">
@@ -210,7 +210,7 @@ export default async function ProductDetailPage({
                         I
                       </div>
                       <div>
-                        <p className="font-semibold text-gray-900">Iyosiola Foods</p>
+                        <p className="font-semibold text-gray-900">Iyosi Foods</p>
                         <p className="text-xs text-gray-500">Official Store</p>
                       </div>
                     </div>
@@ -244,7 +244,7 @@ export default async function ProductDetailPage({
                 </div>
                 <div className="flex justify-between py-2 border-b border-gray-50">
                   <span className="text-gray-500">Brand</span>
-                  <span className="font-medium text-gray-900">Iyosiola Foods</span>
+                  <span className="font-medium text-gray-900">Iyosi Foods</span>
                 </div>
               </div>
             </div>

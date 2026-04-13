@@ -6,7 +6,7 @@ import AdminSidebar from "@/components/admin/AdminSidebar";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Admin Dashboard | IYOSIOLA GROUP",
+  title: "Admin Dashboard | Iyosi Foods",
   description: "Manage products, orders, customers, and store settings",
   robots: {
     index: false,

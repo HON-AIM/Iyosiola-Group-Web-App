@@ -16,7 +16,7 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Analytics | Admin - IYOSIOLA GROUP",
+  title: "Analytics | Admin - Iyosi Foods",
   description: "Store analytics and reports",
   robots: { index: false, follow: false },
 };

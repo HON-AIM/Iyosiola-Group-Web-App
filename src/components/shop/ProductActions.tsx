@@ -103,7 +103,7 @@ export default function ProductActions({ product }: ProductActionProps) {
 
       {/* Promo Message */}
       <p className="text-sm text-center text-gray-500 mt-2">
-        ✓ Free delivery on orders above ₦25,000 | Use code: <span className="font-bold text-primary-600">IYOSIOLA10</span>
+        ✓ Free delivery on orders above ₦25,000 | Use code: <span className="font-bold text-primary-600">IYOSI10</span>
       </p>
     </div>
   );

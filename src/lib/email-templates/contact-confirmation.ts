@@ -30,9 +30,9 @@ export function contactConfirmationTemplate(data: {
           <small>Please reference this ID if you follow up with us</small>
         </div>
         
-        <p>If you have any urgent matters, please call us at +234 800 IYOSIOLA.</p>
+        <p>If you have any urgent matters, please call us at +234 800 IYOSI.</p>
         
-        <p>Best regards,<br><strong>IYOSIOLA GROUP Team</strong></p>
+        <p>Best regards,<br><strong>Iyosi Foods Team</strong></p>
         
         <div class="footer">
           <p>This is an automated message. Please do not reply to this email.</p>

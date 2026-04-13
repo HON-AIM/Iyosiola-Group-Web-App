@@ -4,9 +4,9 @@ import Link from "next/link";
 import Image from "next/image";
 
 export const metadata: Metadata = {
-  title: "Shop Premium Flour Online | Iyosiola Foods",
+  title: "Shop Premium Flour Online | Iyosi Foods",
   description:
-    "Shop premium quality flour, semolina, wheat products, and baking essentials from Iyosiola Foods. Fresh products delivered to your doorstep across Nigeria.",
+    "Shop premium quality flour, semolina, wheat products, and baking essentials from Iyosi Foods. Fresh products delivered to your doorstep across Nigeria.",
 };
 
 const categories = [
@@ -82,7 +82,7 @@ function ProductCard({ product }: { product: any }) {
       </div>
 
       <div className="p-3 flex flex-col flex-1">
-        <div className="text-xs text-primary-600 font-semibold mb-1">Iyosiola Foods</div>
+        <div className="text-xs text-primary-600 font-semibold mb-1">Iyosi Foods</div>
         <h3 className="text-sm text-gray-800 line-clamp-2 mb-2 group-hover:text-primary-600 transition-colors min-h-[2.5rem]">
           {product.name}
         </h3>
@@ -125,7 +125,7 @@ export default async function ShopHomePage() {
     <div className="min-h-screen bg-gray-100">
       {/* Top Promo Bar */}
       <div className="bg-primary-900 text-white text-center py-2 px-4 text-sm">
-        <span className="font-semibold">FREE DELIVERY</span> on orders above ₦25,000 | Use code: <span className="font-bold text-accent-400">IYOSIOLA10</span> for 10% off
+        <span className="font-semibold">FREE DELIVERY</span> on orders above ₦25,000 | Use code: <span className="font-bold text-accent-400">IYOSI10</span> for 10% off
       </div>
 
       <div className="container mx-auto px-4 py-6">
@@ -207,7 +207,7 @@ export default async function ShopHomePage() {
                 </div>
                 <div className="hidden md:block w-1/3 p-8">
                   <div className="bg-white/10 rounded-full p-8">
-                    <Image src="/logo.jpg" alt="Iyosiola Foods" width={200} height={200} className="object-contain" />
+                    <Image src="/logo.jpg" alt="Iyosi Foods" width={200} height={200} className="object-contain" />
                   </div>
                 </div>
               </div>
