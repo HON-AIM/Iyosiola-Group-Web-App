@@ -206,9 +206,7 @@ export default async function ShopHomePage() {
                   </Link>
                 </div>
                 <div className="hidden md:block w-1/3 p-8">
-                  <div className="bg-white/10 rounded-full p-8">
-                    <Image src="/logo.jpg" alt="Iyosi Foods" width={200} height={200} className="object-contain" />
-                  </div>
+                  <Image src="/logo.jpg" alt="Iyosi Foods" width={200} height={200} className="object-contain" />
                 </div>
               </div>
             </div>
