@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useRef } from "react";
+import { useCallback, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ChevronDown } from "lucide-react";
@@ -16,11 +16,9 @@ interface NavItemProps {
 
 export default function NavItem({ item, isOpen, onOpen, onClose }: NavItemProps) {
   const pathname = usePathname();
-  const openDelayRef = useRef<NodeJS.Timeout | null>(null);
-  const closeDelayRef = useRef<NodeJS.Timeout | null>(null);
+  const [isHovered, setIsHovered] = useState(false);
   const hasChildren = !!item.children?.length;
 
-  // Check if current path matches this nav item or any of its children
   const isActive =
     pathname === item.href ||
     (hasChildren && item.children!.some((child) => pathname.startsWith(child.href)));
@@ -28,19 +26,17 @@ export default function NavItem({ item, isOpen, onOpen, onClose }: NavItemProps)
   const dropdownId = `dropdown-${item.label.toLowerCase().replace(/\s+/g, "-")}`;
 
   const handleMouseEnter = useCallback(() => {
-    if (!hasChildren) return;
-    if (closeDelayRef.current) clearTimeout(closeDelayRef.current);
-    openDelayRef.current = setTimeout(() => {
+    if (hasChildren) {
+      setIsHovered(true);
       onOpen(item.label);
-    }, 100);
+    }
   }, [hasChildren, onOpen, item.label]);
 
   const handleMouseLeave = useCallback(() => {
-    if (!hasChildren) return;
-    if (openDelayRef.current) clearTimeout(openDelayRef.current);
-    closeDelayRef.current = setTimeout(() => {
+    if (hasChildren) {
+      setIsHovered(false);
       onClose();
-    }, 220);
+    }
   }, [hasChildren, onClose]);
 
   const handleKeyDown = useCallback(
@@ -92,14 +88,8 @@ export default function NavItem({ item, isOpen, onOpen, onClose }: NavItemProps)
       )}
 
       {/* Desktop dropdown */}
-      {hasChildren && (
-        <div
-          className={`absolute top-full left-0 pt-1 z-50 transition-all duration-200 ease-out ${
-            isOpen
-              ? "opacity-100 translate-y-0 pointer-events-auto"
-              : "opacity-0 -translate-y-2 pointer-events-none"
-          }`}
-        >
+      {hasChildren && isHovered && (
+        <div className="absolute left-0 pt-1 z-50">
           <DropdownMenu items={item.children!} id={dropdownId} />
         </div>
       )}
