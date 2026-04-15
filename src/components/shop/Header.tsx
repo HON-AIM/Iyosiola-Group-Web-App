@@ -47,8 +47,7 @@ export default function ShopHeader() {
           {/* Logo & Mobile Menu */}
           <div className="flex items-center gap-4 flex-shrink-0">
             <Link href="/shop" className="flex items-center gap-2">
-              <Image src="/logo.jpg" alt="Iyosi Foods Logo" width={40} height={40} className="object-contain" />
-              <span className="font-extrabold text-xl text-primary-900 tracking-tight hidden sm:block">IYOSI FOODS</span>
+              <Image src="/logo.jpg" alt="Iyosi Foods" width={45} height={45} className="object-contain" priority />
             </Link>
           </div>
 

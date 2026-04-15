@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Providers } from "@/components/Providers";
-import IyosiHeader from "@/components/IyosiHeader";
+import Navbar from "@/components/navigation/Navbar";
 import NewsletterForm from "@/components/NewsletterForm";
 import "./globals.css";
 
@@ -95,7 +95,7 @@ export default function RootLayout({
       </head>
       <body className="min-h-screen flex flex-col antialiased bg-surface-50 text-surface-900" style={{ fontFamily: "'Inter', system-ui, -apple-system, sans-serif" }}>
         <Providers>
-          <IyosiHeader />
+          <Navbar />
 
           <main className="flex-grow flex flex-col" id="main-content" tabIndex={-1}>
             {children}

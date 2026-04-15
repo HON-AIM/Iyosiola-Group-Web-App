@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 import Preloader from "@/components/Preloader";
 import { ArrowRight, ArrowLeft, Star, Truck, Shield, Award, Phone, ChevronRight } from "lucide-react";
 

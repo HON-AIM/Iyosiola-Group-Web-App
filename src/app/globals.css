@@ -122,3 +122,41 @@ html {
   outline: 2px solid var(--color-primary-500);
   outline-offset: 2px;
 }
+
+/* ── Navigation ── */
+
+/* Dropdown panel styling */
+.dropdown-panel {
+  min-width: 260px;
+  background: white;
+  border: 1px solid var(--color-surface-200);
+  border-radius: 0.75rem;
+  box-shadow:
+    0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+/* Mobile menu slide-in */
+.animate-slide-in-right {
+  animation: nav-slide-in-right 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes nav-slide-in-right {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+/* Backdrop fade */
+.animate-fade-in {
+  animation: nav-fade-in 0.2s ease both;
+}
+
+@keyframes nav-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
