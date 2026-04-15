@@ -1,4 +1,4 @@
-import IyosiHeader from "@/components/IyosiHeader";
+import Navbar from "@/components/navigation/Navbar";
 import CartSidebar from "@/components/shop/CartSidebar";
 
 export default function ShopLayout({
@@ -8,7 +8,7 @@ export default function ShopLayout({
 }) {
   return (
     <div className="min-h-screen flex flex-col bg-surface-50">
-      <IyosiHeader />
+      <Navbar />
       <CartSidebar />
 
       <main className="flex-1 w-full">
