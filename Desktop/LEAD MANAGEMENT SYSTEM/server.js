@@ -78,49 +78,99 @@ app.post('/api/leads', async (req, res) => {
   try {
     const { name, email, phone, state, source = 'form', notes, metadata } = req.body;
 
-    // Find clients that match the state (case-insensitive)
     const stateUpper = state?.toUpperCase();
     console.log(`Looking for client in state: ${stateUpper}`);
 
+    // Find clients matching state and NOT inactive (includes 'full' status so we can check capacity)
     const availableClients = await Client.find({
-      state: { $regex: new RegExp('^' + stateUpper + '$', 'i') }
+      state: { $regex: new RegExp('^' + stateUpper + '$', 'i') },
+      status: { $ne: 'inactive' }
     });
 
     console.log(`Found ${availableClients.length} clients for state ${stateUpper}`);
 
-    // Filter for clients with available capacity
+    // Filter for clients with available capacity, then sort by leadsReceived (fewest first)
+    const eligibleClients = availableClients
+      .filter(c => c.leadsReceived < c.leadCap)
+      .sort((a, b) => a.leadsReceived - b.leadsReceived);
+
     let client = null;
-    for (const c of availableClients) {
-      if (c.leadsReceived < c.leadCap) {
-        // Check if this is the client with fewest leads among those available
-        if (!client || c.leadsReceived < client.leadsReceived) {
-          client = c;
-        }
-      }
+    if (eligibleClients.length > 0) {
+      client = eligibleClients[0];
     }
 
     let assignedTo = null;
-    let status = 'unassigned';
+    let leadStatus = 'unassigned';
+    let clientName = null;
 
     if (client) {
-      assignedTo = client._id;
-      client.leadsReceived += 1;
-      await client.save();
-      status = 'assigned';
-      console.log(`Lead assigned to: ${client.name} (${client.state})`);
+      // Increment client leads atomically, only if not at capacity (using atomic update)
+      const updatedClient = await Client.findOneAndUpdate(
+        { 
+          _id: client._id,
+          leadsReceived: { $lt: client.leadCap }
+        },
+        { $inc: { leadsReceived: 1 } },
+        { new: true }
+      );
 
-      // Log activity
-      await Activity.create({
-        type: 'lead_assigned',
-        message: `Lead ${name} assigned to ${client.name}`,
-        clientId: client._id,
-        leadId: null
-      });
+      if (updatedClient) {
+        assignedTo = client._id;
+        leadStatus = 'assigned';
+        clientName = client.name;
+        
+        // Update client status to 'full' if reached cap
+        if (updatedClient.leadsReceived >= updatedClient.leadCap) {
+          await Client.findByIdAndUpdate(client._id, { status: 'full' });
+        }
+        
+        console.log(`Lead assigned to: ${client.name} (${client.state})`);
+
+        await Activity.create({
+          type: 'lead_assigned',
+          message: `Lead ${name} assigned to ${client.name}`,
+          clientId: client._id,
+          leadId: null
+        });
+      } else {
+        console.log(`Client ${client.name} reached capacity, trying next available client...`);
+        
+        // Try next eligible client
+        const remainingClients = eligibleClients.slice(1).filter(c => c._id.toString() !== client._id.toString());
+        for (const altClient of remainingClients) {
+          const altUpdated = await Client.findOneAndUpdate(
+            { 
+              _id: altClient._id,
+              leadsReceived: { $lt: altClient.leadCap }
+            },
+            { $inc: { leadsReceived: 1 } },
+            { new: true }
+          );
+          
+          if (altUpdated) {
+            assignedTo = altClient._id;
+            leadStatus = 'assigned';
+            clientName = altClient.name;
+            
+            if (altUpdated.leadsReceived >= altUpdated.leadCap) {
+              await Client.findByIdAndUpdate(altClient._id, { status: 'full' });
+            }
+            
+            console.log(`Lead assigned to: ${altClient.name} (${altClient.state})`);
+            await Activity.create({
+              type: 'lead_assigned',
+              message: `Lead ${name} assigned to ${altClient.name}`,
+              clientId: altClient._id,
+              leadId: null
+            });
+            break;
+          }
+        }
+      }
     } else {
       console.log(`No client available for state: ${stateUpper}`);
     }
 
-    // Create lead
     const lead = await Lead.create({
       name,
       email,
@@ -128,12 +178,11 @@ app.post('/api/leads', async (req, res) => {
       state: stateUpper,
       source,
       assignedTo,
-      status,
+      status: leadStatus,
       notes,
       metadata
     });
 
-    // Log activity
     await Activity.create({
       type: 'lead_received',
       message: `New lead received from ${source}: ${name}`,
@@ -144,8 +193,8 @@ app.post('/api/leads', async (req, res) => {
     res.json({
       success: true,
       lead,
-      assignedTo: client ? client.name : "No client available",
-      status
+      assignedTo: clientName || "No client available",
+      status: leadStatus
     });
 
   } catch (err) {
