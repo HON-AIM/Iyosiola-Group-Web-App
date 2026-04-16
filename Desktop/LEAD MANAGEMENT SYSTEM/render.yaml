@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: lead-management-backend
+    plan: free
+    region: oregon
+    repo: https://github.com/HON-AIM/Leads-Management-System-Saas
+    branch: main
+    rootDir: Backend
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGO_URI
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: PORT
+        value: 10000
