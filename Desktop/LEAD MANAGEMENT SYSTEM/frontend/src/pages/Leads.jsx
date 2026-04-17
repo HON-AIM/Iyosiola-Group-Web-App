@@ -32,6 +32,7 @@ const Leads = () => {
     if (window.confirm(`Are you sure you want to delete "${name}"?`)) {
       try {
         await leadsAPI.delete(id);
+        setLeads(leads.filter(lead => lead._id !== id));
         fetchLeads();
       } catch (error) {
         console.error('Error deleting lead:', error);
