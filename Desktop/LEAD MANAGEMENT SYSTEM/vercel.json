@@ -1,5 +1,7 @@
 {
-  "rewrites": [
-    { "source": "/api/(.*)", "destination": "https://leads-management-saas-1.onrender.com/api/$1" }
+  "version": 2,
+  "routes": [
+    { "src": "/api/(?<path>.*)", "dest": "https://leads-management-saas-1.onrender.com/api/${path}" },
+    { "src": "/(.*)", "dest": "/index.html" }
   ]
 }
