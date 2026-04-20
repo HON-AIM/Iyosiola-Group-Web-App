@@ -640,10 +640,17 @@ app.delete('/api/leads/:id', auth, async (req, res) => {
       return res.status(404).json({ success: false, message: 'Lead not found' });
     }
 
+    // Safety check: Only decrement if lead was assigned AND client still has leads > 0
     if (lead.assignedTo) {
-      await Client.findByIdAndUpdate(lead.assignedTo, {
-        $inc: { leadsReceived: -1 }
-      });
+      const client = await Client.findById(lead.assignedTo);
+      if (client && client.leadsReceived > 0) {
+        await Client.findByIdAndUpdate(lead.assignedTo, {
+          $inc: { leadsReceived: -1 }
+        });
+        console.log(`[DELETE_LEAD] Decremented leads for client ${client.name}: ${client.leadsReceived - 1}/${client.leadCap}`);
+      } else {
+        console.log(`[DELETE_LEAD] Skipped decrement - client has 0 leads or not found`);
+      }
     }
 
     await Lead.findByIdAndDelete(req.params.id);
