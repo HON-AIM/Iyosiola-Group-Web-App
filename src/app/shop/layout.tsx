@@ -1,4 +1,4 @@
-import Navbar from "@/components/navigation/Navbar";
+import ShopHeader from "@/components/shop/Header";
 import CartSidebar from "@/components/shop/CartSidebar";
 import Link from "next/link";
 
@@ -9,7 +9,7 @@ export default function ShopLayout({
 }) {
   return (
     <div className="min-h-screen flex flex-col bg-gray-100">
-      <Navbar />
+      <ShopHeader />
       <CartSidebar />
 
       <main className="flex-1 w-full">
