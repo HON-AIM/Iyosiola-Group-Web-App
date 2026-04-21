@@ -100,20 +100,18 @@ export default function AboutPage() {
             Why Choose Iyosiola Group?
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-            {[
-              {
-                title: "Quality Excellence",
-                description: "Premium products",
-              },
-              {
-                title: "Sustainable Practices",
-                description: "Environmentally responsible operations",
-              },
-              {
-                title: "Innovation & Efficiency",
-                description: "Cutting-edge technology and processes",
-              },
-            ]}
+            <div className="bg-white p-6 rounded-xl shadow-sm">
+              <h4 className="font-bold text-primary-900 mb-2">Quality Excellence</h4>
+              <p className="text-surface-600 text-sm">Premium products</p>
+            </div>
+            <div className="bg-white p-6 rounded-xl shadow-sm">
+              <h4 className="font-bold text-primary-900 mb-2">Sustainable Practices</h4>
+              <p className="text-surface-600 text-sm">Environmentally responsible operations</p>
+            </div>
+            <div className="bg-white p-6 rounded-xl shadow-sm">
+              <h4 className="font-bold text-primary-900 mb-2">Innovation & Efficiency</h4>
+              <p className="text-surface-600 text-sm">Cutting-edge technology and processes</p>
+            </div>
           </div>
         </div>
       </section>
