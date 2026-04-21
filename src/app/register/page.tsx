@@ -264,7 +264,7 @@ function RegisterForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  const submitTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const submitTimeoutRef = useRef<NodeJS.Timeout>();
 
   // ✅ Get password strength
   const strength = formData.password
@@ -306,7 +306,7 @@ function RegisterForm() {
 
     if (!validation.success) {
       const fieldErrors: FormErrors = {};
-      validation.error.issues.forEach((err) => {
+      validation.error.errors.forEach((err) => {
         fieldErrors[err.path[0] as keyof FormErrors] = err.message;
       });
       setErrors(fieldErrors);
@@ -427,7 +427,7 @@ function RegisterForm() {
           Create account
         </h2>
         <p className="mt-2 text-sm text-surface-600 dark:text-surface-400">
-          Join Iyosi Foods today
+          Join IYOSIOLA GROUP today
         </p>
       </div>
 

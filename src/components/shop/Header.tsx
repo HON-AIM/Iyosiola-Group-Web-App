@@ -46,8 +46,12 @@ export default function ShopHeader() {
           
           {/* Logo & Mobile Menu */}
           <div className="flex items-center gap-4 flex-shrink-0">
+            <button className="md:hidden text-gray-600 hover:text-primary-600">
+              <Menu className="h-6 w-6" />
+            </button>
             <Link href="/shop" className="flex items-center gap-2">
-              <Image src="/logo.jpg" alt="Iyosi Foods" width={45} height={45} className="object-contain" priority />
+              <Image src="/logo.jpg" alt="Iyosiola Foods Logo" width={40} height={40} className="object-contain" />
+              <span className="font-extrabold text-xl text-primary-900 tracking-tight hidden sm:block">IYOSIOLA STORE</span>
             </Link>
           </div>
 

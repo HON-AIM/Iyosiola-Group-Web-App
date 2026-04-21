@@ -1,5 +1,6 @@
+import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
-import { auth } from "@/lib/auth";
+import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 import { type NextRequest } from "next/server";
 import { z } from "zod";
@@ -103,7 +104,7 @@ export async function POST(request: NextRequest) {
     const parseResult = CreateOrderSchema.safeParse(body);
 
     if (!parseResult.success) {
-      const errors = parseResult.error.issues.map((e) => ({ field: e.path.join("."), message: e.message }));
+      const errors = parseResult.error.errors.map((e) => ({ field: e.path.join("."), message: e.message }));
       return NextResponse.json({ message: "Validation failed", errors }, { status: 400 });
     }
 
@@ -157,7 +158,7 @@ export async function POST(request: NextRequest) {
             items: { create: items.map((item) => ({ productId: item.productId, quantity: item.quantity, price: item.price })) },
             shippingAddr: `${shippingAddress.street}, ${shippingAddress.city}, ${shippingAddress.state}`,
             shippingAddressData: JSON.stringify(shippingAddress),
-            totalAmount: total,
+            total,
             subtotal: calculatedTotal,
             taxAmount: total - calculatedTotal,
             status: "PENDING",

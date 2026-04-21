@@ -29,7 +29,7 @@ export async function POST(request: NextRequest) {
     const parseResult = ForgotPasswordSchema.safeParse(body);
 
     if (!parseResult.success) {
-      const errors = parseResult.error.issues.map((e) => ({
+      const errors = parseResult.error.errors.map((e) => ({
         field: e.path.join("."),
         message: e.message,
       }));

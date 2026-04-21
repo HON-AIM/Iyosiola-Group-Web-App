@@ -15,12 +15,12 @@ model Account {
   type              String
   provider          String
   providerAccountId String
-  refresh_token     String?  @db.Text
-  access_token      String?  @db.Text
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
   expires_at        Int?
   token_type        String?
   scope             String?
-  id_token          String?  @db.Text
+  id_token          String? @db.Text
   session_state     String?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -46,30 +46,30 @@ model VerificationToken {
 
 // User Model for Authentication and Profiles
 model User {
-  id                       String            @id @default(cuid())
+  id                       String    @id @default(cuid())
   name                     String?
-  email                    String?           @unique
+  email                    String?   @unique
   emailVerified            DateTime?
-  password                 String?
-  resetToken               String?           @unique
-  resetTokenExpiry         DateTime?
+  password                String?
+  resetToken              String?   @unique
+  resetTokenExpiry        DateTime?
   verificationToken        String?
   verificationTokenExpires DateTime?
-  lastLogin                DateTime?
-  image                    String?
-  role                     Role              @default(USER)
-  isActive                 Boolean           @default(true)
-  accounts                 Account[]
-  sessions                 Session[]
-  orders                   Order[]
-  addresses                Address[]
-  reviews                  Review[]
-  messages                 Message[]
-  savedItems               SavedItem[]
-  loginAttempts            LoginAttempt[]
-  userActivityLogs         UserActivityLog[]
-  createdAt                DateTime          @default(now())
-  updatedAt                DateTime          @updatedAt
+  lastLogin               DateTime?
+  image                   String?
+  role                    Role      @default(USER)
+  isActive                Boolean   @default(true)
+  accounts                Account[]
+  sessions                Session[]
+  orders                  Order[]
+  addresses               Address[]
+  reviews                 Review[]
+  messages                Message[]
+  savedItems              SavedItem[]
+  loginAttempts           LoginAttempt[]
+  userActivityLogs        UserActivityLog[]
+  createdAt               DateTime  @default(now())
+  updatedAt               DateTime  @updatedAt
 }
 
 enum Role {
@@ -134,21 +134,21 @@ model RegistrationLog {
 
 // Product Model for Flour Catalog
 model Product {
-  id               String            @id @default(cuid())
-  name             String
-  description      String
-  price            Float
-  stock            Int               @default(0)
-  image            String?
-  category         Category          @default(BAKING)
-  isActive         Boolean           @default(true)
-  deactivatedAt    DateTime?
-  orderItems       OrderItem[]
-  reviews          Review[]
-  savedBy          SavedItem[]
+  id           String      @id @default(cuid())
+  name         String
+  description  String
+  price        Float
+  stock        Int         @default(0)
+  image        String?
+  category     Category    @default(BAKING)
+  isActive     Boolean     @default(true)
+  deactivatedAt DateTime?
+  orderItems   OrderItem[]
+  reviews      Review[]
+  savedBy      SavedItem[]
   productAuditLogs ProductAuditLog[]
-  createdAt        DateTime          @default(now())
-  updatedAt        DateTime          @updatedAt
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
 }
 
 enum Category {
@@ -172,22 +172,22 @@ model ProductAuditLog {
 
 // Order Management
 model Order {
-  id                  String      @id @default(cuid())
-  userId              String
-  user                User        @relation(fields: [userId], references: [id])
-  orderNumber         String?     @unique
-  status              OrderStatus @default(PENDING)
-  totalAmount         Float
-  subtotal            Float?
-  taxAmount           Float?
-  paymentRef          String?     @unique
-  items               OrderItem[]
-  shippingAddr        String
-  shippingAddressData String?  @db.Text
-  notes               String?
-  couponCode          String?
-  createdAt           DateTime    @default(now())
-  updatedAt           DateTime    @updatedAt
+  id           String      @id @default(cuid())
+  userId       String
+  user         User        @relation(fields: [userId], references: [id])
+  orderNumber  String?     @unique
+  status       OrderStatus @default(PENDING)
+  totalAmount  Float
+  subtotal     Float?
+  taxAmount    Float?
+  paymentRef   String?     @unique
+  items        OrderItem[]
+  shippingAddr String
+  shippingAddressData String? @db.Text
+  notes        String?
+  couponCode   String?
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
 }
 
 model OrderItem {
@@ -306,5 +306,37 @@ model UploadedFile {
 model StoreSettings {
   id               String   @id @default("global")
   announcementText String?
+  flashSaleEndTime DateTime?
   updatedAt        DateTime @updatedAt
+}
+
+// Hero Banner Slides (Admin-managed carousel)
+model HeroBanner {
+  id          String   @id @default(cuid())
+  title       String
+  subtitle    String?
+  ctaText     String?  @default("SHOP NOW")
+  ctaLink     String?  @default("/shop")
+  badgeText   String?
+  bgColor     String?  @default("#1e3a8a")
+  textColor   String?  @default("#ffffff")
+  image       String?
+  sortOrder   Int      @default(0)
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// Promotional Banners (Admin-managed promo cards)
+model PromoBanner {
+  id          String   @id @default(cuid())
+  title       String
+  subtitle    String?
+  link        String?  @default("/shop")
+  bgGradient  String?  @default("from-orange-500 to-red-500")
+  icon        String?  @default("Zap")
+  sortOrder   Int      @default(0)
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }

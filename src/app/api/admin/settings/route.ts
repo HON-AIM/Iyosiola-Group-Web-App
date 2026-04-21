@@ -57,6 +57,11 @@ const StoreSettingsSchema = z.object({
     .min(0, "Tax percentage cannot be negative")
     .max(100, "Tax percentage cannot exceed 100")
     .optional(),
+  flashSaleEndTime: z
+    .string()
+    .datetime({ message: "Invalid date format" })
+    .optional()
+    .nullable(),
 });
 
 type StoreSettings = z.infer<typeof StoreSettingsSchema>;

@@ -67,7 +67,7 @@ export async function POST(request: NextRequest) {
     const validation = AddressSchema.safeParse(body);
 
     if (!validation.success) {
-      const errors = validation.error.issues.map((e) => ({
+      const errors = validation.error.errors.map((e) => ({
         field: e.path.join("."),
         message: e.message,
       }));

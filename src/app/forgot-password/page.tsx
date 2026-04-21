@@ -88,7 +88,7 @@ function SuccessMessage({ email, onReset }: SuccessMessageProps) {
             <strong>💡 Tip:</strong> If you don't receive the email within a few
             minutes, check your spam or junk folder. Add{" "}
             <code className="bg-surface-100 px-2 py-1 rounded text-xs">
-              noreply@iyosifoods.com
+              noreply@iyosiolagroup.com
             </code>{" "}
             to your contacts to prevent future emails from going to spam.
           </p>
@@ -103,7 +103,7 @@ function SuccessMessage({ email, onReset }: SuccessMessageProps) {
               <p className="text-surface-600">
                 Look for an email from{" "}
                 <span className="font-mono text-xs bg-surface-100 px-2 py-1 rounded">
-                  noreply@iyosifoods.com
+                  noreply@iyosiolagroup.com
                 </span>
               </p>
             </div>
@@ -132,7 +132,7 @@ function SuccessMessage({ email, onReset }: SuccessMessageProps) {
         <div className="mt-6 p-3 bg-blue-50 border border-blue-200 rounded-lg">
           <p className="text-xs text-blue-800">
             <strong>🔒 Security:</strong> Never share your reset link with anyone.
-            Iyosi Foods will never ask for your password via email.
+            IYOSIOLA GROUP will never ask for your password via email.
           </p>
         </div>
       </div>
@@ -167,7 +167,7 @@ function SuccessMessage({ email, onReset }: SuccessMessageProps) {
 // ✅ Main forgot password component
 export default function ForgotPasswordPage() {
   const router = useRouter();
-  const submitTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const submitTimeoutRef = useRef<NodeJS.Timeout>();
 
   // ✅ State management
   const [email, setEmail] = useState("");
@@ -216,7 +216,7 @@ export default function ForgotPasswordPage() {
     const validation = EmailSchema.safeParse({ email });
 
     if (!validation.success) {
-      const firstError = validation.error.issues[0];
+      const firstError = validation.error.errors[0];
       setValidationError(firstError.message);
       return false;
     }

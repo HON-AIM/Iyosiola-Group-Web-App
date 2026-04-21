@@ -60,7 +60,7 @@ function FormSkeleton() {
 function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const submitTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const submitTimeoutRef = useRef<NodeJS.Timeout>();
 
   // ✅ State management
   const [formData, setFormData] = useState<LoginFormData>({
@@ -156,7 +156,7 @@ function LoginForm() {
 
     if (!validation.success) {
       const fieldErrors: ValidationErrors = {};
-      validation.error.issues.forEach((error) => {
+      validation.error.errors.forEach((error) => {
         const field = error.path[0] as string;
         fieldErrors[field as keyof ValidationErrors] = error.message;
       });
@@ -246,28 +246,17 @@ function LoginForm() {
           setSuccessMsg("✅ Login successful! Redirecting...");
           setAttemptCount(0); // Reset attempt count on success
 
-          // ✅ Fetch session to determine user role
-          try {
-            const sessionRes = await fetch("/api/auth/session");
-            const sessionData = await sessionRes.json();
-            const userRole = sessionData?.user?.role;
+          // ✅ Redirect to dashboard or callback URL
+          const redirectUrl =
+            searchParams.get("callbackUrl") || "/dashboard";
 
-            // ✅ Redirect based on role
-            const callbackUrl = searchParams.get("callbackUrl");
-            let redirectUrl = "/dashboard";
-
-            if (callbackUrl && callbackUrl.startsWith("/")) {
-              redirectUrl = callbackUrl;
-            } else if (userRole === "ADMIN") {
-              redirectUrl = "/admin";
-            }
-
+          // ✅ Validate redirect URL (prevent open redirect)
+          if (redirectUrl.startsWith("/")) {
             setTimeout(() => {
               router.push(redirectUrl);
               router.refresh();
             }, 500);
-          } catch {
-            // Fallback redirect if session fetch fails
+          } else {
             setTimeout(() => {
               router.push("/dashboard");
               router.refresh();
@@ -328,7 +317,7 @@ function LoginForm() {
           Welcome back
         </h2>
         <p className="mt-2 text-center text-sm text-surface-600 dark:text-surface-400">
-          Sign in to your Iyosi Foods account
+          Sign in to your Iyosiola account
         </p>
       </div>
       <form className="mt-8 space-y-6" onSubmit={handleSubmit}>

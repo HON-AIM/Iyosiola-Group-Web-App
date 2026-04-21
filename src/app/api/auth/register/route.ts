@@ -25,7 +25,11 @@ const RegisterSchema = z.object({
     .regex(/[A-Z]/, "Password must contain at least one uppercase letter")
     .regex(/[a-z]/, "Password must contain at least one lowercase letter")
     .regex(/[0-9]/, "Password must contain at least one number")
-    .regex(/[^A-Za-z0-9]/, "Password must contain at least one special character"),
+    .regex(/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/, "Password must contain at least one special character"),
+  confirmPassword: z.string(),
+}).refine((data) => data.password === data.confirmPassword, {
+  message: "Passwords don't match",
+  path: ["confirmPassword"],
 });
 
 const registrationAttempts = new Map<string, { count: number; resetAt: number }>();
@@ -67,7 +71,7 @@ export async function POST(request: NextRequest) {
     const parseResult = RegisterSchema.safeParse(body);
 
     if (!parseResult.success) {
-      const errors = parseResult.error.issues.map((e) => ({
+      const errors = parseResult.error.errors.map((e) => ({
         field: e.path.join("."),
         message: e.message,
       }));
@@ -76,8 +80,8 @@ export async function POST(request: NextRequest) {
 
     const { name, email, password } = parseResult.data;
 
-    // Small delay to mitigate timing attacks
-    await new Promise((resolve) => setTimeout(resolve, 200));
+    const startTime = Date.now();
+    while (Date.now() - startTime < 300) {}
 
     let newUser;
     try {
