@@ -235,10 +235,9 @@ export async function PUT(
       try {
         await sendOrderStatusUpdate(
           currentOrder.user.email,
+          currentOrder.user.name || "Customer",
           id,
-          currentOrder.status,
-          status,
-          currentOrder.user.name || undefined
+          status
         );
       } catch (emailError) {
         console.warn("[WARN] Failed to send order status email:", {
