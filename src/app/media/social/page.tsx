@@ -1,0 +1,130 @@
+import { type Metadata } from "next";
+import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Social Media | Iyosiola Group",
+  description: "Connect with Iyosiola Group on social media for real-time updates and engagement.",
+};
+
+export default function SocialMediaPage() {
+  const platforms = [
+    {
+      name: "Facebook",
+      handle: "@IyosiolaGroup",
+      description: "Follow us for company news, product updates, and community stories.",
+      icon: "facebook",
+      color: "bg-blue-600 hover:bg-blue-700",
+      followers: "50K+",
+    },
+    {
+      name: "Twitter/X",
+      handle: "@IyosiolaGroup",
+      description: "Real-time updates, industry news, and engagement with stakeholders.",
+      icon: "twitter",
+      color: "bg-black hover:bg-gray-800",
+      followers: "30K+",
+    },
+    {
+      name: "Instagram",
+      handle: "@iyosiolagroup",
+      description: "Visual stories, behind-the-scenes moments, and product highlights.",
+      icon: "instagram",
+      color: "bg-pink-600 hover:bg-pink-700",
+      followers: "45K+",
+    },
+    {
+      name: "LinkedIn",
+      handle: "Iyosiola Group",
+      description: "Professional updates, career opportunities, and corporate news.",
+      icon: "linkedin",
+      color: "bg-blue-700 hover:bg-blue-800",
+      followers: "20K+",
+    },
+    {
+      name: "YouTube",
+      handle: "Iyosiola Group Channel",
+      description: "Videos, product demos, interviews, and corporate presentations.",
+      icon: "youtube",
+      color: "bg-red-600 hover:bg-red-700",
+      subscribers: "15K+",
+    },
+  ];
+
+  const recentPosts = [
+    { platform: "Twitter", content: "Excited to announce our new flour milling facility opening in Port Harcourt! #IyosiolaGroup #MadeInNigeria", time: "2 hours ago" },
+    { platform: "Instagram", content: "Behind the scenes at our rice mill in Kano 🏭 #IyosiolaGroup #NigerianMade", time: "5 hours ago" },
+    { platform: "Facebook", content: "Thank you to all our employees for making this achievement possible! 🎉 #TeamIyosiola", time: "1 day ago" },
+    { platform: "LinkedIn", content: "We're hiring! Join our team and be part of Nigeria's fastest-growing FMCG company. [Link in bio] #Jobs #Hiring", time: "2 days ago" },
+  ];
+
+  return (
+    <div className="flex flex-col min-h-screen bg-surface-50">
+      <section className="bg-primary-900 text-white py-16 md:py-20 px-4 md:px-8 text-center border-b-8 border-accent-500">
+        <h1 className="text-4xl md:text-5xl font-extrabold mb-4">Social Media</h1>
+        <p className="text-lg md:text-xl text-primary-100 max-w-2xl mx-auto font-light">
+          Connect with us on social platforms
+        </p>
+      </section>
+
+      <section className="container mx-auto px-4 py-12 md:py-16">
+        <div className="max-w-4xl mx-auto">
+          <p className="text-lg text-surface-700 leading-relaxed mb-12 text-center">
+            Follow Iyosiola Group on social media for the latest updates, news, product launches, 
+            and behind-the-scenes content. We love engaging with our community!
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {platforms.map((platform, i) => (
+              <div key={i} className="bg-white p-6 rounded-xl shadow-sm border border-surface-100">
+                <div className={`w-12 h-12 ${platform.color} rounded-full flex items-center justify-center mb-4 text-white`}>
+                  {platform.name === "Facebook" && (
+                    <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>}
+                  {platform.name === "Twitter/X" && (
+                    <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>}
+                  {platform.name === "Instagram" && (
+                    <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.979-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>}
+                  {platform.name === "LinkedIn" && (
+                    <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>}
+                  {platform.name === "YouTube" && (
+                    <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.805 6.892 18.5 6.5 12 6.5c-6.804 0-7.805.392-9.377.05a3.015 3.015 0 0 0-2.122 2.136C.05 10.392 0 12.05 0 12.05c0 1.658.05 3.33.05 4.864 0 1.658-.05 3.33-.05 4.864 0 1.658.05 3.33.05 4.864 0 1.658-.05 3.33-.05 4.864 0 1.658.05 3.33.05 4.864 0 1.658-.05 3.33-.05 4.864 0 1.658.05 3.33.05 4.864 0 1.658-.05 3.33-.05 4.864 0 1.658.05 3.33.05 4.864 0 1.658-.05 3.33-.05 4.864 0 1.658.05 3.33.05 4.864 0 1.658-.05 3.33-.05 4.864 0 1.658.05 3.33.05 4.864 0 1.658-.05 3.33-.05 4.864 0 1.658.05 3.33.05 4.864 0 1.658-.05 3.33-.05 4.864 0 1.658.05 3.33.05 4.864 0 1.658-.05 3.33-.05 4.864 0 1.658.05 3.33.05 4.864 0 1.658-.05 3.33-.05 4.864 0 1.658.05 3.33.05 4.864 0 1.658-.05 3.33-.05 4.864 0 1.658.05 3.33.05 4.864 0 1.658-.05 3.33-.05 4.864 0 1.658.05 3.33.05 4.864 0 1.658-.05 3.33-.05 4.864 0 1.658.05 3.33.05 4.864 0 1.658-.05 3.33-.05 4.864 0 1.658.05 3.33.05 4.864 0 1.658-.05 3.33-.05 4.864 0 1.658.05 3.33.05 4.864 0 1.658-.05 3.33-.05 4.864 0 1.658.05 3.33.05 4.864 0 1.658-.05 3.33-.05 4.864 0 1.658.05 3.33.05 4.864 0 1.658-.05 3.33-.05 4.864 0 1.658.05 3.33.05 4.864 0 1.658-.05 3.33-.05 4.864 0 1.658.05 3.33.05 4.864 0 1.658-.05 3.33-.05 4.864 0 1.658.05 3.33.05 4.864 0 1.658-.05 3.33-.05 4.864 0 1.658.05 3.33.05 4.864 0 1.658-.05 3.33-.05 4.864 0 1.658.05 3.33.05 4.864 0 1.658-.05 3.33-.05 4.864 0 1.658.05 3.33.05 4.864 0 1.658-.05 3.33-.05 4.864 0 1.658.05 3.33.05 4.864 0 1.658-.05 3.33-.05 4.864 0 1.658.05 3.33.05 4.864 0 1.658-.05 3.33-.05 4.864 0 1.658.05 3.33.05 4.864 0 1.658-.05 3.33-.05 4.864 0 1.658.05 3.33.05 4.864 0 1.658-.05 3.33-.05 4.864 0 1.658.05 3.33.05 4.864 0 1.658-.05 3.33-.05 4.864 0 1.658.05 3.33.05 4.864 0 1.658-.05 3.33-.05 4.864 0 1.658.05 3.33.05 4.864 0 1.658-.05 3.33-.05 4.864 0 1.658.05 3.33.05 4.864 0 1.658-.05 3.33-.05 4.864 0 1.658.05 3.33.05 4.864 0 1.658-.05 3.33-.05 4.864 0 1.658.05 3.33.05 4.864 0 1.658-.05 3.33-.05 4.864 0 1.658.05 3.33.05 4.864 0v-22.84l.058-.002z"/></svg>
+                  )}
+                </div>
+                <h3 className="text-lg font-bold text-primary-900 mb-1">{platform.name}</h3>
+                <p className="text-accent-600 text-sm font-medium mb-2">{platform.handle}</p>
+                <p className="text-surface-600 text-sm mb-3">{platform.description}</p>
+                <p className="text-xs text-surface-500">{platform.followers} followers</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-primary-50 py-12 px-4">
+        <div className="container mx-auto max-w-4xl">
+          <h2 className="text-2xl font-bold text-primary-900 mb-8 text-center">Recent Social Posts</h2>
+          <div className="space-y-4">
+            {recentPosts.map((post, i) => (
+              <div key={i} className="bg-white p-4 rounded-xl shadow-sm">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="text-xs font-medium text-accent-600">{post.platform}</span>
+                  <span className="text-xs text-surface-500">• {post.time}</span>
+                </div>
+                <p className="text-surface-700">{post.content}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="container mx-auto px-4 py-12 md:py-16 text-center">
+        <h2 className="text-2xl font-bold text-primary-900 mb-4">Join Our Community</h2>
+        <p className="text-surface-600 mb-6 max-w-xl mx-auto">
+          Follow, like, and share to be part of the Iyosiola Group community
+        </p>
+        <Link href="/contact" className="inline-block bg-accent-500 hover:bg-accent-600 text-white font-bold py-3 px-8 rounded-lg transition-colors">
+          Contact Us
+        </Link>
+      </section>
+    </div>
+  );
+}

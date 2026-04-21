@@ -26,32 +26,32 @@ const ContactFormSchema = z.object({
   email: z.string().email("Invalid email address").max(100).trim().toLowerCase(),
   phone: z.string().regex(/^\+?[1-9]\d{1,14}$/, "Invalid phone number").optional().or(z.literal("")),
   subject: z.string().min(5, "Subject must be at least 5 characters").max(100).trim(),
-  category: z.enum(["PRODUCT_INQUIRY", "WHOLESALE_INQUIRY", "ORDER_ISSUE", "COMPLAINT", "OTHER"]),
+  category: z.enum(["BUSINESS_INQUIRY", "INVESTMENT", "PRODUCT_SUPPORT", "COMPLAINT", "OTHER"]),
   message: z.string().min(10, "Message must be at least 10 characters").max(5000).trim(),
   honeypot: z.string().optional(),
 });
 
 const CONTACT_CATEGORIES = [
-  { value: "PRODUCT_INQUIRY", label: "Product Inquiry" },
-  { value: "WHOLESALE_INQUIRY", label: "Wholesale / Bulk Order" },
-  { value: "ORDER_ISSUE", label: "Order Issue" },
-  { value: "COMPLAINT", label: "Complaint / Feedback" },
+  { value: "BUSINESS_INQUIRY", label: "Business Inquiry" },
+  { value: "INVESTMENT", label: "Investment Opportunity" },
+  { value: "PRODUCT_SUPPORT", label: "Product Support" },
+  { value: "COMPLAINT", label: "Complaint/Feedback" },
   { value: "OTHER", label: "Other" },
 ];
 
 const CONTACT_INFO = {
   headquarters: {
-    title: "Our Office",
-    lines: ["Iyosi Foods Headquarters", "Lagos, Nigeria"],
+    title: "Corporate Headquarters",
+    lines: ["Iyosiola Group Towers", "Central Business District", "Lagos, Nigeria"],
   },
   phone: {
     title: "Phone",
-    primary: "+234 800 IYOSI",
+    primary: "+234 800 IYOSIOLA",
     secondary: "+234 801 234 5678",
   },
   email: {
     title: "Email",
-    address: "hello@iyosifoods.com",
+    address: "contact@iyosiolagroup.com",
   },
   hours: {
     title: "Business Hours",
@@ -66,7 +66,7 @@ export default function ContactForm() {
     email: "",
     phone: "",
     subject: "",
-    category: "PRODUCT_INQUIRY",
+    category: "BUSINESS_INQUIRY",
     message: "",
     honeypot: "",
   });
@@ -76,7 +76,7 @@ export default function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
   const [submissionResponse, setSubmissionResponse] = useState<SubmissionResponse | null>(null);
   const [generalError, setGeneralError] = useState<string | null>(null);
-  const submitTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const submitTimeoutRef = useRef<NodeJS.Timeout>();
   const formRef = useRef<HTMLFormElement>(null);
 
   const handleInputChange = useCallback(
@@ -110,7 +110,7 @@ export default function ContactForm() {
 
       if (!validation.success) {
         const fieldErrors: Record<string, string> = {};
-        validation.error.issues.forEach((error) => {
+        validation.error.errors.forEach((error) => {
           fieldErrors[error.path.join(".")] = error.message;
         });
         setErrors(fieldErrors);
@@ -142,7 +142,7 @@ export default function ContactForm() {
         const data: SubmissionResponse = await response.json();
         setSubmissionResponse(data);
         setSubmitted(true);
-        setFormData({ firstName: "", lastName: "", email: "", phone: "", subject: "", category: "PRODUCT_INQUIRY", message: "", honeypot: "" });
+        setFormData({ firstName: "", lastName: "", email: "", phone: "", subject: "", category: "BUSINESS_INQUIRY", message: "", honeypot: "" });
 
         submitTimeoutRef.current = setTimeout(() => {
           setSubmitted(false);
@@ -297,6 +297,49 @@ export default function ContactForm() {
 
                   <p className="text-xs text-surface-600 text-center">We respect your privacy. Your information will not be shared.</p>
                 </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-primary-50 py-12 md:py-16 px-4">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-2xl md:text-3xl font-bold text-primary-900 mb-6 text-center">Whistleblowing Policy</h2>
+          <div className="bg-white p-8 rounded-xl shadow-sm">
+            <p className="text-surface-700 mb-6">
+              Have you experienced or observed any case of unethical, unlawful or unprofessional conduct on the part of any of our staff? Report any form of wrongdoing, criminal offence and illegal activity.
+            </p>
+            
+            <div className="mb-6">
+              <h3 className="text-lg font-bold text-primary-900 mb-2">What is whistleblowing?</h3>
+              <p className="text-surface-600 text-sm">Whistleblowing is the act of reporting all wrongdoing or unethical practices that have been perpetuated by an employee or group of employees to the detriment of the organization or other employees.</p>
+            </div>
+
+            <div className="mb-6">
+              <h3 className="text-lg font-bold text-primary-900 mb-2">When should I speak out?</h3>
+              <ul className="list-disc list-inside text-surface-600 text-sm space-y-1">
+                <li>A criminal offence</li>
+                <li>Aiding and abetting fraudulent activities</li>
+                <li>Contravention of laws and regulations</li>
+                <li>Miscarriage of justice</li>
+                <li>Danger to the health and safety of any individual</li>
+                <li>Insider-dealing and conflict of interest</li>
+              </ul>
+            </div>
+
+            <div className="bg-surface-50 p-6 rounded-lg">
+              <h3 className="text-lg font-bold text-primary-900 mb-4">How do I make a report?</h3>
+              <div className="space-y-3">
+                <p className="text-surface-700">
+                  <strong>Email:</strong>{" "}
+                  <a href="mailto:whistleblowing@iyosiolagroup.com" className="text-accent-600 hover:underline">
+                    whistleblowing@iyosiolagroup.com
+                  </a>
+                </p>
+                <p className="text-surface-700">
+                  <strong>Hotline:</strong> +234 800 WHISTLE (800 947 8553)
+                </p>
               </div>
             </div>
           </div>

@@ -35,10 +35,10 @@ export const navConfig: NavItemConfig[] = [
     children: [
       { label: "Sugar", href: "/products/sugar", description: "Premium refined sugar products" },
       { label: "Flour", href: "/products/flour", description: "High-quality flour for every need" },
-      { label: "Poultry & Agro-Allied", href: "/products/poultry", description: "Poultry feeds and agro products" },
       { label: "Rice", href: "/products/rice", description: "Locally sourced premium rice" },
-      { label: "Edible Oil", href: "/products/oil", description: "Pure and refined cooking oils" },
-      { label: "Tomato Paste", href: "/products/tomato-paste", description: "Rich, flavourful tomato paste" },
+      { label: "Edible Oils", href: "/products/oil", description: "Pure and refined cooking oils" },
+      { label: "Tomato Paste", href: "/products/tomato-paste", description: "Rich, flavourful tomato products" },
+      { label: "Poultry & Agro-Allied", href: "/products/poultry", description: "Poultry feeds and agro products" },
     ],
   },
   {
@@ -57,6 +57,7 @@ export const navConfig: NavItemConfig[] = [
       { label: "Press Releases", href: "/media/press", description: "Official company announcements" },
       { label: "Blogs & Articles", href: "/media/blogs", description: "Insights, stories, and thought pieces" },
       { label: "Photo Gallery", href: "/media/gallery", description: "Visual highlights and events" },
+      { label: "Social Media", href: "/media/social", description: "Connect with us on social platforms" },
     ],
   },
   {

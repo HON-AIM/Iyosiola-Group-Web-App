@@ -2,19 +2,19 @@ import type { Metadata } from "next";
 import ContactForm from "./ContactForm";
 
 export const metadata: Metadata = {
-  title: "Contact Us | Iyosi Foods",
+  title: "Contact Us | Iyosiola Group",
   description:
-    "Get in touch with Iyosi Foods. Contact us for product inquiries, wholesale orders, support, or feedback. We're here to help.",
+    "Get in touch with Iyosiola Group. Contact us for business inquiries, investment opportunities, product support, or partnership proposals. We're here to help.",
   keywords: [
-    "contact Iyosi Foods",
-    "Iyosi Foods support",
-    "flour wholesale Nigeria",
-    "product inquiry",
+    "contact Iyosiola Group",
+    "Iyosiola customer support",
+    "business inquiry Nigeria",
+    "investment Nigeria",
     "flour company contact",
   ],
   openGraph: {
-    title: "Contact Us | Iyosi Foods",
-    description: "Get in touch with Iyosi Foods for product inquiries, wholesale orders, or support.",
+    title: "Contact Us | Iyosiola Group",
+    description: "Get in touch with Iyosiola Group for business inquiries, investment opportunities, or product support.",
     type: "website",
   },
 };
