@@ -157,7 +157,7 @@ export async function POST(request: NextRequest) {
             items: { create: items.map((item) => ({ productId: item.productId, quantity: item.quantity, price: item.price })) },
             shippingAddr: `${shippingAddress.street}, ${shippingAddress.city}, ${shippingAddress.state}`,
             shippingAddressData: JSON.stringify(shippingAddress),
-            total,
+totalAmount: total,
             subtotal: calculatedTotal,
             taxAmount: total - calculatedTotal,
             status: "PENDING",
