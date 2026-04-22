@@ -67,13 +67,6 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-video-preview": -1,
-      "maxImagePreview": "large",
-      "maxSnippet": -1,
-    },
   },
   verification: {
     google: process.env.GOOGLE_SITE_VERIFICATION,
