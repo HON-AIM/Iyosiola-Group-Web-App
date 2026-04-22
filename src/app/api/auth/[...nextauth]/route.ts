@@ -17,10 +17,7 @@ const { GET: nextAuthGet, POST: nextAuthPost } = handlers;
  * GET /api/auth/[...nextauth]
  * Handles NextAuth GET requests (signin, callback, etc.)
  */
-export async function GET(
-  request: NextRequest,
-  context: { params: Promise<{ nextauth: string[] }> }
-) {
+export async function GET(request: NextRequest) {
   try {
     // ✅ Validate request
     if (!request.nextUrl) {
@@ -31,16 +28,16 @@ export async function GET(
     }
 
     // ✅ Extract NextAuth route segments
-    const { nextauth } = await context.params;
+    const path = request.nextUrl.pathname.split("/api/auth/")[1]?.split("/") || [];
 
-    if (!Array.isArray(nextauth) || nextauth.length === 0) {
+    if (!Array.isArray(path) || path.length === 0) {
       return NextResponse.json(
         { message: "Bad Request: Invalid NextAuth route" },
         { status: 400 }
       );
     }
 
-    const route = nextauth[0];
+    const route = path[0];
 
     // ✅ Validate known NextAuth routes
     const validRoutes = [
@@ -79,7 +76,7 @@ export async function GET(
     }
 
     // ✅ Set security headers
-    const response = await nextAuthGet(request, context);
+    const response = await nextAuthGet(request);
 
     // ✅ Add security headers to response
     response.headers.set("X-Content-Type-Options", "nosniff");
@@ -98,11 +95,9 @@ export async function GET(
     console.error("[ERROR] NextAuth GET handler failed:", {
       error: error instanceof Error ? error.message : String(error),
       stack: error instanceof Error ? error.stack : undefined,
-      route: (await context.params).nextauth?.[0],
       timestamp: new Date().toISOString(),
     });
 
-    // ✅ Return generic error to prevent information disclosure
     return NextResponse.json(
       { message: "Authentication service temporarily unavailable" },
       { status: 503 }
@@ -110,16 +105,8 @@ export async function GET(
   }
 }
 
-/**
- * POST /api/auth/[...nextauth]
- * Handles NextAuth POST requests (signin, callback, etc.)
- */
-export async function POST(
-  request: NextRequest,
-  context: { params: Promise<{ nextauth: string[] }> }
-) {
+export async function POST(request: NextRequest) {
   try {
-    // ✅ Validate request
     if (!request.nextUrl) {
       return NextResponse.json(
         { message: "Bad Request: Invalid request" },
@@ -127,17 +114,16 @@ export async function POST(
       );
     }
 
-    // ✅ Extract NextAuth route segments
-    const { nextauth } = await context.params;
+    const path = request.nextUrl.pathname.split("/api/auth/")[1]?.split("/") || [];
 
-    if (!Array.isArray(nextauth) || nextauth.length === 0) {
+    if (!Array.isArray(path) || path.length === 0) {
       return NextResponse.json(
         { message: "Bad Request: Invalid NextAuth route" },
         { status: 400 }
       );
     }
 
-    const route = nextauth[0];
+    const route = path[0];
 
     // ✅ Validate known NextAuth routes
     const validRoutes = [
@@ -187,7 +173,7 @@ export async function POST(
     });
 
     // ✅ Call NextAuth handler
-    const response = await nextAuthPost(request, context);
+    const response = await nextAuthPost(request);
 
     // ✅ Add security headers to response
     response.headers.set("X-Content-Type-Options", "nosniff");
@@ -211,11 +197,9 @@ export async function POST(
     console.error("[ERROR] NextAuth POST handler failed:", {
       error: error instanceof Error ? error.message : String(error),
       stack: error instanceof Error ? error.stack : undefined,
-      route: (await context.params).nextauth?.[0],
       timestamp: new Date().toISOString(),
     });
 
-    // ✅ Return generic error to prevent information disclosure
     return NextResponse.json(
       { message: "Authentication service temporarily unavailable" },
       { status: 503 }
