@@ -1,3 +1,4 @@
+// SEO Metadata and Viewport configuration
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import Image from "next/image";
