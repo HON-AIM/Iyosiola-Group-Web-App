@@ -42,7 +42,6 @@ const nextConfig: NextConfig = {
   },
   poweredByHeader: false,
   compress: true,
-  generateEtag: true,
 };
 
 export default nextConfig;
