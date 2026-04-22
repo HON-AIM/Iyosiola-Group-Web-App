@@ -216,7 +216,7 @@ export default function ForgotPasswordPage() {
     const validation = EmailSchema.safeParse({ email });
 
     if (!validation.success) {
-      const firstError = validation.error.errors[0];
+      const firstError = validation.error.issues[0];
       setValidationError(firstError.message);
       return false;
     }

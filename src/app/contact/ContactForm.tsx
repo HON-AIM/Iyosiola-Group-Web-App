@@ -110,7 +110,7 @@ export default function ContactForm() {
 
       if (!validation.success) {
         const fieldErrors: Record<string, string> = {};
-        validation.error.errors.forEach((error) => {
+        validation.error.issues.forEach((error) => {
           fieldErrors[error.path.join(".")] = error.message;
         });
         setErrors(fieldErrors);

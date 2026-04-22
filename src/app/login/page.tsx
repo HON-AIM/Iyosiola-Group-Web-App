@@ -156,7 +156,7 @@ function LoginForm() {
 
     if (!validation.success) {
       const fieldErrors: ValidationErrors = {};
-      validation.error.errors.forEach((error) => {
+      validation.error.issues.forEach((error) => {
         const field = error.path[0] as string;
         fieldErrors[field as keyof ValidationErrors] = error.message;
       });

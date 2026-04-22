@@ -306,7 +306,7 @@ function RegisterForm() {
 
     if (!validation.success) {
       const fieldErrors: FormErrors = {};
-      validation.error.errors.forEach((err) => {
+      validation.error.issues.forEach((err) => {
         fieldErrors[err.path[0] as keyof FormErrors] = err.message;
       });
       setErrors(fieldErrors);

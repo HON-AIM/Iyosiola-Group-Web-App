@@ -61,7 +61,7 @@ export async function PUT(req: NextRequest) {
     const parseResult = SettingsSchema.safeParse(body);
 
     if (!parseResult.success) {
-      const errors = parseResult.error.errors.map((e) => ({ field: e.path.join("."), message: e.message }));
+      const errors = parseResult.error.issues.map((e) => ({ field: e.path.join("."), message: e.message }));
       return NextResponse.json({ message: "Validation failed", errors }, { status: 400 });
     }
 
