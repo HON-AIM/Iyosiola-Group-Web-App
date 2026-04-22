@@ -381,11 +381,9 @@ export async function DELETE(
       try {
         await sendOrderStatusUpdate(
           order.user.email,
+          order.user.name || "Customer",
           id,
-          order.status,
-          "CANCELLED",
-          order.user.name || undefined,
-          reason
+          "CANCELLED"
         );
       } catch (emailError) {
         console.warn("[WARN] Failed to send cancellation email:", {
