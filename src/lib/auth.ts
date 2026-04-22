@@ -77,8 +77,8 @@ const nextAuthOptions = {
             throw new Error("EmailNotVerified");
           }
 
-          // ✅ Verify account is not disabled
-          if (user?.disabled) {
+          // ✅ Verify account is active
+          if (user && !user.isActive) {
             console.warn("[SECURITY] Login attempt on disabled account:", {
               email,
               ip,
