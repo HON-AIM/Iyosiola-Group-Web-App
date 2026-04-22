@@ -17,7 +17,7 @@ const CredentialsSchema = z.object({
   rememberMe: z.boolean().optional(),
 });
 
-export const authOptions: AuthOptions = {
+const nextAuthOptions: AuthOptions = {
   adapter: PrismaAdapter(prisma),
   providers: [
     // ✅ Credentials provider (email/password)
@@ -188,20 +188,24 @@ export const authOptions: AuthOptions = {
 
   // ✅ Callbacks
   callbacks: {
-    // ✅ JWT callback
     async jwt({ token, user, account }) {
       if (user) {
         token.id = user.id;
         token.email = user.email;
       }
 
-      // ✅ Remember me duration
       if (account?.type === "credentials") {
-        // Extended session for remember
-        token.maxAge = 30 * 24 * 60 * 60; // 30 days
+        token.maxAge = 30 * 24 * 60 * 60;
       }
+      return token;
+    },
+    async session({ session, token }) {
+      if (token && session.user) {
+        session.user.id = token.id as string;
+      }
+      return session;
     },
   },
 };
 
-export const { handlers, auth, signIn, signOut } = NextAuth(authOptions);
+export const { handlers, auth, signIn, signOut } = NextAuth(nextAuthOptions);
