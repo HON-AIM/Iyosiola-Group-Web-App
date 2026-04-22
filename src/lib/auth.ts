@@ -1,4 +1,5 @@
-import NextAuthOptions from "next-auth";
+import NextAuth from "next-auth";
+import type { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import { PrismaAdapter } from "@auth/prisma-adapter";
@@ -6,7 +7,6 @@ import { prisma } from "./db";
 import bcrypt from "bcryptjs";
 import { z } from "zod";
 
-// ✅ Validation schema
 const CredentialsSchema = z.object({
   email: z
     .string()
