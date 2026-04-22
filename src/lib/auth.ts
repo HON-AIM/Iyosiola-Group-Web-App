@@ -1,5 +1,4 @@
 import NextAuth from "next-auth";
-import type { NextAuthConfig } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import { PrismaAdapter } from "@auth/prisma-adapter";
@@ -17,7 +16,7 @@ const CredentialsSchema = z.object({
   rememberMe: z.boolean().optional(),
 });
 
-const nextAuthOptions: NextAuthConfig = {
+const nextAuthOptions = {
   adapter: PrismaAdapter(prisma),
   providers: [
     // ✅ Credentials provider (email/password)
