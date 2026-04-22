@@ -60,7 +60,7 @@ function FormSkeleton() {
 function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const submitTimeoutRef = useRef<NodeJS.Timeout>();
+  const submitTimeoutRef = useRef<NodeJS.Timeout>(null);
 
   // ✅ State management
   const [formData, setFormData] = useState<LoginFormData>({

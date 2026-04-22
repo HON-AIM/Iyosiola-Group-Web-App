@@ -167,7 +167,7 @@ function SuccessMessage({ email, onReset }: SuccessMessageProps) {
 // ✅ Main forgot password component
 export default function ForgotPasswordPage() {
   const router = useRouter();
-  const submitTimeoutRef = useRef<NodeJS.Timeout>();
+  const submitTimeoutRef = useRef<NodeJS.Timeout>(null);
 
   // ✅ State management
   const [email, setEmail] = useState("");

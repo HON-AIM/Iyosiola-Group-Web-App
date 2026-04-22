@@ -264,7 +264,7 @@ function RegisterForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  const submitTimeoutRef = useRef<NodeJS.Timeout>();
+  const submitTimeoutRef = useRef<NodeJS.Timeout>(null);
 
   // ✅ Get password strength
   const strength = formData.password
