@@ -1,5 +1,6 @@
 import { redirect } from "next/navigation";
 import { type Metadata } from "next";
+import type { Session } from "next-auth";
 import { auth } from "@/lib/auth";
 import AdminSidebar from "@/components/admin/AdminSidebar";
 import { AlertCircle } from "lucide-react";
@@ -17,22 +18,10 @@ interface AdminLayoutProps {
   children: React.ReactNode;
 }
 
-interface SessionUser {
-  id?: string;
-  email?: string;
-  name?: string | null;
-  role?: string;
-}
-
-interface AuthSession {
-  user?: SessionUser;
-  expires?: string;
-}
-
 export default async function AdminLayout({
   children,
 }: AdminLayoutProps) {
-  let session: AuthSession | null = null;
+  let session: Session | null = null;
   let authError = false;
 
   try {
