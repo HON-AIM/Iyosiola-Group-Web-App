@@ -9,12 +9,7 @@ import crypto from "crypto";
 const ALLOWED_MIME_TYPES = new Set(["image/jpeg", "image/png", "image/webp", "image/gif"]);
 const MAX_FILE_SIZE_BYTES = 5 * 1024 * 1024;
 const MIN_FILE_SIZE_BYTES = 100;
-const MAX_UPLOADS_PER_HOUR = 20;
-const MAX_UPLOAD_BYTES_PER_HOUR = 100 * 1024 * 1024;
-const UPLOAD_WINDOW = 60 * 60 * 1000;
 const UPLOAD_DIR = path.join(process.cwd(), "public", "uploads");
-
-const uploadAttempts = new Map<string, { count: number; resetAt: number; totalBytes: number }>();
 
 function isValidImageBuffer(buffer: Buffer): boolean {
   if (buffer.length < 12) return false;
@@ -54,23 +49,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ message: "Unauthorized: Admin access required" }, { status: 401 });
     }
 
-    const clientIp = request.headers.get("x-forwarded-for") || "unknown";
-
-    const now = Date.now();
-    const attemptData = uploadAttempts.get(clientIp);
-
-    if (attemptData) {
-      if (now < attemptData.resetAt) {
-        if (attemptData.count >= MAX_UPLOADS_PER_HOUR) {
-          return NextResponse.json({ message: "Upload rate limit exceeded. Please try again later." }, { status: 429 });
-        }
-        attemptData.count++;
-      } else {
-        uploadAttempts.set(clientIp, { count: 1, resetAt: now + UPLOAD_WINDOW, totalBytes: 0 });
-      }
-    } else {
-      uploadAttempts.set(clientIp, { count: 1, resetAt: now + UPLOAD_WINDOW, totalBytes: 0 });
-    }
+    const clientIp = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
 
     const contentType = request.headers.get("content-type") || "";
     if (!contentType.includes("multipart/form-data")) {
@@ -96,11 +75,6 @@ export async function POST(request: NextRequest) {
 
     if (file.size < MIN_FILE_SIZE_BYTES || file.size > MAX_FILE_SIZE_BYTES) {
       return NextResponse.json({ message: "Bad Request: File size must be between 100 bytes and 5MB" }, { status: 400 });
-    }
-
-    const currentAttempt = uploadAttempts.get(clientIp);
-    if (currentAttempt && currentAttempt.totalBytes + file.size > MAX_UPLOAD_BYTES_PER_HOUR) {
-      return NextResponse.json({ message: "Total upload size exceeded. Please try again later." }, { status: 429 });
     }
 
     const bytes = await file.arrayBuffer();

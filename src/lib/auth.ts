@@ -74,6 +74,14 @@ const nextAuthOptions = {
               email,
               ip,
             });
+            await prisma.loginAttempt.create({
+              data: {
+                userId: user?.id || email,
+                ipAddress: ip,
+                userAgent: req?.headers?.get("user-agent"),
+                success: false,
+              },
+            });
             throw new Error("EmailNotVerified");
           }
 
@@ -82,6 +90,14 @@ const nextAuthOptions = {
             console.warn("[SECURITY] Login attempt on disabled account:", {
               email,
               ip,
+            });
+            await prisma.loginAttempt.create({
+              data: {
+                userId: user?.id || email,
+                ipAddress: ip,
+                userAgent: req?.headers?.get("user-agent"),
+                success: false,
+              },
             });
             throw new Error("AccountDisabled");
           }

@@ -46,7 +46,7 @@ const CONTACT_INFO = {
   },
   phone: {
     title: "Phone",
-    primary: "+234 800 IYOSIOLA",
+    primary: "+234 800 000 0000",
     secondary: "+234 801 234 5678",
   },
   email: {
@@ -76,7 +76,7 @@ export default function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
   const [submissionResponse, setSubmissionResponse] = useState<SubmissionResponse | null>(null);
   const [generalError, setGeneralError] = useState<string | null>(null);
-  const submitTimeoutRef = useRef<NodeJS.Timeout>(null);
+  const submitTimeoutRef = useRef<NodeJS.Timeout>();
   const formRef = useRef<HTMLFormElement>(null);
 
   const handleInputChange = useCallback(
@@ -110,7 +110,7 @@ export default function ContactForm() {
 
       if (!validation.success) {
         const fieldErrors: Record<string, string> = {};
-        validation.error.issues.forEach((error) => {
+        validation.error.errors.forEach((error) => {
           fieldErrors[error.path.join(".")] = error.message;
         });
         setErrors(fieldErrors);
@@ -297,49 +297,6 @@ export default function ContactForm() {
 
                   <p className="text-xs text-surface-600 text-center">We respect your privacy. Your information will not be shared.</p>
                 </form>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="bg-primary-50 py-12 md:py-16 px-4">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-2xl md:text-3xl font-bold text-primary-900 mb-6 text-center">Whistleblowing Policy</h2>
-          <div className="bg-white p-8 rounded-xl shadow-sm">
-            <p className="text-surface-700 mb-6">
-              Have you experienced or observed any case of unethical, unlawful or unprofessional conduct on the part of any of our staff? Report any form of wrongdoing, criminal offence and illegal activity.
-            </p>
-            
-            <div className="mb-6">
-              <h3 className="text-lg font-bold text-primary-900 mb-2">What is whistleblowing?</h3>
-              <p className="text-surface-600 text-sm">Whistleblowing is the act of reporting all wrongdoing or unethical practices that have been perpetuated by an employee or group of employees to the detriment of the organization or other employees.</p>
-            </div>
-
-            <div className="mb-6">
-              <h3 className="text-lg font-bold text-primary-900 mb-2">When should I speak out?</h3>
-              <ul className="list-disc list-inside text-surface-600 text-sm space-y-1">
-                <li>A criminal offence</li>
-                <li>Aiding and abetting fraudulent activities</li>
-                <li>Contravention of laws and regulations</li>
-                <li>Miscarriage of justice</li>
-                <li>Danger to the health and safety of any individual</li>
-                <li>Insider-dealing and conflict of interest</li>
-              </ul>
-            </div>
-
-            <div className="bg-surface-50 p-6 rounded-lg">
-              <h3 className="text-lg font-bold text-primary-900 mb-4">How do I make a report?</h3>
-              <div className="space-y-3">
-                <p className="text-surface-700">
-                  <strong>Email:</strong>{" "}
-                  <a href="mailto:whistleblowing@iyosiolagroup.com" className="text-accent-600 hover:underline">
-                    whistleblowing@iyosiolagroup.com
-                  </a>
-                </p>
-                <p className="text-surface-700">
-                  <strong>Hotline:</strong> +234 800 WHISTLE (800 947 8553)
-                </p>
               </div>
             </div>
           </div>

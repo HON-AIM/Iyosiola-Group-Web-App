@@ -24,9 +24,6 @@ const ResetPasswordSchema = z
     path: ["confirmPassword"],
   });
 
-const resetAttempts = new Map<string, { count: number; resetAt: number }>();
-const MAX_RESET_ATTEMPTS = 5;
-const RESET_ATTEMPT_WINDOW = 15 * 60 * 1000;
 const TOKEN_EXPIRY = 60 * 60 * 1000;
 
 export async function POST(request: NextRequest) {
@@ -35,34 +32,25 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ message: "Method Not Allowed" }, { status: 405 });
     }
 
-    const body = await request.json().catch(() => null);
-
-    if (!body || typeof body !== "object") {
+    const body = await request.text();
+    if (!body || body.length === 0 || body.length > 10000) {
       return NextResponse.json({ message: "Bad Request: Invalid request body" }, { status: 400 });
     }
 
-    const clientIp = request.headers.get("x-forwarded-for") || "unknown";
-
-    const now = Date.now();
-    const attemptData = resetAttempts.get(clientIp);
-
-    if (attemptData) {
-      if (now < attemptData.resetAt) {
-        if (attemptData.count >= MAX_RESET_ATTEMPTS) {
-          console.warn("[WARN] Too many password reset attempts:", { ip: clientIp, attempts: attemptData.count, timestamp: new Date().toISOString() });
-          return NextResponse.json({ message: "Too many reset attempts. Please try again later." }, { status: 429 });
-        }
-        attemptData.count++;
-      } else {
-        resetAttempts.set(clientIp, { count: 1, resetAt: now + RESET_ATTEMPT_WINDOW });
-      }
-    } else {
-      resetAttempts.set(clientIp, { count: 1, resetAt: now + RESET_ATTEMPT_WINDOW });
+    let parsedBody;
+    try {
+      parsedBody = JSON.parse(body);
+    } catch {
+      return NextResponse.json({ message: "Bad Request: Invalid JSON" }, { status: 400 });
     }
 
-    const startTime = Date.now();
+    if (!parsedBody || typeof parsedBody !== "object") {
+      return NextResponse.json({ message: "Bad Request: Invalid request body" }, { status: 400 });
+    }
 
-    const parseResult = ResetPasswordSchema.safeParse(body);
+    const clientIp = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
+
+    const parseResult = ResetPasswordSchema.safeParse(parsedBody);
 
     if (!parseResult.success) {
       const errors = parseResult.error.issues.map((e) => ({
@@ -73,8 +61,6 @@ export async function POST(request: NextRequest) {
     }
 
     const { token, email, password } = parseResult.data;
-
-    while (Date.now() - startTime < 300) {}
 
     const tokenHash = crypto.createHash("sha256").update(token).digest("hex");
 

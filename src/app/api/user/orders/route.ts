@@ -25,32 +25,12 @@ const CreateOrderSchema = z.object({
   notes: z.string().max(1000).trim().optional().nullable(),
 });
 
-const orderRateLimits = new Map<string, { count: number; resetAt: number }>();
-const RATE_LIMIT_WINDOW = 60 * 1000;
-const MAX_ORDERS_PER_MINUTE = 5;
-
 export async function GET(request: NextRequest) {
   try {
     const session = await auth();
 
     if (!session?.user?.id) {
       return NextResponse.json({ message: "Unauthorized: Please login" }, { status: 401 });
-    }
-
-    const now = Date.now();
-    const userLimit = orderRateLimits.get(session.user.id);
-
-    if (userLimit) {
-      if (now < userLimit.resetAt) {
-        if (userLimit.count >= MAX_ORDERS_PER_MINUTE) {
-          return NextResponse.json({ message: "Too many requests. Please try again later." }, { status: 429 });
-        }
-        userLimit.count++;
-      } else {
-        orderRateLimits.set(session.user.id, { count: 1, resetAt: now + RATE_LIMIT_WINDOW });
-      }
-    } else {
-      orderRateLimits.set(session.user.id, { count: 1, resetAt: now + RATE_LIMIT_WINDOW });
     }
 
     const page = Math.max(1, parseInt(request.nextUrl.searchParams.get("page") || "1"));

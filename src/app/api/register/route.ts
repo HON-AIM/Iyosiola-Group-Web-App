@@ -28,41 +28,30 @@ const RegisterSchema = z.object({
   path: ["confirmPassword"],
 });
 
-const registrationAttempts = new Map<string, { count: number; resetAt: number }>();
-const MAX_REGISTRATIONS_PER_IP = 5;
-const REGISTRATION_WINDOW = 60 * 60 * 1000;
-
 export async function POST(request: NextRequest) {
   try {
     if (request.method !== "POST") {
       return NextResponse.json({ message: "Method Not Allowed" }, { status: 405 });
     }
 
-    const body = await request.json().catch(() => null);
-
-    if (!body || typeof body !== "object") {
+    const body = await request.text();
+    if (!body || body.length === 0 || body.length > 10000) {
       return NextResponse.json({ message: "Bad Request: Invalid request body" }, { status: 400 });
     }
 
-    const clientIp = request.headers.get("x-forwarded-for") || "unknown";
-    const now = Date.now();
-    const attemptData = registrationAttempts.get(clientIp);
-
-    if (attemptData) {
-      if (now < attemptData.resetAt) {
-        if (attemptData.count >= MAX_REGISTRATIONS_PER_IP) {
-          console.warn("[WARN] Too many registration attempts from IP:", { ip: clientIp, timestamp: new Date().toISOString() });
-          return NextResponse.json({ message: "Too many registration attempts. Please try again later." }, { status: 429 });
-        }
-        attemptData.count++;
-      } else {
-        registrationAttempts.set(clientIp, { count: 1, resetAt: now + REGISTRATION_WINDOW });
-      }
-    } else {
-      registrationAttempts.set(clientIp, { count: 1, resetAt: now + REGISTRATION_WINDOW });
+    let parsedBody;
+    try {
+      parsedBody = JSON.parse(body);
+    } catch {
+      return NextResponse.json({ message: "Bad Request: Invalid JSON" }, { status: 400 });
     }
 
-    const parseResult = RegisterSchema.safeParse(body);
+    if (!parsedBody || typeof parsedBody !== "object") {
+      return NextResponse.json({ message: "Bad Request: Invalid request body" }, { status: 400 });
+    }
+
+    const clientIp = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
+    const parseResult = RegisterSchema.safeParse(parsedBody);
 
     if (!parseResult.success) {
       const errors = parseResult.error.issues.map((e) => ({
@@ -73,9 +62,6 @@ export async function POST(request: NextRequest) {
     }
 
     const { name, email, password } = parseResult.data;
-
-    const startTime = Date.now();
-    while (Date.now() - startTime < 300) {}
 
     let newUser;
     try {

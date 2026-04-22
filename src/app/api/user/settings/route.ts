@@ -14,10 +14,6 @@ const SettingsSchema = z.object({
   { message: "Both current and new password are required to change password", path: ["currentPassword"] }
 );
 
-const userRateLimits = new Map<string, { count: number; resetAt: number }>();
-const RATE_LIMIT_WINDOW = 60 * 1000;
-const MAX_REQUESTS_PER_WINDOW = 10;
-
 export async function PUT(req: NextRequest) {
   const startTime = Date.now();
 
@@ -36,29 +32,23 @@ export async function PUT(req: NextRequest) {
       return NextResponse.json({ message: "Unauthorized: Please login" }, { status: 401 });
     }
 
-    const now = Date.now();
-    const userLimit = userRateLimits.get(session.user.id);
-
-    if (userLimit) {
-      if (now < userLimit.resetAt) {
-        if (userLimit.count >= MAX_REQUESTS_PER_WINDOW) {
-          return NextResponse.json({ message: "Too many requests. Please try again later." }, { status: 429 });
-        }
-        userLimit.count++;
-      } else {
-        userRateLimits.set(session.user.id, { count: 1, resetAt: now + RATE_LIMIT_WINDOW });
-      }
-    } else {
-      userRateLimits.set(session.user.id, { count: 1, resetAt: now + RATE_LIMIT_WINDOW });
-    }
-
-    const body = await req.json().catch(() => null);
-
-    if (!body || typeof body !== "object") {
+    const body = await req.text();
+    if (!body || body.length === 0 || body.length > 10000) {
       return NextResponse.json({ message: "Bad Request: Invalid request body" }, { status: 400 });
     }
 
-    const parseResult = SettingsSchema.safeParse(body);
+    let parsedBody: unknown;
+    try {
+      parsedBody = JSON.parse(body);
+    } catch {
+      return NextResponse.json({ message: "Bad Request: Invalid JSON" }, { status: 400 });
+    }
+
+    if (!parsedBody || typeof parsedBody !== "object") {
+      return NextResponse.json({ message: "Bad Request: Invalid request body" }, { status: 400 });
+    }
+
+    const parseResult = SettingsSchema.safeParse(parsedBody);
 
     if (!parseResult.success) {
       const errors = parseResult.error.issues.map((e) => ({ field: e.path.join("."), message: e.message }));

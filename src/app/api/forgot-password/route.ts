@@ -9,9 +9,6 @@ const ForgotPasswordSchema = z.object({
   email: z.string().email("Invalid email format").toLowerCase().trim(),
 });
 
-const resetAttempts = new Map<string, { count: number; resetAt: number }>();
-const MAX_RESET_ATTEMPTS = 5;
-const RESET_WINDOW = 15 * 60 * 1000;
 const TOKEN_EXPIRY = 60 * 60 * 1000;
 
 export async function POST(request: NextRequest) {
@@ -20,13 +17,23 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ message: "Method Not Allowed" }, { status: 405 });
     }
 
-    const body = await request.json().catch(() => null);
-
-    if (!body || typeof body !== "object") {
+    const body = await request.text();
+    if (!body || body.length === 0 || body.length > 5000) {
       return NextResponse.json({ message: "Bad Request: Invalid request body" }, { status: 400 });
     }
 
-    const parseResult = ForgotPasswordSchema.safeParse(body);
+    let parsedBody;
+    try {
+      parsedBody = JSON.parse(body);
+    } catch {
+      return NextResponse.json({ message: "Bad Request: Invalid JSON" }, { status: 400 });
+    }
+
+    if (!parsedBody || typeof parsedBody !== "object") {
+      return NextResponse.json({ message: "Bad Request: Invalid request body" }, { status: 400 });
+    }
+
+    const parseResult = ForgotPasswordSchema.safeParse(parsedBody);
 
     if (!parseResult.success) {
       const errors = parseResult.error.issues.map((e) => ({
@@ -37,27 +44,7 @@ export async function POST(request: NextRequest) {
     }
 
     const { email } = parseResult.data;
-    const clientIp = request.headers.get("x-forwarded-for") || "unknown";
-
-    const now = Date.now();
-    const attemptData = resetAttempts.get(clientIp);
-
-    if (attemptData) {
-      if (now < attemptData.resetAt) {
-        if (attemptData.count >= MAX_RESET_ATTEMPTS) {
-          console.warn("[WARN] Too many password reset attempts:", { email, ip: clientIp, attempts: attemptData.count, timestamp: new Date().toISOString() });
-          return NextResponse.json({ message: "Too many reset attempts. Please try again later." }, { status: 429 });
-        }
-        attemptData.count++;
-      } else {
-        resetAttempts.set(clientIp, { count: 1, resetAt: now + RESET_WINDOW });
-      }
-    } else {
-      resetAttempts.set(clientIp, { count: 1, resetAt: now + RESET_WINDOW });
-    }
-
-    const startTime = Date.now();
-    while (Date.now() - startTime < 300) {}
+    const clientIp = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
 
     const user = await prisma.user.findUnique({
       where: { email },
