@@ -1,0 +1,16 @@
+"use client";
+
+import { SessionProvider } from "next-auth/react";
+import { Toaster } from "react-hot-toast";
+import { CartProvider } from "@/context/CartContext";
+
+export function Providers({ children }: { children: React.ReactNode }) {
+  return (
+    <SessionProvider>
+      <CartProvider>
+        {children}
+        <Toaster position="top-right" />
+      </CartProvider>
+    </SessionProvider>
+  );
+}

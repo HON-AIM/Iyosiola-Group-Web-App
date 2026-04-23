@@ -1,0 +1,244 @@
+// SEO Metadata and Viewport configuration
+import type { Metadata, Viewport } from "next";
+import { Inter } from "next/font/google";
+import Image from "next/image";
+import Link from "next/link";
+import { Providers } from "@/components/Providers";
+import Header from "@/components/Header";
+import "./globals.css";
+
+const inter = Inter({ subsets: ["latin"], display: "swap" });
+
+const BASE_URL = process.env.NEXT_PUBLIC_APP_URL || "https://iyosiolagroup.com";
+
+export const metadata: Metadata = {
+  metadataBase: new URL(BASE_URL),
+  title: {
+    default: "Iyosiola Group | Premium Flour Millers & Agro-Allied Products in Nigeria",
+    template: "%s | Iyosiola Group",
+  },
+  description:
+    "Iyosiola Group is a premier Nigerian conglomerate delivering premium flour products, integrated logistics, and sustainable agro-allied solutions. Shop online for quality baking flour, semolina, and wheat products.",
+  keywords: [
+    "Iyosiola Group",
+    "flour Nigeria",
+    "baking flour",
+    "semolina Nigeria",
+    "wheat flour",
+    "buy flour online Nigeria",
+    "flour millers Nigeria",
+    "agro-allied Nigeria",
+    "food distribution Nigeria",
+    "premium flour brand",
+  ],
+  authors: [{ name: "Iyosiola Group", url: BASE_URL }],
+  creator: "Iyosiola Group",
+  publisher: "Iyosiola Group",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_NG",
+    url: BASE_URL,
+    siteName: "Iyosiola Group",
+    title: "Iyosiola Group | Premium Flour Millers & Agro-Allied Products",
+    description:
+      "Premier Nigerian conglomerate delivering premium flour products, integrated logistics, and sustainable agro-allied solutions.",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Iyosiola Group - Quality You Can Trust",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Iyosiola Group | Premium Flour & Agro Products",
+    description:
+      "Shop premium flour, semolina, and wheat products. Quality flour millers and distributors in Nigeria.",
+    images: ["/og-image.jpg"],
+    creator: "@iyosiolagroup",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+  verification: {
+    google: process.env.GOOGLE_SITE_VERIFICATION,
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#166534",
+  width: "device-width",
+  initialScale: 1,
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en" className="scroll-smooth">
+      <head>
+        <link rel="canonical" href={BASE_URL} />
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+      </head>
+      <body
+        className={`${inter.className} min-h-screen flex flex-col antialiased bg-surface-50 text-surface-900`}
+      >
+        <Providers>
+          <Header />
+
+          <main className="flex-grow flex flex-col" id="main-content" tabIndex={-1}>
+            {children}
+          </main>
+
+          <footer className="w-full bg-primary-900 text-white py-12 px-4 md:px-8 mt-auto">
+            <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
+              <div className="md:col-span-1">
+                <div className="flex items-center gap-3 mb-4">
+                  <Image
+                    src="/logo.jpg"
+                    alt="Iyosiola Group Logo"
+                    width={40}
+                    height={40}
+                    className="object-contain bg-white rounded p-1"
+                  />
+                  <h3 className="font-bold text-xl text-accent-500">
+                    Iyosiola Group
+                  </h3>
+                </div>
+                <p className="text-sm text-surface-200 leading-relaxed">
+                  A diversified conglomerate driving growth and agricultural
+                  excellence across Africa.
+                </p>
+                <div className="flex gap-3 mt-4">
+                  <a
+                    href="#"
+                    aria-label="Facebook"
+                    className="h-8 w-8 rounded-full bg-primary-800 hover:bg-primary-700 flex items-center justify-center transition-colors"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="white" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                  </a>
+                  <a
+                    href="#"
+                    aria-label="Instagram"
+                    className="h-8 w-8 rounded-full bg-primary-800 hover:bg-primary-700 flex items-center justify-center transition-colors"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="white" strokeWidth="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="m16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                  </a>
+                  <a
+                    href="#"
+                    aria-label="Twitter / X"
+                    className="h-8 w-8 rounded-full bg-primary-800 hover:bg-primary-700 flex items-center justify-center transition-colors"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="white" viewBox="0 0 24 24"><path d="M4 4l16 16M14.828 14.828 20 20M9.172 9.172 4 4M20 4l-4.828 4.828M4 20l4.828-4.828"/></svg>
+                  </a>
+                </div>
+              </div>
+
+              <div>
+                <h4 className="font-semibold mb-4 text-surface-50 uppercase text-xs tracking-wider">
+                  Company
+                </h4>
+                <ul className="space-y-2 text-sm text-surface-200">
+                  <li>
+                    <Link href="/businesses" className="hover:text-white transition-colors">
+                      Our Businesses
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/about" className="hover:text-white transition-colors">
+                      About the Group
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/contact" className="hover:text-white transition-colors">
+                      Contact Us
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/shop" className="hover:text-white transition-colors text-accent-400">
+                      Shop Online
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+
+              <div>
+                <h4 className="font-semibold mb-4 text-surface-50 uppercase text-xs tracking-wider">
+                  Customer
+                </h4>
+                <ul className="space-y-2 text-sm text-surface-200">
+                  <li>
+                    <Link href="/dashboard" className="hover:text-white transition-colors">
+                      My Account
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/dashboard/orders" className="hover:text-white transition-colors">
+                      Track Orders
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/dashboard/address-book" className="hover:text-white transition-colors">
+                      Address Book
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/dashboard/saved" className="hover:text-white transition-colors">
+                      Saved Items
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+
+              <div>
+                <h4 className="font-semibold mb-4 text-surface-50 uppercase text-xs tracking-wider">
+                  Legal & Trust
+                </h4>
+                <ul className="space-y-2 text-sm text-surface-200">
+                  <li>
+                    <Link href="/privacy-policy" className="hover:text-white transition-colors">
+                      Privacy Policy
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/terms" className="hover:text-white transition-colors">
+                      Terms of Service
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/returns" className="hover:text-white transition-colors">
+                      Returns Policy
+                    </Link>
+                  </li>
+                </ul>
+                <div className="mt-4 text-xs text-surface-300 bg-primary-800 rounded-md p-3">
+                  Secure Checkout powered by Paystack
+                </div>
+              </div>
+            </div>
+
+            <div className="border-t border-primary-800 mt-10 pt-6 flex flex-col sm:flex-row items-center justify-between text-sm text-surface-300 gap-2">
+              <span>
+                &copy; {new Date().getFullYear()} Iyosiola Group. All rights reserved.
+              </span>
+              <span className="text-xs">
+                Registered in Nigeria &middot; RC: 0000000
+              </span>
+            </div>
+          </footer>
+        </Providers>
+      </body>
+    </html>
+  );
+}
