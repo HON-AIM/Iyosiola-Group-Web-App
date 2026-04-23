@@ -5,6 +5,7 @@ import Clients from './pages/Clients';
 import Leads from './pages/Leads';
 import AddLead from './pages/AddLead';
 import Login from './pages/Login';
+import Settings from './pages/Settings';
 
 const ProtectedRoute = ({ children }) => {
   const { user, loading } = useAuth();
@@ -70,6 +71,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <AddLead />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/settings"
+            element={
+              <ProtectedRoute>
+                <Settings />
               </ProtectedRoute>
             }
           />

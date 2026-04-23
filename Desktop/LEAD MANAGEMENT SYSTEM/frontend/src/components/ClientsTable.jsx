@@ -24,69 +24,111 @@ const ClientsTable = () => {
     return () => clearInterval(interval);
   }, []);
 
-  const getStatusBadge = (status) => {
+  const getStatusBadge = (status, remaining) => {
     const styles = {
-      active: 'bg-green-100 text-green-800',
-      full: 'bg-red-100 text-red-800',
-      inactive: 'bg-gray-100 text-gray-800'
+      active: { bg: 'bg-emerald-100', text: 'text-emerald-700', label: 'ACTIVE' },
+      full: { bg: 'bg-rose-100', text: 'text-rose-700', label: 'FULL' },
+      inactive: { bg: 'bg-gray-100', text: 'text-gray-600', label: 'INACTIVE' }
     };
+    const style = status === 'full' || remaining === 0 
+      ? styles.full 
+      : styles[status] || styles.inactive;
     return (
-      <span className={`px-2 py-1 text-xs font-medium rounded-full ${styles[status] || styles.inactive}`}>
-        {status?.toUpperCase() || 'INACTIVE'}
+      <span className={`px-2 py-1 text-xs font-medium rounded-full ${style.bg} ${style.text}`}>
+        {style.label}
       </span>
     );
   };
 
-  return (
-    <div className="card">
-      <div className="flex items-center justify-between mb-4">
-        <h2 className="text-lg font-semibold text-gray-900">Active Clients</h2>
-        <button
-          onClick={() => navigate('/clients')}
-          className="text-sm text-primary-600 hover:text-primary-700"
-        >
-          View All →
-        </button>
+  const getProgressBar = (received, cap) => {
+    const percentage = cap > 0 ? (received / cap) * 100 : 0;
+    const color = percentage >= 100 ? 'bg-rose-500' : percentage >= 80 ? 'bg-amber-500' : 'bg-emerald-500';
+    return (
+      <div className="w-full bg-gray-200 rounded-full h-2 mt-1 overflow-hidden">
+        <div className={`h-2 rounded-full ${color} transition-all duration-500`} style={{ width: `${Math.min(percentage, 100)}%` }}></div>
       </div>
-      <div className="overflow-x-auto">
-        <table className="w-full">
-          <thead>
-            <tr className="border-b border-gray-200">
-              <th className="text-left py-3 px-4 text-sm font-medium text-gray-600">Name</th>
-              <th className="text-left py-3 px-4 text-sm font-medium text-gray-600">State</th>
-              <th className="text-left py-3 px-4 text-sm font-medium text-gray-600">Cap</th>
-              <th className="text-left py-3 px-4 text-sm font-medium text-gray-600">Received</th>
-              <th className="text-left py-3 px-4 text-sm font-medium text-gray-600">Remaining</th>
-              <th className="text-left py-3 px-4 text-sm font-medium text-gray-600">Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            {clients.slice(0, 5).map((client) => (
-              <tr key={client._id} className="border-b border-gray-100 hover:bg-gray-50">
-                <td className="py-3 px-4">
-                  <div>
-                    <p className="text-sm font-medium text-gray-900">{client.name}</p>
-                    <p className="text-xs text-gray-500">{client.email}</p>
+    );
+  };
+
+  if (loading) {
+    return (
+      <div className="card">
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-lg font-semibold text-gray-900">Active Clients</h2>
+        </div>
+        <div className="space-y-4">
+          {[...Array(5)].map((_, i) => (
+            <div key={i} className="animate-pulse">
+              <div className="h-16 bg-gray-200 rounded-xl"></div>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="card overflow-hidden">
+      <div className="p-5 border-b border-gray-100">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-lg flex items-center justify-center text-white text-sm">
+              👥
+            </div>
+            <h2 className="text-lg font-semibold text-gray-900">Active Clients</h2>
+          </div>
+          <button
+            onClick={() => navigate('/clients')}
+            className="text-sm text-primary-600 hover:text-primary-700 font-medium"
+          >
+            View All →
+          </button>
+        </div>
+      </div>
+      <div className="divide-y divide-gray-50">
+        {clients.length === 0 ? (
+          <div className="p-8 text-center">
+            <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center text-3xl mx-auto mb-3">
+              📭
+            </div>
+            <p className="text-gray-500">No clients yet</p>
+            <button 
+              onClick={() => navigate('/clients')}
+              className="mt-3 text-primary-600 hover:text-primary-700 font-medium text-sm"
+            >
+              Add your first client →
+            </button>
+          </div>
+        ) : (
+          clients.slice(0, 5).map((client) => {
+            const remaining = Math.max(0, client.leadCap - client.leadsReceived);
+            return (
+              <div key={client._id} className="p-4 hover:bg-gray-50 transition-colors">
+                <div className="flex items-center justify-between">
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2">
+                      <p className="text-sm font-semibold text-gray-900 truncate">{client.name}</p>
+                      <span className="px-2 py-0.5 bg-gray-100 text-gray-600 text-xs rounded-full">
+                        {client.state}
+                      </span>
+                    </div>
+                    <p className="text-xs text-gray-500 truncate mt-0.5">{client.email}</p>
                   </div>
-                </td>
-                <td className="py-3 px-4 text-sm text-gray-600">{client.state}</td>
-                <td className="py-3 px-4 text-sm text-gray-600">{client.leadCap}</td>
-                <td className="py-3 px-4 text-sm text-gray-600">{client.leadsReceived}</td>
-                <td className="py-3 px-4 text-sm text-gray-600">
-                  <span className={client.leadCap - client.leadsReceived <= 0 ? 'text-red-600 font-medium' : ''}>
-                    {Math.max(0, client.leadCap - client.leadsReceived)}
-                  </span>
-                </td>
-                <td className="py-3 px-4">{getStatusBadge(client.status)}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        {loading ? (
-          <p className="text-center py-8 text-gray-500">Loading...</p>
-        ) : clients.length === 0 ? (
-          <p className="text-center py-8 text-gray-500">No clients yet</p>
-        ) : null}
+                  <div className="text-right ml-3">
+                    <div className="flex items-center gap-2 mb-1">
+                      <span className="text-sm font-bold text-gray-900">{client.leadsReceived}</span>
+                      <span className="text-xs text-gray-400">/ {client.leadCap}</span>
+                    </div>
+                    {getProgressBar(client.leadsReceived, client.leadCap)}
+                  </div>
+                  <div className="ml-3">
+                    {getStatusBadge(client.status, remaining)}
+                  </div>
+                </div>
+              </div>
+            );
+          })
+        )}
       </div>
     </div>
   );

@@ -42,7 +42,8 @@ api.interceptors.response.use(
 
 export const authAPI = {
   login: (username, password) => api.post('/auth/login', { username, password }),
-  register: (username, password) => api.post('/auth/register', { username, password })
+  register: (username, password) => api.post('/auth/register', { username, password }),
+  changePassword: (currentPassword, newPassword) => api.post('/auth/change-password', { currentPassword, newPassword })
 };
 
 export const leadsAPI = {
