@@ -452,8 +452,19 @@ app.get('/api/stats', auth, async (req, res) => {
     today.setHours(0, 0, 0, 0);
     const leadsToday = await Lead.countDocuments({ createdAt: { $gte: today } });
     const unassignedLeads = await Lead.countDocuments({ assignedTo: null });
+    const totalAssignedLeads = await Lead.countDocuments({ assignedTo: { $ne: null } });
+    const assignedClients = await Client.countDocuments({ leadsReceived: { $gt: 0 } });
+    const activeClients = await Client.countDocuments({ status: 'active' });
     
-    res.json({ totalLeads, totalClients, leadsToday, unassignedLeads });
+    res.json({ 
+      totalLeads, 
+      totalClients, 
+      leadsToday, 
+      unassignedLeads,
+      totalAssignedLeads,
+      assignedClients,
+      activeClients
+    });
   } catch (err) {
     console.error('❌ STATS ERROR:', err);
     res.status(500).json(err);
@@ -911,6 +922,33 @@ app.post('/api/auth/register', async (req, res) => {
   } catch (err) {
     console.error('❌ REGISTER ERROR:', err);
     res.status(500).json(err);
+  }
+});
+
+// 🔐 CHANGE PASSWORD
+app.post('/api/auth/change-password', auth, async (req, res) => {
+  try {
+    const { currentPassword, newPassword } = req.body;
+    const token = req.headers.authorization?.split(' ')[1];
+    const decoded = jwt.verify(token, JWT_SECRET);
+    
+    const user = await User.findById(decoded.userId);
+    if (!user) {
+      return res.status(404).json({ success: false, message: 'User not found' });
+    }
+    
+    const isMatch = await user.comparePassword(currentPassword);
+    if (!isMatch) {
+      return res.status(400).json({ success: false, message: 'Current password is incorrect' });
+    }
+    
+    user.password = newPassword;
+    await user.save();
+    
+    res.json({ success: true, message: 'Password changed successfully' });
+  } catch (err) {
+    console.error('❌ CHANGE_PASSWORD ERROR:', err);
+    res.status(500).json({ success: false, message: err.message });
   }
 });
 
