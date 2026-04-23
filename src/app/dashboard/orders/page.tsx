@@ -3,6 +3,23 @@ import { prisma } from "@/lib/db";
 import Link from "next/link";
 import { format } from "date-fns";
 
+type OrderItem = {
+  id: string;
+  quantity: number;
+  product: {
+    name: string;
+    image: string | null;
+  };
+};
+
+type Order = {
+  id: string;
+  createdAt: Date;
+  totalAmount: number;
+  status: string;
+  items: OrderItem[];
+};
+
 export default async function OrdersPage() {
   const session = await auth();
   
@@ -18,7 +35,7 @@ export default async function OrdersPage() {
       }
     },
     orderBy: { createdAt: 'desc' }
-  });
+  }) as Order[];
 
   const getStatusColor = (status: string) => {
       switch(status) {
@@ -52,7 +69,7 @@ export default async function OrdersPage() {
           </div>
       ) : (
           <div className="space-y-4">
-              {orders.map((order: any) => (
+              {orders.map((order: Order) => (
                   <div key={order.id} className="border border-gray-200 rounded-lg overflow-hidden">
                       {/* Order Header */}
                       <div className="bg-gray-50 px-4 py-3 border-b border-gray-200 flex flex-col md:flex-row md:justify-between md:items-center gap-2">
@@ -74,7 +91,7 @@ export default async function OrdersPage() {
                       
                       {/* Order Items */}
                       <div className="divide-y divide-gray-100">
-                          {order.items.map((item: any) => (
+                          {order.items.map((item: OrderItem) => (
                               <div key={item.id} className="p-4 flex gap-4">
                                   <div className="w-20 h-20 bg-gray-100 rounded-md shrink-0 border border-gray-200 overflow-hidden flex items-center justify-center">
                                       {item.product.image ? (

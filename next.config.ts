@@ -35,11 +35,6 @@ const nextConfig: NextConfig = {
     ],
     formats: ["image/avif", "image/webp"],
   },
-  experimental: {
-    serverActions: {
-      bodySizeLimit: "2mb",
-    },
-  },
   poweredByHeader: false,
   compress: true,
   trailingSlash: false,

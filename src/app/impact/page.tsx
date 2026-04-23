@@ -22,7 +22,7 @@ export default function ImpactPage() {
             Environmental, Social & Governance
           </h2>
           <p className="text-lg text-surface-700 leading-relaxed mb-12 text-center">
-            At Iyosiola Group, we believe that our success is intrinsically linked to the well-being of our communities 
+            At Iyosi Foods, we believe that our success is intrinsically linked to the well-being of our communities 
             and the environment. We are committed to sustainable business practices that create lasting positive 
             impact on society while protecting our environment for future generations.
           </p>
