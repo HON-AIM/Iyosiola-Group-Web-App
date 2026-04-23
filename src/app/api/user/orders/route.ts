@@ -22,7 +22,7 @@ const CreateOrderSchema = z.object({
   items: z.array(OrderItemSchema).min(1).max(100),
   shippingAddress: AddressSchema,
   total: z.number().positive().max(10000000),
-  notes: z.string().max(1000).trim().optional().nullable(),
+notes: z.string().max(1000).trim().optional().nullable(),
 });
 
 export async function GET(request: NextRequest) {
@@ -88,22 +88,6 @@ export async function POST(request: NextRequest) {
     }
 
     const { items, shippingAddress, total, notes } = parseResult.data;
-
-    const now = Date.now();
-    const userLimit = orderRateLimits.get(session.user.id);
-
-    if (userLimit) {
-      if (now < userLimit.resetAt) {
-        if (userLimit.count >= MAX_ORDERS_PER_MINUTE) {
-          return NextResponse.json({ message: "Too many orders created. Please wait before creating another." }, { status: 429 });
-        }
-        userLimit.count++;
-      } else {
-        orderRateLimits.set(session.user.id, { count: 1, resetAt: now + RATE_LIMIT_WINDOW });
-      }
-    } else {
-      orderRateLimits.set(session.user.id, { count: 1, resetAt: now + RATE_LIMIT_WINDOW });
-    }
 
     let order;
     try {
