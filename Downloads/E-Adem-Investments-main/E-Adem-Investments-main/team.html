@@ -3,163 +3,216 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Management Team | E-Adem Microfinance</title>
+    <title>Our Team | E-Adem Investments</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="bg-white">
     <div class="preloader">
         <div class="loader"></div>
     </div>
 
-    <header>
-        <div class="container">
-            <div class="logo-icon">EA</div>
-            <div class="logo">E-<span>Adem</span></div>
-            <button class="mobile-menu-btn">☰</button>
-            <nav>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="services.html">Services</a></li>
-                    <li><a href="team.html">Team</a></li>
-                    <li><a href="ambassador.html">Ambassador</a></li>
-                    <li><a href="market-insights.html">Insights</a></li>
-                    <li><a href="testimonials.html">Testimonials</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
+    <header class="fixed w-full top-0 bg-white/95 backdrop-blur-lg z-50 transition-all duration-300">
+        <div class="container-custom">
+            <nav class="flex items-center justify-between h-20">
+                <a href="index.html" class="flex items-center space-x-3">
+                    <div class="w-12 h-12 bg-gradient-to-br from-primary-600 to-primary-700 rounded-xl flex items-center justify-center shadow-lg">
+                        <span class="text-white font-bold text-lg">EA</span>
+                    </div>
+                    <div>
+                        <span class="text-2xl font-bold text-navy-900">E-Adem</span>
+                        <span class="block text-xs text-navy-500 font-medium">Investments</span>
+                    </div>
+                </a>
+                
+                <div class="hidden lg:flex items-center space-x-1">
+                    <a href="index.html" class="nav-link px-4 py-2 rounded-lg">Home</a>
+                    <a href="about.html" class="nav-link px-4 py-2 rounded-lg">About</a>
+                    <a href="services.html" class="nav-link px-4 py-2 rounded-lg">Services</a>
+                    <a href="team.html" class="nav-link-active px-4 py-2 rounded-lg">Team</a>
+                    <a href="ambassador.html" class="nav-link px-4 py-2 rounded-lg">Ambassador</a>
+                    <a href="testimonials.html" class="nav-link px-4 py-2 rounded-lg">Testimonials</a>
+                    <a href="contact.html" class="btn-primary ml-4">Contact Us</a>
+                </div>
+                
+                <button class="mobile-menu-btn lg:hidden p-2 rounded-lg hover:bg-navy-100">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
             </nav>
         </div>
     </header>
 
-    <section class="page-hero">
-        <div class="container">
-            <h1>Our Team</h1>
+    <section class="relative pt-32 pb-20 bg-gradient-hero">
+        <div class="container-custom">
+            <div class="max-w-3xl mx-auto text-center">
+                <span class="badge-gold mb-4">Meet The Team</span>
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">Our Leadership</h1>
+                <p class="text-lg text-navy-200">Dedicated professionals committed to your financial success</p>
+            </div>
         </div>
     </section>
 
-    <section class="section">
-        <div class="container">
-            <div class="section-title animate-on-scroll">
-                <span class="section-subtitle">Meet The Leaders</span>
-                <h2>Leadership & Expertise</h2>
+    <section class="section-padding bg-white">
+        <div class="container-custom">
+            <div class="heading-section">
+                <span class="badge-primary mb-4">Leadership Team</span>
+                <h2>Meet Our Experts</h2>
+                <p>Experienced professionals driving our mission forward.</p>
             </div>
             
-            <div class="row">
-                <div class="card team-card animate-on-scroll" data-delay="100">
-                    <div class="team-img">👤</div>
-                    <div class="card-content">
-                        <h3>Mrs Evelyn Oyediji</h3>
-                        <p class="team-role">Chief Executive Officer</p>
-                        <p>Over 15 years of experience in microfinance and community development. Holds an MBA in Finance and is passionate about financial inclusion.</p>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="card animate-on-scroll group">
+                    <div class="p-8 text-center">
+                        <div class="w-32 h-32 bg-gradient-to-br from-primary-100 to-primary-200 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-105 transition-transform duration-300">
+                            <svg class="w-16 h-16 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                            </svg>
+                        </div>
+                        <span class="badge-primary mb-3">Chief Executive Officer</span>
+                        <h3 class="text-xl font-bold text-navy-900 mb-2">Mrs Evelyn Oyediji</h3>
+                        <p class="text-navy-600 text-sm">Over 15 years of experience in microfinance and community development. MBA in Finance, passionate about financial inclusion.</p>
                     </div>
                 </div>
                 
-                <div class="card team-card animate-on-scroll" data-delay="200">
-                    <div class="team-img">👤</div>
-                    <div class="card-content">
-                        <h3>Oyediji David Boluwatife</h3>
-                        <p class="team-role">General Manager</p>
-                        <p>Extensive background in operations management within the financial sector. Responsible for day-to-day operations and strategic implementation.</p>
+                <div class="card animate-on-scroll group">
+                    <div class="p-8 text-center">
+                        <div class="w-32 h-32 bg-gradient-to-br from-primary-100 to-primary-200 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-105 transition-transform duration-300">
+                            <svg class="w-16 h-16 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                            </svg>
+                        </div>
+                        <span class="badge-primary mb-3">General Manager</span>
+                        <h3 class="text-xl font-bold text-navy-900 mb-2">Oyediji David Boluwatife</h3>
+                        <p class="text-navy-600 text-sm">Extensive background in operations management within the financial sector. Responsible for day-to-day operations and strategy.</p>
                     </div>
                 </div>
                 
-                <div class="card team-card animate-on-scroll" data-delay="300">
-                    <div class="team-img">👤</div>
-                    <div class="card-content">
-                        <h3>Lawal Timileyin</h3>
-                        <p class="team-role">Secretary</p>
-                        <p>Manages corporate governance, compliance, and administrative functions. Ensures smooth communication between departments and stakeholders.</p>
+                <div class="card animate-on-scroll group">
+                    <div class="p-8 text-center">
+                        <div class="w-32 h-32 bg-gradient-to-br from-primary-100 to-primary-200 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-105 transition-transform duration-300">
+                            <svg class="w-16 h-16 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                            </svg>
+                        </div>
+                        <span class="badge-primary mb-3">Secretary</span>
+                        <h3 class="text-xl font-bold text-navy-900 mb-2">Lawal Timileyin</h3>
+                        <p class="text-navy-600 text-sm">Manages corporate governance, compliance, and administrative functions. Ensures smooth communication between departments.</p>
                     </div>
                 </div>
                 
-                <div class="card team-card animate-on-scroll" data-delay="400">
-                    <div class="team-img">👤</div>
-                    <div class="card-content">
-                        <h3>Cristiano Ronaldo</h3>
-                        <p class="team-role">Senior Credit Officer</p>
-                        <p>Leads the credit assessment team with expertise in risk evaluation and loan portfolio management. Focuses on responsible lending practices.</p>
+                <div class="card animate-on-scroll group">
+                    <div class="p-8 text-center">
+                        <div class="w-32 h-32 bg-gradient-to-br from-gold-100 to-gold-200 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-105 transition-transform duration-300">
+                            <svg class="w-16 h-16 text-gold-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                            </svg>
+                        </div>
+                        <span class="badge-gold mb-3">Senior Credit Officer</span>
+                        <h3 class="text-xl font-bold text-navy-900 mb-2">Cristiano Ronaldo</h3>
+                        <p class="text-navy-600 text-sm">Leads the credit assessment team with expertise in risk evaluation and loan portfolio management.</p>
                     </div>
                 </div>
                 
-                <div class="card team-card animate-on-scroll" data-delay="500">
-                    <div class="team-img">👤</div>
-                    <div class="card-content">
-                        <h3>Lionel Messi</h3>
-                        <p class="team-role">Accountant</p>
-                        <p>Manages all financial reporting, auditing, and regulatory compliance. Ensures financial integrity and transparency across all operations.</p>
+                <div class="card animate-on-scroll group">
+                    <div class="p-8 text-center">
+                        <div class="w-32 h-32 bg-gradient-to-br from-gold-100 to-gold-200 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-105 transition-transform duration-300">
+                            <svg class="w-16 h-16 text-gold-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                            </svg>
+                        </div>
+                        <span class="badge-gold mb-3">Accountant</span>
+                        <h3 class="text-xl font-bold text-navy-900 mb-2">Lionel Messi</h3>
+                        <p class="text-navy-600 text-sm">Manages all financial reporting, auditing, and regulatory compliance. Ensures financial integrity and transparency.</p>
                     </div>
                 </div>
                 
-                <div class="card team-card animate-on-scroll" data-delay="600">
-                    <div class="team-img">👤</div>
-                    <div class="card-content">
-                        <h3>Owoputi Oluwadamilola</h3>
-                        <p class="team-role">Credit Officer</p>
-                        <p>Specializes in client relationship management and loan processing. Works directly with clients to understand their financial needs.</p>
+                <div class="card animate-on-scroll group">
+                    <div class="p-8 text-center">
+                        <div class="w-32 h-32 bg-gradient-to-br from-primary-100 to-primary-200 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-105 transition-transform duration-300">
+                            <svg class="w-16 h-16 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                            </svg>
+                        </div>
+                        <span class="badge-primary mb-3">Credit Officer</span>
+                        <h3 class="text-xl font-bold text-navy-900 mb-2">Owoputi Oluwadamilola</h3>
+                        <p class="text-navy-600 text-sm">Specializes in client relationship management and loan processing. Works directly with clients.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="section value-section">
-        <div class="container">
-            <div class="section-title animate-on-scroll">
-                <span class="section-subtitle" style="color: var(--accent-blue);">Join Our Team</span>
-                <h2 style="color: var(--white);">We're Always Looking for Talent</h2>
-                <p style="color: rgba(255,255,255,0.8); margin-top: 20px;">If you're passionate about financial inclusion and community development, we'd love to hear from you.</p>
-                <a href="contact.html" class="btn btn-gold" style="margin-top: 30px;">Contact Us</a>
+    <section class="section-padding bg-gradient-to-br from-navy-900 via-primary-900 to-navy-900 text-white">
+        <div class="container-custom">
+            <div class="max-w-3xl mx-auto text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6">Join Our Growing Team</h2>
+                <p class="text-navy-200 text-lg mb-8">If you're passionate about financial inclusion and community development, we'd love to hear from you.</p>
+                <a href="contact.html" class="btn-gold">
+                    Contact Us
+                    <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                    </svg>
+                </a>
             </div>
         </div>
     </section>
 
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>E-Adem Microfinance</h3>
-                    <p>Providing ethical financial services to empower communities since 2010.</p>
-                    <div class="footer-social">
-                        <a href="#" class="social-link">f</a>
-                        <a href="#" class="social-link">in</a>
-                        <a href="#" class="social-link">t</a>
+    <footer class="bg-navy-900 text-white">
+        <div class="container-custom py-16">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
+                <div class="col-span-2 md:col-span-1">
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div class="w-12 h-12 bg-gradient-to-br from-primary-500 to-primary-600 rounded-xl flex items-center justify-center">
+                            <span class="text-white font-bold text-lg">EA</span>
+                        </div>
+                        <div>
+                            <span class="text-xl font-bold">E-Adem</span>
+                            <span class="block text-xs text-navy-400">Investments</span>
+                        </div>
                     </div>
+                    <p class="text-navy-400 text-sm">Providing ethical financial services to empower communities since 2010.</p>
                 </div>
-                <div class="footer-section">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="services.html">Services</a></li>
-                        <li><a href="ambassador.html">Our Ambassador</a></li>
-                        <li><a href="contact.html">Contact</a></li>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-3 text-navy-400">
+                        <li><a href="index.html" class="hover:text-white transition-colors">Home</a></li>
+                        <li><a href="about.html" class="hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="services.html" class="hover:text-white transition-colors">Services</a></li>
+                        <li><a href="contact.html" class="hover:text-white transition-colors">Contact</a></li>
                     </ul>
                 </div>
-                <div class="footer-section">
-                    <h3>Services</h3>
-                    <ul class="footer-links">
-                        <li><a href="services.html">Micro Loans</a></li>
-                        <li><a href="services.html">Savings Accounts</a></li>
-                        <li><a href="services.html">Forex Classes</a></li>
-                        <li><a href="services.html">Business Advisory</a></li>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Services</h4>
+                    <ul class="space-y-3 text-navy-400">
+                        <li><a href="services.html" class="hover:text-white transition-colors">Micro Loans</a></li>
+                        <li><a href="services.html" class="hover:text-white transition-colors">Savings</a></li>
+                        <li><a href="services.html" class="hover:text-white transition-colors">Forex Classes</a></li>
                     </ul>
                 </div>
-                <div class="footer-section">
-                    <h3>Contact Info</h3>
-                    <ul class="footer-links">
-                        <li>Barika Junction, opposite UI second gate, Ibadan, Nigeria</li>
-                        <li>info@eademmicrofinance.com</li>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Contact</h4>
+                    <ul class="space-y-3 text-navy-400">
+                        <li>info@eadem.com</li>
                         <li>+234 706 398 1158</li>
                     </ul>
                 </div>
             </div>
-            <div class="copyright">
-                <p>&copy; 2026 E-Adem Microfinance Company. All rights reserved.</p>
+            
+            <div class="pt-8 border-t border-navy-800 text-center text-navy-400 text-sm">
+                <p>&copy; 2026 E-Adem Investments. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
-    <div class="scroll-top">↑</div>
+    <button class="scroll-top fixed bottom-8 right-8 w-12 h-12 bg-primary-600 text-white rounded-full shadow-lg flex items-center justify-center opacity-0 pointer-events-none transition-all duration-300 hover:bg-primary-700">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/>
+        </svg>
+    </button>
 
     <script src="main.js"></script>
 </body>

@@ -3,173 +3,234 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us | E-Adem Microfinance</title>
+    <title>About Us | E-Adem Investments</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="bg-white">
     <div class="preloader">
         <div class="loader"></div>
     </div>
 
-    <header>
-        <div class="container">
-            <div class="logo-icon">EA</div>
-            <div class="logo">E-<span>Adem</span></div>
-            <button class="mobile-menu-btn">☰</button>
-            <nav>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="services.html">Services</a></li>
-                    <li><a href="team.html">Team</a></li>
-                    <li><a href="ambassador.html">Ambassador</a></li>
-                    <li><a href="market-insights.html">Insights</a></li>
-                    <li><a href="testimonials.html">Testimonials</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
+    <header class="fixed w-full top-0 bg-white/95 backdrop-blur-lg z-50 transition-all duration-300">
+        <div class="container-custom">
+            <nav class="flex items-center justify-between h-20">
+                <a href="index.html" class="flex items-center space-x-3">
+                    <div class="w-12 h-12 bg-gradient-to-br from-primary-600 to-primary-700 rounded-xl flex items-center justify-center shadow-lg shadow-primary-600/30">
+                        <span class="text-white font-bold text-lg">EA</span>
+                    </div>
+                    <div>
+                        <span class="text-2xl font-bold text-navy-900">E-Adem</span>
+                        <span class="block text-xs text-navy-500 font-medium">Investments</span>
+                    </div>
+                </a>
+                
+                <div class="hidden lg:flex items-center space-x-1">
+                    <a href="index.html" class="nav-link px-4 py-2 rounded-lg hover:bg-navy-50">Home</a>
+                    <a href="about.html" class="nav-link-active px-4 py-2 rounded-lg">About</a>
+                    <a href="services.html" class="nav-link px-4 py-2 rounded-lg hover:bg-navy-50">Services</a>
+                    <a href="team.html" class="nav-link px-4 py-2 rounded-lg hover:bg-navy-50">Team</a>
+                    <a href="ambassador.html" class="nav-link px-4 py-2 rounded-lg hover:bg-navy-50">Ambassador</a>
+                    <a href="testimonials.html" class="nav-link px-4 py-2 rounded-lg hover:bg-navy-50">Testimonials</a>
+                    <a href="contact.html" class="btn-primary ml-4">Contact Us</a>
+                </div>
+                
+                <button class="mobile-menu-btn lg:hidden p-2 rounded-lg hover:bg-navy-100">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
             </nav>
         </div>
+        
+        <nav class="lg:hidden hidden bg-white border-t border-navy-100">
+            <div class="container-custom py-4 space-y-2">
+                <a href="index.html" class="nav-link block px-4 py-3 rounded-lg">Home</a>
+                <a href="about.html" class="nav-link-active block px-4 py-3 rounded-lg bg-primary-50">About</a>
+                <a href="services.html" class="nav-link block px-4 py-3 rounded-lg">Services</a>
+                <a href="team.html" class="nav-link block px-4 py-3 rounded-lg">Team</a>
+                <a href="ambassador.html" class="nav-link block px-4 py-3 rounded-lg">Ambassador</a>
+                <a href="testimonials.html" class="nav-link block px-4 py-3 rounded-lg">Testimonials</a>
+                <a href="contact.html" class="btn-primary block text-center mt-4">Contact Us</a>
+            </div>
+        </nav>
     </header>
 
-    <section class="page-hero">
-        <div class="container">
-            <h1>About E-Adem</h1>
+    <section class="relative pt-32 pb-20 bg-gradient-hero">
+        <div class="container-custom">
+            <div class="max-w-3xl mx-auto text-center">
+                <span class="badge-gold mb-4">Our Story</span>
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">About E-Adem</h1>
+                <p class="text-lg text-navy-200">Building bridges to financial freedom since 2010</p>
+            </div>
         </div>
     </section>
 
-    <section class="section">
-        <div class="container">
-            <div class="section-title animate-on-scroll">
-                <span class="section-subtitle">Our Journey</span>
-                <h2>Our Story</h2>
-            </div>
-            <div class="card animate-on-scroll" style="max-width: 900px; margin: 0 auto;">
-                <div class="card-content">
-                    <p>E-Adem Microfinance Company was founded in 2010 with a mission to provide accessible financial services to underserved communities in Nigeria. What started as a small initiative with just five employees has grown into a trusted institution serving over 10,000 clients across multiple states.</p>
-                    <p>Our journey began when our founder, recognizing the challenges faced by small business owners and entrepreneurs in accessing capital, decided to create a solution that combined financial expertise with deep community understanding.</p>
+    <section class="section-padding bg-white">
+        <div class="container-custom">
+            <div class="grid lg:grid-cols-2 gap-12 items-center mb-20">
+                <div class="animate-on-scroll">
+                    <span class="badge-primary mb-4">Our Story</span>
+                    <h2 class="text-3xl md:text-4xl font-bold text-navy-900 mb-6">From Humble Beginnings to Industry Leaders</h2>
+                    <p class="text-navy-600 mb-4">E-Adem Microfinance Company was founded in 2010 with a mission to provide accessible financial services to underserved communities in Nigeria. What started as a small initiative with just five employees has grown into a trusted institution serving over 10,000 clients across multiple states.</p>
+                    <p class="text-navy-600 mb-4">Our journey began when our founder, recognizing the challenges faced by small business owners and entrepreneurs in accessing capital, decided to create a solution that combined financial expertise with deep community understanding.</p>
+                    <p class="text-navy-600">Today, we continue to uphold the values that guided us from the start: integrity, empowerment, and genuine care for our clients' success.</p>
                 </div>
-            </div>
-            
-            <div class="section-title animate-on-scroll" style="margin-top: 80px;">
-                <span class="section-subtitle">Our Values</span>
-                <h2>Core Values</h2>
-            </div>
-            <div class="row">
-                <div class="card animate-on-scroll" data-delay="100">
-                    <div class="card-img">🛡️</div>
-                    <div class="card-content">
-                        <h3>Integrity</h3>
-                        <p>We conduct all our operations with the highest ethical standards, ensuring transparency and honesty in every interaction with our clients and partners.</p>
-                    </div>
-                </div>
-                <div class="card animate-on-scroll" data-delay="200">
-                    <div class="card-img">🚀</div>
-                    <div class="card-content">
-                        <h3>Empowerment</h3>
-                        <p>We believe in empowering our clients through financial literacy and accessible services that enable sustainable growth and economic independence.</p>
-                    </div>
-                </div>
-                <div class="card animate-on-scroll" data-delay="300">
-                    <div class="card-img">🌍</div>
-                    <div class="card-content">
-                        <h3>Community Focus</h3>
-                        <p>Our success is measured by the prosperity of the communities we serve. We actively invest in local development initiatives and partnerships.</p>
+                <div class="animate-on-scroll">
+                    <div class="relative">
+                        <div class="absolute -inset-4 bg-gradient-to-r from-primary-500 to-gold-500 rounded-3xl blur-xl opacity-20"></div>
+                        <div class="relative bg-gradient-to-br from-navy-100 to-primary-50 rounded-3xl p-12 aspect-square flex items-center justify-center">
+                            <div class="text-center">
+                                <div class="text-6xl font-bold text-primary-600 mb-2">15+</div>
+                                <div class="text-navy-600 font-medium">Years Serving</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
             
-            <div class="section-title animate-on-scroll" style="margin-top: 80px;">
-                <span class="section-subtitle">Our Commitment</span>
+            <div class="heading-section">
+                <span class="badge-primary mb-4">Our Values</span>
+                <h2>Core Values That Drive Us</h2>
+                <p>The principles that guide every decision we make.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8 mb-20">
+                <div class="card card-body text-center animate-on-scroll">
+                    <div class="w-16 h-16 bg-primary-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-navy-900 mb-3">Integrity</h3>
+                    <p class="text-navy-600">We conduct all our operations with the highest ethical standards, ensuring transparency and honesty in every interaction.</p>
+                </div>
+                
+                <div class="card card-body text-center animate-on-scroll">
+                    <div class="w-16 h-16 bg-primary-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-navy-900 mb-3">Empowerment</h3>
+                    <p class="text-navy-600">We believe in empowering our clients through financial literacy and accessible services that enable sustainable growth.</p>
+                </div>
+                
+                <div class="card card-body text-center animate-on-scroll">
+                    <div class="w-16 h-16 bg-primary-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-navy-900 mb-3">Community Focus</h3>
+                    <p class="text-navy-600">Our success is measured by the prosperity of the communities we serve. We invest in local development initiatives.</p>
+                </div>
+            </div>
+            
+            <div class="heading-section">
+                <span class="badge-primary mb-4">Our Commitment</span>
                 <h2>Financial Inclusion</h2>
+                <p>Breaking barriers and building bridges to financial freedom.</p>
             </div>
-            <div class="card animate-on-scroll" style="max-width: 900px; margin: 0 auto;">
-                <div class="card-content">
-                    <p>At E-Adem, we recognize that financial exclusion remains a significant barrier to economic development in Nigeria. Our commitment to financial inclusion drives everything we do:</p>
-                    <ul style="margin-left: 20px; margin-top: 20px; line-height: 2;">
-                        <li>Designing loan products accessible to those without traditional collateral</li>
-                        <li>Providing financial literacy training to build long-term capability</li>
-                        <li>Offering savings products that help clients build assets securely</li>
-                        <li>Expanding our reach to rural and underserved urban communities</li>
-                        <li>Partnering with local organizations for greater impact</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="section value-section">
-        <div class="container">
-            <div class="section-title animate-on-scroll">
-                <span class="section-subtitle" style="color: var(--accent-blue);">Our Team</span>
-                <h2 style="color: var(--white);">Professional Excellence</h2>
-            </div>
-            <div class="row">
-                <div class="value-card animate-on-scroll" data-delay="100">
-                    <div class="value-icon">👩‍💼</div>
-                    <h3>Expert Leadership</h3>
-                    <p>Our leadership team brings decades of combined experience in microfinance and community banking.</p>
-                </div>
-                <div class="value-card animate-on-scroll" data-delay="200">
-                    <div class="value-icon">📊</div>
-                    <h3>Financial Expertise</h3>
-                    <p>Our certified professionals ensure the highest standards of financial management and compliance.</p>
-                </div>
-                <div class="value-card animate-on-scroll" data-delay="300">
-                    <div class="value-icon">💼</div>
-                    <h3>Dedicated Officers</h3>
-                    <p>Our credit officers are trained to provide personalized service and support to every client.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>E-Adem Microfinance</h3>
-                    <p>Providing ethical financial services to empower communities since 2010.</p>
-                    <div class="footer-social">
-                        <a href="#" class="social-link">f</a>
-                        <a href="#" class="social-link">in</a>
-                        <a href="#" class="social-link">t</a>
+            
+            <div class="card card-body max-w-4xl mx-auto animate-on-scroll">
+                <p class="text-navy-600 mb-6">At E-Adem, we recognize that financial exclusion remains a significant barrier to economic development in Nigeria. Our commitment to financial inclusion drives everything we do:</p>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="flex items-start space-x-4">
+                        <div class="w-10 h-10 bg-primary-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <svg class="w-5 h-5 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-navy-900 mb-1">Accessible Products</h4>
+                            <p class="text-navy-600 text-sm">Designing loan products accessible to those without traditional collateral</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-4">
+                        <div class="w-10 h-10 bg-primary-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <svg class="w-5 h-5 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-navy-900 mb-1">Financial Education</h4>
+                            <p class="text-navy-600 text-sm">Providing financial literacy training to build long-term capability</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-4">
+                        <div class="w-10 h-10 bg-primary-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <svg class="w-5 h-5 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-navy-900 mb-1">Savings Programs</h4>
+                            <p class="text-navy-600 text-sm">Offering savings products that help clients build assets securely</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-4">
+                        <div class="w-10 h-10 bg-primary-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <svg class="w-5 h-5 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-navy-900 mb-1">Community Reach</h4>
+                            <p class="text-navy-600 text-sm">Expanding our reach to rural and underserved urban communities</p>
+                        </div>
                     </div>
                 </div>
-                <div class="footer-section">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="services.html">Services</a></li>
-                        <li><a href="ambassador.html">Our Ambassador</a></li>
-                        <li><a href="contact.html">Contact</a></li>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-navy-900 text-white">
+        <div class="container-custom py-16">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
+                <div class="col-span-2 md:col-span-1">
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div class="w-12 h-12 bg-gradient-to-br from-primary-500 to-primary-600 rounded-xl flex items-center justify-center">
+                            <span class="text-white font-bold text-lg">EA</span>
+                        </div>
+                        <div>
+                            <span class="text-xl font-bold">E-Adem</span>
+                            <span class="block text-xs text-navy-400">Investments</span>
+                        </div>
+                    </div>
+                    <p class="text-navy-400 text-sm mb-6">Providing ethical financial services to empower communities since 2010.</p>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-3 text-navy-400">
+                        <li><a href="index.html" class="hover:text-white transition-colors">Home</a></li>
+                        <li><a href="about.html" class="hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="services.html" class="hover:text-white transition-colors">Services</a></li>
+                        <li><a href="contact.html" class="hover:text-white transition-colors">Contact</a></li>
                     </ul>
                 </div>
-                <div class="footer-section">
-                    <h3>Services</h3>
-                    <ul class="footer-links">
-                        <li><a href="services.html">Micro Loans</a></li>
-                        <li><a href="services.html">Savings Accounts</a></li>
-                        <li><a href="services.html">Forex Classes</a></li>
-                        <li><a href="services.html">Business Advisory</a></li>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Services</h4>
+                    <ul class="space-y-3 text-navy-400">
+                        <li><a href="services.html" class="hover:text-white transition-colors">Micro Loans</a></li>
+                        <li><a href="services.html" class="hover:text-white transition-colors">Savings</a></li>
+                        <li><a href="services.html" class="hover:text-white transition-colors">Forex Classes</a></li>
                     </ul>
                 </div>
-                <div class="footer-section">
-                    <h3>Contact Info</h3>
-                    <ul class="footer-links">
-                        <li>Barika Junction, opposite UI second gate, Ibadan, Nigeria</li>
-                        <li>info@eademmicrofinance.com</li>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Contact</h4>
+                    <ul class="space-y-3 text-navy-400">
+                        <li>info@eadem.com</li>
                         <li>+234 706 398 1158</li>
                     </ul>
                 </div>
             </div>
-            <div class="copyright">
-                <p>&copy; 2026 E-Adem Microfinance Company. All rights reserved.</p>
+            
+            <div class="pt-8 border-t border-navy-800 text-center text-navy-400 text-sm">
+                <p>&copy; 2026 E-Adem Investments. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
-    <div class="scroll-top">↑</div>
+    <button class="scroll-top fixed bottom-8 right-8 w-12 h-12 bg-primary-600 text-white rounded-full shadow-lg shadow-primary-600/30 flex items-center justify-center opacity-0 pointer-events-none transition-all duration-300 hover:bg-primary-700">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/>
+        </svg>
+    </button>
 
     <script src="main.js"></script>
 </body>

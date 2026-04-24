@@ -3,185 +3,277 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Services | E-Adem Microfinance</title>
+    <title>Services | E-Adem Investments</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="bg-white">
     <div class="preloader">
         <div class="loader"></div>
     </div>
 
-    <header>
-        <div class="container">
-            <div class="logo-icon">EA</div>
-            <div class="logo">E-<span>Adem</span></div>
-            <button class="mobile-menu-btn">☰</button>
-            <nav>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="services.html">Services</a></li>
-                    <li><a href="team.html">Team</a></li>
-                    <li><a href="ambassador.html">Ambassador</a></li>
-                    <li><a href="market-insights.html">Insights</a></li>
-                    <li><a href="testimonials.html">Testimonials</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
+    <header class="fixed w-full top-0 bg-white/95 backdrop-blur-lg z-50 transition-all duration-300">
+        <div class="container-custom">
+            <nav class="flex items-center justify-between h-20">
+                <a href="index.html" class="flex items-center space-x-3">
+                    <div class="w-12 h-12 bg-gradient-to-br from-primary-600 to-primary-700 rounded-xl flex items-center justify-center shadow-lg">
+                        <span class="text-white font-bold text-lg">EA</span>
+                    </div>
+                    <div>
+                        <span class="text-2xl font-bold text-navy-900">E-Adem</span>
+                        <span class="block text-xs text-navy-500 font-medium">Investments</span>
+                    </div>
+                </a>
+                
+                <div class="hidden lg:flex items-center space-x-1">
+                    <a href="index.html" class="nav-link px-4 py-2 rounded-lg">Home</a>
+                    <a href="about.html" class="nav-link px-4 py-2 rounded-lg">About</a>
+                    <a href="services.html" class="nav-link-active px-4 py-2 rounded-lg">Services</a>
+                    <a href="team.html" class="nav-link px-4 py-2 rounded-lg">Team</a>
+                    <a href="ambassador.html" class="nav-link px-4 py-2 rounded-lg">Ambassador</a>
+                    <a href="testimonials.html" class="nav-link px-4 py-2 rounded-lg">Testimonials</a>
+                    <a href="contact.html" class="btn-primary ml-4">Contact Us</a>
+                </div>
+                
+                <button class="mobile-menu-btn lg:hidden p-2 rounded-lg hover:bg-navy-100">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
             </nav>
         </div>
     </header>
 
-    <section class="page-hero">
-        <div class="container">
-            <h1>Our Services</h1>
+    <section class="relative pt-32 pb-20 bg-gradient-hero">
+        <div class="container-custom">
+            <div class="max-w-3xl mx-auto text-center">
+                <span class="badge-gold mb-4">What We Offer</span>
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">Our Services</h1>
+                <p class="text-lg text-navy-200">Comprehensive financial solutions tailored to your needs</p>
+            </div>
         </div>
     </section>
 
-    <section class="section">
-        <div class="container">
-            <div class="section-title animate-on-scroll">
-                <span class="section-subtitle">What We Offer</span>
-                <h2>Comprehensive Financial Solutions</h2>
+    <section class="section-padding bg-white">
+        <div class="container-custom">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="card overflow-hidden animate-on-scroll group">
+                    <div class="h-56 bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center relative overflow-hidden">
+                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300"></div>
+                        <svg class="w-24 h-24 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                    <div class="card-body">
+                        <span class="badge-primary mb-4">Most Popular</span>
+                        <h3 class="text-2xl font-bold text-navy-900 mb-3">Micro Loans</h3>
+                        <p class="text-navy-600 mb-6">Access flexible financing solutions tailored to your business needs.</p>
+                        <ul class="space-y-3 mb-6">
+                            <li class="flex items-center text-navy-600">
+                                <svg class="w-5 h-5 text-primary-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                                Loans from ₦30,000 to ₦500,000
+                            </li>
+                            <li class="flex items-center text-navy-600">
+                                <svg class="w-5 h-5 text-primary-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                                Flexible repayment terms
+                            </li>
+                            <li class="flex items-center text-navy-600">
+                                <svg class="w-5 h-5 text-primary-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                                Minimal documentation
+                            </li>
+                            <li class="flex items-center text-navy-600">
+                                <svg class="w-5 h-5 text-primary-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                                48-hour approval
+                            </li>
+                        </ul>
+                        <a href="contact.html" class="btn-primary w-full">Apply Now</a>
+                    </div>
+                </div>
+                
+                <div class="card overflow-hidden animate-on-scroll group">
+                    <div class="h-56 bg-gradient-to-br from-gold-500 to-gold-600 flex items-center justify-center relative overflow-hidden">
+                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300"></div>
+                        <svg class="w-24 h-24 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/>
+                        </svg>
+                    </div>
+                    <div class="card-body">
+                        <span class="badge-gold mb-4">Grow Your Wealth</span>
+                        <h3 class="text-2xl font-bold text-navy-900 mb-3">Savings & Investments</h3>
+                        <p class="text-navy-600 mb-6">Secure your future with competitive returns and flexible plans.</p>
+                        <ul class="space-y-3 mb-6">
+                            <li class="flex items-center text-navy-600">
+                                <svg class="w-5 h-5 text-gold-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                                High-interest savings accounts
+                            </li>
+                            <li class="flex items-center text-navy-600">
+                                <svg class="w-5 h-5 text-gold-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                                Fixed deposit options
+                            </li>
+                            <li class="flex items-center text-navy-600">
+                                <svg class="w-5 h-5 text-gold-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                                Group savings schemes
+                            </li>
+                            <li class="flex items-center text-navy-600">
+                                <svg class="w-5 h-5 text-gold-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                                Financial planning consultation
+                            </li>
+                        </ul>
+                        <a href="contact.html" class="btn-gold w-full">Start Saving</a>
+                    </div>
+                </div>
+                
+                <div class="card overflow-hidden animate-on-scroll group">
+                    <div class="h-56 bg-gradient-to-br from-navy-500 to-navy-700 flex items-center justify-center relative overflow-hidden">
+                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300"></div>
+                        <svg class="w-24 h-24 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"/>
+                        </svg>
+                    </div>
+                    <div class="card-body">
+                        <span class="bg-navy-100 text-navy-700 px-3 py-1 rounded-full text-sm font-medium mb-4 inline-block">Skills Development</span>
+                        <h3 class="text-2xl font-bold text-navy-900 mb-3">Forex Education</h3>
+                        <p class="text-navy-600 mb-6">Master forex trading with expert-led practical training.</p>
+                        <ul class="space-y-3 mb-6">
+                            <li class="flex items-center text-navy-600">
+                                <svg class="w-5 h-5 text-navy-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                                Beginner-friendly curriculum
+                            </li>
+                            <li class="flex items-center text-navy-600">
+                                <svg class="w-5 h-5 text-navy-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                                Live trading sessions
+                            </li>
+                            <li class="flex items-center text-navy-600">
+                                <svg class="w-5 h-5 text-navy-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                                Risk management strategies
+                            </li>
+                            <li class="flex items-center text-navy-600">
+                                <svg class="w-5 h-5 text-navy-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                                Certification upon completion
+                            </li>
+                        </ul>
+                        <a href="contact.html" class="btn-secondary w-full">Register for Classes</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding bg-navy-50">
+        <div class="container-custom">
+            <div class="heading-section">
+                <span class="badge-primary mb-4">How It Works</span>
+                <h2>Our Simple Process</h2>
+                <p>Get the financial support you need in four easy steps.</p>
             </div>
             
-            <div class="row">
-                <div class="card animate-on-scroll" data-delay="100">
-                    <div class="card-img">💰</div>
-                    <div class="card-content">
-                        <h3>Micro Loans</h3>
-                        <p>Access flexible financing solutions tailored to your needs:</p>
-                        <ul style="margin-left: 20px; margin-top: 15px; line-height: 2;">
-                            <li>Loan amounts from <strong>₦30,000 to ₦500,000</strong></li>
-                            <li>Flexible repayment terms aligned with your cash flow</li>
-                            <li>Minimal documentation requirements</li>
-                            <li>Quick approval process (within 48 hours)</li>
-                            <li>Competitive interest rates</li>
-                        </ul>
-                        <a href="contact.html" class="btn" style="margin-top: 20px;">Apply Now</a>
+            <div class="grid md:grid-cols-4 gap-8">
+                <div class="text-center animate-on-scroll">
+                    <div class="w-20 h-20 bg-primary-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg shadow-primary-600/30">
+                        <span class="text-3xl font-bold text-white">1</span>
                     </div>
+                    <h3 class="text-lg font-bold text-navy-900 mb-2">Application</h3>
+                    <p class="text-navy-600 text-sm">Fill out our simple application form with your basic information.</p>
                 </div>
                 
-                <div class="card animate-on-scroll" data-delay="200">
-                    <div class="card-img">🏦</div>
-                    <div class="card-content">
-                        <h3>Savings & Investments</h3>
-                        <p>Secure your future with our savings and investment products:</p>
-                        <ul style="margin-left: 20px; margin-top: 15px; line-height: 2;">
-                            <li>Long-term savings accounts with competitive interest</li>
-                            <li>Fixed deposit options with guaranteed returns</li>
-                            <li>Group savings schemes for community development</li>
-                            <li>Financial planning consultation</li>
-                            <li>Secure and insured deposits</li>
-                        </ul>
-                        <a href="contact.html" class="btn" style="margin-top: 20px;">Start Saving</a>
+                <div class="text-center animate-on-scroll">
+                    <div class="w-20 h-20 bg-primary-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg shadow-primary-600/30">
+                        <span class="text-3xl font-bold text-white">2</span>
                     </div>
+                    <h3 class="text-lg font-bold text-navy-900 mb-2">Verification</h3>
+                    <p class="text-navy-600 text-sm">Our team reviews and verifies your application quickly.</p>
                 </div>
                 
-                <div class="card animate-on-scroll" data-delay="300">
-                    <div class="card-img">📈</div>
-                    <div class="card-content">
-                        <h3>Forex Trading Education</h3>
-                        <p>Learn practical forex trading skills with our expert-led classes:</p>
-                        <ul style="margin-left: 20px; margin-top: 15px; line-height: 2;">
-                            <li>Beginner-friendly curriculum designed for non-finance professionals</li>
-                            <li>Live trading sessions with real market examples</li>
-                            <li>Risk management strategies</li>
-                            <li>Technical and fundamental analysis training</li>
-                            <li>Certification upon completion</li>
-                        </ul>
-                        <a href="contact.html" class="btn" style="margin-top: 20px;">Register for Classes</a>
+                <div class="text-center animate-on-scroll">
+                    <div class="w-20 h-20 bg-primary-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg shadow-primary-600/30">
+                        <span class="text-3xl font-bold text-white">3</span>
                     </div>
+                    <h3 class="text-lg font-bold text-navy-900 mb-2">Approval</h3>
+                    <p class="text-navy-600 text-sm">Receive your loan offer with clear terms for your review.</p>
+                </div>
+                
+                <div class="text-center animate-on-scroll">
+                    <div class="w-20 h-20 bg-gold-500 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg shadow-gold-500/30">
+                        <span class="text-3xl font-bold text-white">4</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-navy-900 mb-2">Disbursement</h3>
+                    <p class="text-navy-600 text-sm">Funds are disbursed quickly to your account.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="section value-section">
-        <div class="container">
-            <div class="section-title animate-on-scroll">
-                <span class="section-subtitle" style="color: var(--accent-blue);">How It Works</span>
-                <h2 style="color: var(--white);">Our Process</h2>
-            </div>
-            <div class="process-timeline">
-                <div class="process-step animate-on-scroll">
-                    <div class="process-content">
-                        <h3>Step 1: Application</h3>
-                        <p>Fill out our simple online or offline application form with your basic information and loan requirements.</p>
-                    </div>
-                    <div class="process-number">1</div>
+    <section class="section-padding bg-gradient-to-r from-primary-600 to-primary-700">
+        <div class="container-custom">
+            <div class="flex flex-col lg:flex-row items-center justify-between gap-8">
+                <div class="text-center lg:text-left">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Ready to Get Started?</h2>
+                    <p class="text-primary-100 text-lg max-w-xl">Contact us today and take the first step towards financial empowerment.</p>
                 </div>
-                <div class="process-step animate-on-scroll" data-delay="100">
-                    <div class="process-content">
-                        <h3>Step 2: Verification</h3>
-                        <p>Our team reviews your application and conducts a quick verification process to assess your eligibility.</p>
-                    </div>
-                    <div class="process-number">2</div>
-                </div>
-                <div class="process-step animate-on-scroll" data-delay="200">
-                    <div class="process-content">
-                        <h3>Step 3: Approval</h3>
-                        <p>Once approved, you'll receive your loan offer with clear terms and conditions for your review.</p>
-                    </div>
-                    <div class="process-number">3</div>
-                </div>
-                <div class="process-step animate-on-scroll" data-delay="300">
-                    <div class="process-content">
-                        <h3>Step 4: Disbursement</h3>
-                        <p>Funds are disbursed quickly to your account, ready for you to use for your business or personal needs.</p>
-                    </div>
-                    <div class="process-number">4</div>
-                </div>
+                <a href="contact.html" class="btn-gold whitespace-nowrap">
+                    Contact Us
+                    <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                    </svg>
+                </a>
             </div>
         </div>
     </section>
 
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>E-Adem Microfinance</h3>
-                    <p>Providing ethical financial services to empower communities since 2010.</p>
-                    <div class="footer-social">
-                        <a href="#" class="social-link">f</a>
-                        <a href="#" class="social-link">in</a>
-                        <a href="#" class="social-link">t</a>
+    <footer class="bg-navy-900 text-white">
+        <div class="container-custom py-16">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
+                <div class="col-span-2 md:col-span-1">
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div class="w-12 h-12 bg-gradient-to-br from-primary-500 to-primary-600 rounded-xl flex items-center justify-center">
+                            <span class="text-white font-bold text-lg">EA</span>
+                        </div>
+                        <div>
+                            <span class="text-xl font-bold">E-Adem</span>
+                            <span class="block text-xs text-navy-400">Investments</span>
+                        </div>
                     </div>
+                    <p class="text-navy-400 text-sm">Providing ethical financial services to empower communities since 2010.</p>
                 </div>
-                <div class="footer-section">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="services.html">Services</a></li>
-                        <li><a href="ambassador.html">Our Ambassador</a></li>
-                        <li><a href="contact.html">Contact</a></li>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-3 text-navy-400">
+                        <li><a href="index.html" class="hover:text-white transition-colors">Home</a></li>
+                        <li><a href="about.html" class="hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="services.html" class="hover:text-white transition-colors">Services</a></li>
+                        <li><a href="contact.html" class="hover:text-white transition-colors">Contact</a></li>
                     </ul>
                 </div>
-                <div class="footer-section">
-                    <h3>Services</h3>
-                    <ul class="footer-links">
-                        <li><a href="services.html">Micro Loans</a></li>
-                        <li><a href="services.html">Savings Accounts</a></li>
-                        <li><a href="services.html">Forex Classes</a></li>
-                        <li><a href="services.html">Business Advisory</a></li>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Services</h4>
+                    <ul class="space-y-3 text-navy-400">
+                        <li><a href="services.html" class="hover:text-white transition-colors">Micro Loans</a></li>
+                        <li><a href="services.html" class="hover:text-white transition-colors">Savings</a></li>
+                        <li><a href="services.html" class="hover:text-white transition-colors">Forex Classes</a></li>
                     </ul>
                 </div>
-                <div class="footer-section">
-                    <h3>Contact Info</h3>
-                    <ul class="footer-links">
-                        <li>Barika Junction, opposite UI second gate, Ibadan, Nigeria</li>
-                        <li>info@eademmicrofinance.com</li>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Contact</h4>
+                    <ul class="space-y-3 text-navy-400">
+                        <li>info@eadem.com</li>
                         <li>+234 706 398 1158</li>
                     </ul>
                 </div>
             </div>
-            <div class="copyright">
-                <p>&copy; 2026 E-Adem Microfinance Company. All rights reserved.</p>
+            
+            <div class="pt-8 border-t border-navy-800 text-center text-navy-400 text-sm">
+                <p>&copy; 2026 E-Adem Investments. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
-    <div class="scroll-top">↑</div>
+    <button class="scroll-top fixed bottom-8 right-8 w-12 h-12 bg-primary-600 text-white rounded-full shadow-lg flex items-center justify-center opacity-0 pointer-events-none transition-all duration-300 hover:bg-primary-700">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/>
+        </svg>
+    </button>
 
     <script src="main.js"></script>
 </body>

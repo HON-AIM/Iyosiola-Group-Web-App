@@ -3,134 +3,215 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Testimonials | E-Adem Microfinance</title>
+    <title>Testimonials | E-Adem Investments</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="bg-white">
     <div class="preloader">
         <div class="loader"></div>
     </div>
 
-    <header>
-        <div class="container">
-            <div class="logo-icon">EA</div>
-            <div class="logo">E-<span>Adem</span></div>
-            <button class="mobile-menu-btn">☰</button>
-            <nav>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="services.html">Services</a></li>
-                    <li><a href="team.html">Team</a></li>
-                    <li><a href="ambassador.html">Ambassador</a></li>
-                    <li><a href="market-insights.html">Insights</a></li>
-                    <li><a href="testimonials.html">Testimonials</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
+    <header class="fixed w-full top-0 bg-white/95 backdrop-blur-lg z-50 transition-all duration-300">
+        <div class="container-custom">
+            <nav class="flex items-center justify-between h-20">
+                <a href="index.html" class="flex items-center space-x-3">
+                    <div class="w-12 h-12 bg-gradient-to-br from-primary-600 to-primary-700 rounded-xl flex items-center justify-center shadow-lg">
+                        <span class="text-white font-bold text-lg">EA</span>
+                    </div>
+                    <div>
+                        <span class="text-2xl font-bold text-navy-900">E-Adem</span>
+                        <span class="block text-xs text-navy-500 font-medium">Investments</span>
+                    </div>
+                </a>
+                
+                <div class="hidden lg:flex items-center space-x-1">
+                    <a href="index.html" class="nav-link px-4 py-2 rounded-lg">Home</a>
+                    <a href="about.html" class="nav-link px-4 py-2 rounded-lg">About</a>
+                    <a href="services.html" class="nav-link px-4 py-2 rounded-lg">Services</a>
+                    <a href="team.html" class="nav-link px-4 py-2 rounded-lg">Team</a>
+                    <a href="ambassador.html" class="nav-link px-4 py-2 rounded-lg">Ambassador</a>
+                    <a href="testimonials.html" class="nav-link-active px-4 py-2 rounded-lg">Testimonials</a>
+                    <a href="contact.html" class="btn-primary ml-4">Contact Us</a>
+                </div>
+                
+                <button class="mobile-menu-btn lg:hidden p-2 rounded-lg hover:bg-navy-100">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
             </nav>
         </div>
     </header>
 
-    <section class="page-hero">
-        <div class="container">
-            <h1>Client Testimonials</h1>
+    <section class="relative pt-32 pb-20 bg-gradient-hero">
+        <div class="container-custom">
+            <div class="max-w-3xl mx-auto text-center">
+                <span class="badge-gold mb-4">Success Stories</span>
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">Client Testimonials</h1>
+                <p class="text-lg text-navy-200">Hear from those whose lives we've helped transform</p>
+            </div>
         </div>
     </section>
 
-    <section class="section">
-        <div class="container">
-            <div class="section-title animate-on-scroll">
-                <span class="section-subtitle">Success Stories</span>
-                <h2>What Our Clients Say</h2>
+    <section class="section-padding bg-white">
+        <div class="container-custom">
+            <div class="heading-section">
+                <span class="badge-primary mb-4">What They Say</span>
+                <h2>Real Stories, Real Impact</h2>
+                <p>Discover how E-Adem has made a difference in the lives of our clients.</p>
             </div>
             
-            <div class="testimonial-container animate-on-scroll">
-                <div class="testimonial">
-                    <p class="testimonial-text">"E-Adem changed my business completely. I got a ₦200,000 loan to expand my tailoring shop, and the repayment terms were so flexible. The CEO himself visited our community and listened to our challenges. He's truly a man of the people!"</p>
-                    <p class="testimonial-author">Chiamaka Okonkwo, Business Owner</p>
-                </div>
-                
-                <div class="testimonial">
-                    <p class="testimonial-text">"I've tried other microfinance institutions before, but E-Adem stands out for their transparency. No hidden fees, clear terms, and they actually care about your success. Their forex class helped me start a side income trading currencies."</p>
-                    <p class="testimonial-author">Ibrahim Musa, Trader</p>
-                </div>
-                
-                <div class="testimonial">
-                    <p class="testimonial-text">"When my farm needed capital for seeds and equipment, E-Adem approved my loan in just two days. The interest rate was fair, and the officer even gave me advice on crop selection. This is what community banking should be!"</p>
-                    <p class="testimonial-author">Ngozi Eze, Farmer</p>
-                </div>
-                
-                <div class="testimonial">
-                    <p class="testimonial-text">"As a young entrepreneur, I was skeptical about getting a loan without collateral. But E-Adem believed in my business plan. Their support went beyond money - they connected me with mentors and customers. Truly empowering!"</p>
-                    <p class="testimonial-author">Tobi Adeyemi, Tech Startup Founder</p>
-                </div>
-                
-                <div class="carousel-nav">
-                    <button class="carousel-btn prev-btn">‹</button>
-                    <button class="carousel-btn next-btn">›</button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="section value-section">
-        <div class="container">
-            <div class="section-title animate-on-scroll">
-                <span class="section-subtitle" style="color: var(--accent-blue);">Share Your Story</span>
-                <h2 style="color: var(--white);">We Love Hearing From You</h2>
-                <p style="color: rgba(255,255,255,0.8); margin-top: 20px;">Your success stories inspire us to keep improving. Contact us to share your experience with E-Adem.</p>
-                <a href="contact.html" class="btn" style="margin-top: 30px;">Share Your Story</a>
-            </div>
-        </div>
-    </section>
-
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>E-Adem Microfinance</h3>
-                    <p>Providing ethical financial services to empower communities since 2010.</p>
-                    <div class="footer-social">
-                        <a href="#" class="social-link">f</a>
-                        <a href="#" class="social-link">in</a>
-                        <a href="#" class="social-link">t</a>
+            <div class="testimonial-container max-w-4xl mx-auto">
+                <div class="testimonial bg-navy-50 rounded-3xl p-8 md:p-12">
+                    <div class="flex items-center justify-center mb-6">
+                        <svg class="w-12 h-12 text-primary-300" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                        </svg>
+                    </div>
+                    <p class="text-xl md:text-2xl text-navy-800 text-center leading-relaxed mb-8">"E-Adem changed my business completely. I got a ₦200,000 loan to expand my tailoring shop, and the repayment terms were so flexible. The CEO himself visited our community and listened to our challenges. He's truly a man of the people!"</p>
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-gradient-to-br from-primary-500 to-primary-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-2xl font-bold text-white">CO</span>
+                        </div>
+                        <h4 class="font-bold text-navy-900">Chiamaka Okonkwo</h4>
+                        <p class="text-navy-500 text-sm">Business Owner</p>
                     </div>
                 </div>
-                <div class="footer-section">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="services.html">Services</a></li>
-                        <li><a href="ambassador.html">Our Ambassador</a></li>
-                        <li><a href="contact.html">Contact</a></li>
+                
+                <div class="testimonial hidden bg-navy-50 rounded-3xl p-8 md:p-12">
+                    <div class="flex items-center justify-center mb-6">
+                        <svg class="w-12 h-12 text-primary-300" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                        </svg>
+                    </div>
+                    <p class="text-xl md:text-2xl text-navy-800 text-center leading-relaxed mb-8">"I've tried other microfinance institutions before, but E-Adem stands out for their transparency. No hidden fees, clear terms, and they actually care about your success. Their forex class helped me start a side income trading currencies."</p>
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-gradient-to-br from-gold-500 to-gold-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-2xl font-bold text-white">IM</span>
+                        </div>
+                        <h4 class="font-bold text-navy-900">Ibrahim Musa</h4>
+                        <p class="text-navy-500 text-sm">Trader</p>
+                    </div>
+                </div>
+                
+                <div class="testimonial hidden bg-navy-50 rounded-3xl p-8 md:p-12">
+                    <div class="flex items-center justify-center mb-6">
+                        <svg class="w-12 h-12 text-primary-300" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                        </svg>
+                    </div>
+                    <p class="text-xl md:text-2xl text-navy-800 text-center leading-relaxed mb-8">"When my farm needed capital for seeds and equipment, E-Adem approved my loan in just two days. The interest rate was fair, and the officer even gave me advice on crop selection. This is what community banking should be!"</p>
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-gradient-to-br from-primary-500 to-primary-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-2xl font-bold text-white">NE</span>
+                        </div>
+                        <h4 class="font-bold text-navy-900">Ngozi Eze</h4>
+                        <p class="text-navy-500 text-sm">Farmer</p>
+                    </div>
+                </div>
+                
+                <div class="testimonial hidden bg-navy-50 rounded-3xl p-8 md:p-12">
+                    <div class="flex items-center justify-center mb-6">
+                        <svg class="w-12 h-12 text-primary-300" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                        </svg>
+                    </div>
+                    <p class="text-xl md:text-2xl text-navy-800 text-center leading-relaxed mb-8">"As a young entrepreneur, I was skeptical about getting a loan without collateral. But E-Adem believed in my business plan. Their support went beyond money - they connected me with mentors and customers. Truly empowering!"</p>
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-gradient-to-br from-gold-500 to-gold-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-2xl font-bold text-white">TA</span>
+                        </div>
+                        <h4 class="font-bold text-navy-900">Tobi Adeyemi</h4>
+                        <p class="text-navy-500 text-sm">Tech Startup Founder</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-center justify-center gap-4 mt-8">
+                    <button class="prev-btn w-12 h-12 bg-white border-2 border-navy-200 rounded-full flex items-center justify-center hover:bg-primary-600 hover:border-primary-600 hover:text-white transition-all duration-300">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                        </svg>
+                    </button>
+                    <button class="next-btn w-12 h-12 bg-white border-2 border-navy-200 rounded-full flex items-center justify-center hover:bg-primary-600 hover:border-primary-600 hover:text-white transition-all duration-300">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding bg-gradient-to-br from-navy-900 via-primary-900 to-navy-900 text-white">
+        <div class="container-custom">
+            <div class="max-w-3xl mx-auto text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6">Share Your Story</h2>
+                <p class="text-navy-200 text-lg mb-8">Your success stories inspire us to keep improving. Contact us to share your experience with E-Adem.</p>
+                <a href="contact.html" class="btn-gold">
+                    Share Your Story
+                    <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-navy-900 text-white">
+        <div class="container-custom py-16">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
+                <div class="col-span-2 md:col-span-1">
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div class="w-12 h-12 bg-gradient-to-br from-primary-500 to-primary-600 rounded-xl flex items-center justify-center">
+                            <span class="text-white font-bold text-lg">EA</span>
+                        </div>
+                        <div>
+                            <span class="text-xl font-bold">E-Adem</span>
+                            <span class="block text-xs text-navy-400">Investments</span>
+                        </div>
+                    </div>
+                    <p class="text-navy-400 text-sm">Providing ethical financial services to empower communities since 2010.</p>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-3 text-navy-400">
+                        <li><a href="index.html" class="hover:text-white transition-colors">Home</a></li>
+                        <li><a href="about.html" class="hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="services.html" class="hover:text-white transition-colors">Services</a></li>
+                        <li><a href="contact.html" class="hover:text-white transition-colors">Contact</a></li>
                     </ul>
                 </div>
-                <div class="footer-section">
-                    <h3>Services</h3>
-                    <ul class="footer-links">
-                        <li><a href="services.html">Micro Loans</a></li>
-                        <li><a href="services.html">Savings Accounts</a></li>
-                        <li><a href="services.html">Forex Classes</a></li>
-                        <li><a href="services.html">Business Advisory</a></li>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Services</h4>
+                    <ul class="space-y-3 text-navy-400">
+                        <li><a href="services.html" class="hover:text-white transition-colors">Micro Loans</a></li>
+                        <li><a href="services.html" class="hover:text-white transition-colors">Savings</a></li>
+                        <li><a href="services.html" class="hover:text-white transition-colors">Forex Classes</a></li>
                     </ul>
                 </div>
-                <div class="footer-section">
-                    <h3>Contact Info</h3>
-                    <ul class="footer-links">
-                        <li>Barika Junction, opposite UI second gate, Ibadan, Nigeria</li>
-                        <li>info@eademmicrofinance.com</li>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Contact</h4>
+                    <ul class="space-y-3 text-navy-400">
+                        <li>info@eadem.com</li>
                         <li>+234 706 398 1158</li>
                     </ul>
                 </div>
             </div>
-            <div class="copyright">
-                <p>&copy; 2026 E-Adem Microfinance Company. All rights reserved.</p>
+            
+            <div class="pt-8 border-t border-navy-800 text-center text-navy-400 text-sm">
+                <p>&copy; 2026 E-Adem Investments. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
-    <div class="scroll-top">↑</div>
+    <button class="scroll-top fixed bottom-8 right-8 w-12 h-12 bg-primary-600 text-white rounded-full shadow-lg flex items-center justify-center opacity-0 pointer-events-none transition-all duration-300 hover:bg-primary-700">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/>
+        </svg>
+    </button>
 
     <script src="main.js"></script>
 </body>

@@ -3,165 +3,258 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Market Insights | E-Adem Microfinance</title>
+    <title>Market Insights | E-Adem Investments</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="bg-white">
     <div class="preloader">
         <div class="loader"></div>
     </div>
 
-    <header>
-        <div class="container">
-            <div class="logo-icon">EA</div>
-            <div class="logo">E-<span>Adem</span></div>
-            <button class="mobile-menu-btn">☰</button>
-            <nav>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="services.html">Services</a></li>
-                    <li><a href="team.html">Team</a></li>
-                    <li><a href="ambassador.html">Ambassador</a></li>
-                    <li><a href="market-insights.html">Insights</a></li>
-                    <li><a href="testimonials.html">Testimonials</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
+    <header class="fixed w-full top-0 bg-white/95 backdrop-blur-lg z-50 transition-all duration-300">
+        <div class="container-custom">
+            <nav class="flex items-center justify-between h-20">
+                <a href="index.html" class="flex items-center space-x-3">
+                    <div class="w-12 h-12 bg-gradient-to-br from-primary-600 to-primary-700 rounded-xl flex items-center justify-center shadow-lg">
+                        <span class="text-white font-bold text-lg">EA</span>
+                    </div>
+                    <div>
+                        <span class="text-2xl font-bold text-navy-900">E-Adem</span>
+                        <span class="block text-xs text-navy-500 font-medium">Investments</span>
+                    </div>
+                </a>
+                
+                <div class="hidden lg:flex items-center space-x-1">
+                    <a href="index.html" class="nav-link px-4 py-2 rounded-lg">Home</a>
+                    <a href="about.html" class="nav-link px-4 py-2 rounded-lg">About</a>
+                    <a href="services.html" class="nav-link px-4 py-2 rounded-lg">Services</a>
+                    <a href="team.html" class="nav-link px-4 py-2 rounded-lg">Team</a>
+                    <a href="ambassador.html" class="nav-link px-4 py-2 rounded-lg">Ambassador</a>
+                    <a href="market-insights.html" class="nav-link-active px-4 py-2 rounded-lg">Insights</a>
+                    <a href="contact.html" class="btn-primary ml-4">Contact Us</a>
+                </div>
+                
+                <button class="mobile-menu-btn lg:hidden p-2 rounded-lg hover:bg-navy-100">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
             </nav>
         </div>
     </header>
 
-    <section class="page-hero">
-        <div class="container">
-            <h1>Market Insights</h1>
+    <section class="relative pt-32 pb-20 bg-gradient-hero">
+        <div class="container-custom">
+            <div class="max-w-3xl mx-auto text-center">
+                <span class="badge-gold mb-4">Industry Analysis</span>
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">Market Insights</h1>
+                <p class="text-lg text-navy-200">Stay informed about the microfinance landscape</p>
+            </div>
         </div>
     </section>
 
-    <section class="section">
-        <div class="container">
-            <div class="section-title animate-on-scroll">
-                <span class="section-subtitle">Industry Analysis</span>
-                <h2>The Microfinance Landscape</h2>
-            </div>
-            <div class="card animate-on-scroll" style="max-width: 900px; margin: 0 auto;">
-                <div class="card-content">
-                    <h3>The Microfinance Sector in Nigeria</h3>
-                    <p>The microfinance sector in Nigeria plays a crucial role in financial inclusion, serving millions of individuals and small businesses excluded from traditional banking. With over 800 licensed microfinance institutions, the sector manages assets exceeding ₦1.5 trillion and serves more than 30 million clients nationwide.</p>
+    <section class="section-padding bg-white">
+        <div class="container-custom">
+            <div class="max-w-4xl mx-auto">
+                <div class="heading-section">
+                    <span class="badge-primary mb-4">The Big Picture</span>
+                    <h2>The Microfinance Landscape in Nigeria</h2>
+                    <p>Understanding the industry that drives financial inclusion</p>
+                </div>
+                
+                <div class="card mb-12 animate-on-scroll">
+                    <div class="card-body">
+                        <h3 class="text-2xl font-bold text-navy-900 mb-4">Overview</h3>
+                        <p class="text-navy-600 mb-6">The microfinance sector in Nigeria plays a crucial role in financial inclusion, serving millions of individuals and small businesses excluded from traditional banking. With over 800 licensed microfinance institutions, the sector manages assets exceeding ₦1.5 trillion and serves more than 30 million clients nationwide.</p>
+                        
+                        <h3 class="text-2xl font-bold text-navy-900 mb-4">Challenges and Opportunities</h3>
+                        <p class="text-navy-600 mb-4">Despite its growth, the sector faces several challenges:</p>
+                        <div class="grid md:grid-cols-2 gap-4 mb-6">
+                            <div class="flex items-start space-x-3">
+                                <div class="w-6 h-6 bg-primary-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                    <svg class="w-4 h-4 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                                </div>
+                                <p class="text-navy-600">High operational costs in rural areas</p>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <div class="w-6 h-6 bg-primary-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                    <svg class="w-4 h-4 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                                </div>
+                                <p class="text-navy-600">Regulatory compliance complexities</p>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <div class="w-6 h-6 bg-primary-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                    <svg class="w-4 h-4 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                                </div>
+                                <p class="text-navy-600">Technology adoption barriers</p>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <div class="w-6 h-6 bg-primary-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                    <svg class="w-4 h-4 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                                </div>
+                                <p class="text-navy-600">Client financial literacy gaps</p>
+                            </div>
+                        </div>
+                        <p class="text-navy-600">However, these challenges present significant opportunities for innovative institutions like E-Adem to differentiate through technology, financial education, and community-focused models.</p>
+                    </div>
+                </div>
+                
+                <div class="heading-section">
+                    <span class="badge-primary mb-4">Our Strategy</span>
+                    <h2>The E-Adem Approach</h2>
+                    <p>How we're making a difference in the industry</p>
+                </div>
+                
+                <div class="grid md:grid-cols-3 gap-8 mb-12">
+                    <div class="card card-body text-center animate-on-scroll">
+                        <div class="w-16 h-16 bg-primary-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                            <svg class="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-navy-900 mb-3">Accessible Lending</h3>
+                        <p class="text-navy-600">Streamlined processes with minimal documentation requirements make financial access easier for everyone.</p>
+                    </div>
                     
-                    <h3 style="margin-top: 30px;">Industry Challenges and Opportunities</h3>
-                    <p>Despite its growth, the sector faces challenges including:</p>
-                    <ul style="margin-left: 20px; margin-top: 15px; line-height: 2;">
-                        <li>High operational costs in rural areas</li>
-                        <li>Regulatory compliance complexities</li>
-                        <li>Technology adoption barriers</li>
-                        <li>Client financial literacy gaps</li>
-                    </ul>
-                    <p style="margin-top: 15px;">However, these challenges present significant opportunities for innovative institutions like E-Adem to differentiate through technology, financial education, and community-focused models.</p>
-                </div>
-            </div>
-            
-            <div class="section-title animate-on-scroll" style="margin-top: 80px;">
-                <span class="section-subtitle">Our Strategy</span>
-                <h2>The E-Adem Approach</h2>
-            </div>
-            <div class="row">
-                <div class="card animate-on-scroll" data-delay="100">
-                    <div class="card-img">📋</div>
-                    <div class="card-content">
-                        <h3>Accessible Lending</h3>
-                        <p>Streamlined processes with minimal documentation requirements make financial access easier for everyone.</p>
+                    <div class="card card-body text-center animate-on-scroll">
+                        <div class="w-16 h-16 bg-gold-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                            <svg class="w-8 h-8 text-gold-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-navy-900 mb-3">Financial Education</h3>
+                        <p class="text-navy-600">Mandatory training for loan recipients and specialized forex classes build long-term financial capability.</p>
+                    </div>
+                    
+                    <div class="card card-body text-center animate-on-scroll">
+                        <div class="w-16 h-16 bg-primary-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                            <svg class="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-navy-900 mb-3">Community Integration</h3>
+                        <p class="text-navy-600">Local staff who understand community dynamics and needs ensure personalized service delivery.</p>
                     </div>
                 </div>
-                <div class="card animate-on-scroll" data-delay="200">
-                    <div class="card-img">📚</div>
-                    <div class="card-content">
-                        <h3>Financial Education</h3>
-                        <p>Mandatory training for loan recipients and specialized forex classes build long-term financial capability.</p>
+                
+                <div class="card bg-navy-50 animate-on-scroll">
+                    <div class="card-body">
+                        <h3 class="text-2xl font-bold text-navy-900 mb-4">Growth and Sustainability Plan</h3>
+                        <p class="text-navy-600 mb-6">Our growth strategy focuses on sustainable scaling rather than rapid expansion:</p>
+                        <ul class="space-y-4">
+                            <li class="flex items-start space-x-4">
+                                <div class="w-8 h-8 bg-primary-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                                    <span class="text-white font-bold">1</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-navy-900">Geographic Expansion</h4>
+                                    <p class="text-navy-600 text-sm">Expanding to underserved regions with proven community models</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start space-x-4">
+                                <div class="w-8 h-8 bg-primary-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                                    <span class="text-white font-bold">2</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-navy-900">Technology Investment</h4>
+                                    <p class="text-navy-600 text-sm">Reducing operational costs while maintaining personal service</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start space-x-4">
+                                <div class="w-8 h-8 bg-primary-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                                    <span class="text-white font-bold">3</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-navy-900">Product Diversification</h4>
+                                    <p class="text-navy-600 text-sm">Developing new financial products based on client feedback</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start space-x-4">
+                                <div class="w-8 h-8 bg-primary-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                                    <span class="text-white font-bold">4</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-navy-900">Strategic Partnerships</h4>
+                                    <p class="text-navy-600 text-sm">Partnering with agricultural cooperatives and trade associations</p>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
-                </div>
-                <div class="card animate-on-scroll" data-delay="300">
-                    <div class="card-img">🤝</div>
-                    <div class="card-content">
-                        <h3>Community Integration</h3>
-                        <p>Local staff who understand community dynamics and needs ensure personalized service delivery.</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="card animate-on-scroll" style="max-width: 900px; margin: 60px auto 0;">
-                <div class="card-content">
-                    <h3>Growth and Sustainability Plan</h3>
-                    <p>Our growth strategy focuses on sustainable scaling rather than rapid expansion:</p>
-                    <ul style="margin-left: 20px; margin-top: 15px; line-height: 2;">
-                        <li>Geographic expansion to underserved regions with proven community models</li>
-                        <li>Technology investment to reduce operational costs while maintaining personal service</li>
-                        <li>Diversification of financial products based on client feedback</li>
-                        <li>Strategic partnerships with agricultural cooperatives and trade associations</li>
-                    </ul>
-                    <p style="margin-top: 15px;">We project a 25% annual growth in client base while maintaining portfolio quality and social impact metrics.</p>
-                </div>
-            </div>
-            
-            <div class="section-title animate-on-scroll" style="margin-top: 80px;">
-                <span class="section-subtitle">Looking Ahead</span>
-                <h2>Future Outlook</h2>
-            </div>
-            <div class="card animate-on-scroll" style="max-width: 900px; margin: 0 auto;">
-                <div class="card-content">
-                    <p>As Nigeria continues its journey toward greater financial inclusion, microfinance institutions will play an increasingly vital role. E-Adem is positioned to lead this transformation through our commitment to ethical practices, community empowerment, and innovative service delivery.</p>
-                    <p>Our vision extends beyond profit margins. We see E-Adem as a catalyst for community transformation—supporting families' education, healthcare, and futures. This holistic view of finance drives our expansion strategy and product development.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>E-Adem Microfinance</h3>
-                    <p>Providing ethical financial services to empower communities since 2010.</p>
-                    <div class="footer-social">
-                        <a href="#" class="social-link">f</a>
-                        <a href="#" class="social-link">in</a>
-                        <a href="#" class="social-link">t</a>
+    <section class="section-padding bg-gradient-to-br from-navy-900 via-primary-900 to-navy-900 text-white">
+        <div class="container-custom">
+            <div class="max-w-3xl mx-auto text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6">Future Outlook</h2>
+                <p class="text-navy-200 text-lg mb-8">As Nigeria continues its journey toward greater financial inclusion, microfinance institutions will play an increasingly vital role. E-Adem is positioned to lead this transformation through our commitment to ethical practices, community empowerment, and innovative service delivery.</p>
+                <a href="contact.html" class="btn-gold">
+                    Partner With Us
+                    <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-navy-900 text-white">
+        <div class="container-custom py-16">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
+                <div class="col-span-2 md:col-span-1">
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div class="w-12 h-12 bg-gradient-to-br from-primary-500 to-primary-600 rounded-xl flex items-center justify-center">
+                            <span class="text-white font-bold text-lg">EA</span>
+                        </div>
+                        <div>
+                            <span class="text-xl font-bold">E-Adem</span>
+                            <span class="block text-xs text-navy-400">Investments</span>
+                        </div>
                     </div>
+                    <p class="text-navy-400 text-sm">Providing ethical financial services to empower communities since 2010.</p>
                 </div>
-                <div class="footer-section">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="services.html">Services</a></li>
-                        <li><a href="ambassador.html">Our Ambassador</a></li>
-                        <li><a href="contact.html">Contact</a></li>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-3 text-navy-400">
+                        <li><a href="index.html" class="hover:text-white transition-colors">Home</a></li>
+                        <li><a href="about.html" class="hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="services.html" class="hover:text-white transition-colors">Services</a></li>
+                        <li><a href="contact.html" class="hover:text-white transition-colors">Contact</a></li>
                     </ul>
                 </div>
-                <div class="footer-section">
-                    <h3>Services</h3>
-                    <ul class="footer-links">
-                        <li><a href="services.html">Micro Loans</a></li>
-                        <li><a href="services.html">Savings Accounts</a></li>
-                        <li><a href="services.html">Forex Classes</a></li>
-                        <li><a href="services.html">Business Advisory</a></li>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Services</h4>
+                    <ul class="space-y-3 text-navy-400">
+                        <li><a href="services.html" class="hover:text-white transition-colors">Micro Loans</a></li>
+                        <li><a href="services.html" class="hover:text-white transition-colors">Savings</a></li>
+                        <li><a href="services.html" class="hover:text-white transition-colors">Forex Classes</a></li>
                     </ul>
                 </div>
-                <div class="footer-section">
-                    <h3>Contact Info</h3>
-                    <ul class="footer-links">
-                        <li>Barika Junction, opposite UI second gate, Ibadan, Nigeria</li>
-                        <li>info@eademmicrofinance.com</li>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Contact</h4>
+                    <ul class="space-y-3 text-navy-400">
+                        <li>info@eadem.com</li>
                         <li>+234 706 398 1158</li>
                     </ul>
                 </div>
             </div>
-            <div class="copyright">
-                <p>&copy; 2026 E-Adem Microfinance Company. All rights reserved.</p>
+            
+            <div class="pt-8 border-t border-navy-800 text-center text-navy-400 text-sm">
+                <p>&copy; 2026 E-Adem Investments. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
-    <div class="scroll-top">↑</div>
+    <button class="scroll-top fixed bottom-8 right-8 w-12 h-12 bg-primary-600 text-white rounded-full shadow-lg flex items-center justify-center opacity-0 pointer-events-none transition-all duration-300 hover:bg-primary-700">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/>
+        </svg>
+    </button>
 
     <script src="main.js"></script>
 </body>
