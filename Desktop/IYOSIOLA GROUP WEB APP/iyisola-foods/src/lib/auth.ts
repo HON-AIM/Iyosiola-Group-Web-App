@@ -1,12 +1,11 @@
-import { NextAuthOptions } from "next-auth";
+import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import GoogleProvider from "next-auth/providers/google";
-import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import { PrismaAdapter } from "@auth/prisma-adapter";
 import { prisma } from "./db";
 import bcrypt from "bcryptjs";
 import { z } from "zod";
+import { authConfig } from "./auth.config";
 
-// ✅ Validation schema
 const CredentialsSchema = z.object({
   email: z
     .string()
@@ -17,10 +16,20 @@ const CredentialsSchema = z.object({
   rememberMe: z.boolean().optional(),
 });
 
-export const authOptions: NextAuthOptions = {
+export const { handlers, auth, signIn, signOut } = NextAuth({
+  ...authConfig,
   adapter: PrismaAdapter(prisma),
+  session: {
+    strategy: "jwt",
+    maxAge: 30 * 24 * 60 * 60,
+    updateAge: 24 * 60 * 60,
+  },
+  jwt: {
+    secret: process.env.AUTH_SECRET,
+    maxAge: 30 * 24 * 60 * 60,
+  },
   providers: [
-    // ✅ Credentials provider (email/password)
+    ...authConfig.providers,
     CredentialsProvider({
       id: "credentials",
       name: "Email & Password",
@@ -29,7 +38,6 @@ export const authOptions: NextAuthOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials, req) {
-        // ✅ Validate input
         const validation = CredentialsSchema.safeParse(credentials);
 
         if (!validation.success) {
@@ -38,28 +46,25 @@ export const authOptions: NextAuthOptions = {
 
         const { email, password, rememberMe } = validation.data;
 
-        // ✅ Get client IP for logging
         const ip =
           req?.headers?.get("x-forwarded-for") ||
           req?.headers?.get("x-real-ip") ||
           "unknown";
 
         try {
-          // ✅ Find user by email
           const user = await prisma.user.findUnique({
             where: { email },
             include: {
               loginAttempts: {
                 where: {
                   createdAt: {
-                    gte: new Date(Date.now() - 15 * 60 * 1000), // Last 15 minutes
+                    gte: new Date(Date.now() - 15 * 60 * 1000),
                   },
                 },
               },
             },
           });
 
-          // ✅ Check if account is locked
           if (user?.loginAttempts && user.loginAttempts.length >= 5) {
             console.warn("[SECURITY] Account locked due to failed attempts:", {
               email,
@@ -69,27 +74,39 @@ export const authOptions: NextAuthOptions = {
             throw new Error("TooManyAttempts");
           }
 
-          // ✅ Verify email is verified
           if (!user?.emailVerified) {
             console.warn("[SECURITY] Login attempt with unverified email:", {
               email,
               ip,
             });
+            await prisma.loginAttempt.create({
+              data: {
+                userId: user?.id || email,
+                ipAddress: ip,
+                userAgent: req?.headers?.get("user-agent"),
+                success: false,
+              },
+            });
             throw new Error("EmailNotVerified");
           }
 
-          // ✅ Verify account is not disabled
-          if (user?.disabled) {
+          if (user && !user.isActive) {
             console.warn("[SECURITY] Login attempt on disabled account:", {
               email,
               ip,
             });
+            await prisma.loginAttempt.create({
+              data: {
+                userId: user?.id || email,
+                ipAddress: ip,
+                userAgent: req?.headers?.get("user-agent"),
+                success: false,
+              },
+            });
             throw new Error("AccountDisabled");
           }
 
-          // ✅ Verify password
           if (!user?.password || !(await bcrypt.compare(password, user.password))) {
-            // ✅ Log failed attempt
             await prisma.loginAttempt.create({
               data: {
                 userId: user?.id || email,
@@ -107,7 +124,6 @@ export const authOptions: NextAuthOptions = {
             throw new Error("InvalidCredentials");
           }
 
-          // ✅ Clear failed login attempts on success
           await prisma.loginAttempt.deleteMany({
             where: {
               userId: user.id,
@@ -118,7 +134,6 @@ export const authOptions: NextAuthOptions = {
             },
           });
 
-          // ✅ Log successful login
           await prisma.loginAttempt.create({
             data: {
               userId: user.id,
@@ -128,7 +143,6 @@ export const authOptions: NextAuthOptions = {
             },
           });
 
-          // ✅ Update last login
           await prisma.user.update({
             where: { id: user.id },
             data: {
@@ -148,6 +162,7 @@ export const authOptions: NextAuthOptions = {
             email: user.email,
             name: user.name,
             image: user.image,
+            role: user.role,
           };
         } catch (error) {
           const errorMessage =
@@ -156,52 +171,5 @@ export const authOptions: NextAuthOptions = {
         }
       },
     }),
-
-    // ✅ Google OAuth provider
-    GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID || "",
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
-      allowDangerousEmailAccountLinking: false,
-    }),
   ],
-
-  // ✅ Session configuration
-  session: {
-    strategy: "jwt",
-    maxAge: 30 * 24 * 60 * 60, // 30 days default
-    updateAge: 24 * 60 * 60, // Update every 24 hours
-  },
-
-  // ✅ JWT configuration
-  jwt: {
-    secret: process.env.NEXTAUTH_SECRET,
-    maxAge: 30 * 24 * 60 * 60, // 30 days
-  },
-
-  // ✅ Pages configuration
-  pages: {
-    signIn: "/login",
-    error: "/login",
-    verifyRequest: "/verify-email",
-    newUser: "/register",
-  },
-
-  // ✅ Callbacks
-  callbacks: {
-    // ✅ JWT callback
-    async jwt({ token, user, account }) {
-      if (user) {
-        token.id = user.id;
-        token.email = user.email;
-      }
-
-      // ✅ Remember me duration
-      if (account?.type === "credentials") {
-        // Extended session for remember
-        token.maxAge = 30 * 24 * 60 * 60; // 30 days
-      }
-    },
-  },
-};
-
-export const { handlers, auth, signIn, signOut } = NextAuth(authOptions);
+});
